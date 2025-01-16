@@ -10,6 +10,5 @@
         public DateTime DueDate { get; set; }
         public DateTime BillDate { get; set; }
         public string BillStatus { get; set; } //Paid, Unpaid
-
     }
 }

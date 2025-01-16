@@ -21,9 +21,21 @@ namespace MVC_WaterBilling_API.Data
                 .ToListAsync();
         }
 
-        public async Task<Consumers?> GetConsumerByIdAsync(int id)
+        public async Task<ConsumerWithUserDTO?> GetConsumerByIdAsync(int id)
         {
-            return await _db.Consumers.FindAsync(id);
+            return await _db.Consumers
+                .Where(c => c.ConsumerID == id)
+                .Join(
+                    _db.Users,
+                    consumer => consumer.UserID,
+                    user => user.UserID.ToString(),
+                    (consumer, user) => new ConsumerWithUserDTO
+                    {
+                        Consumer = consumer,
+                        User = user
+                    }
+                )
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> isUserIdUsedAsync(string UserID)
@@ -49,5 +61,23 @@ namespace MVC_WaterBilling_API.Data
             _db.Consumers.Update(consumers);
             await _db.SaveChangesAsync();
         }
+
+        public async Task<object?> GetConsumerWithUser(string meterNumber)
+        {
+            return await _db.Consumers
+                .Where(c => c.Meter_Number == meterNumber)
+                .Join(
+                    _db.Users,
+                    consumer => consumer.UserID,
+                    user => user.UserID.ToString(),
+                    (consumer, user) => new
+                    {
+                        Consumer = consumer,
+                        User = user
+                    }
+                )
+                .FirstOrDefaultAsync();
+        }
+
     }
 }

@@ -68,31 +68,36 @@ namespace MVC_WaterBilling_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditConsumer(int id, [FromBody] ConsumersDTO consumersDTO)
         {
-            var consumer = await _consumerData.GetConsumerByIdAsync(id);
-            if(consumer == null)
+            var consumerWithUser = await _consumerData.GetConsumerByIdAsync(id);
+            if (consumerWithUser == null)
             {
                 return NotFound();
             }
 
+            var consumer = consumerWithUser.Consumer;
             consumer.Address = consumersDTO.Address;
             consumer.ConnectionType = consumersDTO.ConnectionType;
             consumer.Meter_Number = consumersDTO.Meter_Number;
 
             await _consumerData.UpdateConsumerAsync(consumer);
+
             return Ok(new
             {
-                message = "Consumer updated Successfully!"
+                message = "Consumer updated successfully!"
             });
         }
 
-        [HttpPut("{id}/delete")]
+        [HttpPut("{id}/disconnect")]
         public async Task<IActionResult> DisconnectConsumer(int id)
         {
-            var consumer = await _consumerData.GetConsumerByIdAsync(id);
-            if (consumer == null)
+            var consumerWithUser = await _consumerData.GetConsumerByIdAsync(id);
+            if (consumerWithUser == null)
             {
                 return NotFound();
             }
+
+            var consumer = consumerWithUser.Consumer;
+            consumer.Consumer_Status = "Disconnected";
 
             await _consumerData.DisconnectConsumerAsync(consumer);
 
@@ -101,5 +106,19 @@ namespace MVC_WaterBilling_API.Controllers
                 message = "Consumer disconnected successfully!"
             });
         }
+
+
+        [HttpGet("{meterNumber}/searchConsumer")]
+        public async Task<IActionResult> SearchConsumer(string meterNumber)
+        {
+            var consumerWithUser = await _consumerData.GetConsumerWithUser(meterNumber);
+            if (consumerWithUser == null)
+            {
+                return NotFound(new { message = "Consumer not found for the given meter number." });
+            }
+
+            return Ok(consumerWithUser);
+        }
+
     }
 }

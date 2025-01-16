@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MVC_WaterBilling_API.Model.User;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC_WaterBilling_API.Model.Consumer
 {
@@ -20,5 +21,11 @@ namespace MVC_WaterBilling_API.Model.Consumer
         public string Meter_Number { get; set; }
 
         
+    }
+
+    public class ConsumerWithUserDTO
+    {
+        public Consumers Consumer { get; set; }
+        public Users User { get; set; }
     }
 }
