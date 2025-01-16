@@ -4,7 +4,7 @@ using MVC_WaterBilling_API.Model.Bill;
 
 namespace MVC_WaterBilling_API.Controllers
 {
-    [Route("api/[controller")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BillController : Controller
     {
@@ -35,7 +35,7 @@ namespace MVC_WaterBilling_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Payment([FromBody] BillDTO billDTO)
+        public async Task<IActionResult> CreateBill([FromBody] BillDTO billDTO)
         {
             var bills = new Bills
             {
@@ -52,7 +52,7 @@ namespace MVC_WaterBilling_API.Controllers
 
             return Ok(new
             {
-                message = "Payment inserted successfully!"
+                message = "Bill inserted successfully!"
             });
         }
 
