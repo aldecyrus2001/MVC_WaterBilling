@@ -4,7 +4,6 @@ using MVC_WaterBilling_API.Model.Bill;
 using MVC_WaterBilling_API.Model.Consumer;
 using MVC_WaterBilling_API.Model.Meter_Reading;
 using MVC_WaterBilling_API.Model.Payments;
-using MVC_WaterBilling_API.Model.Penalty;
 using MVC_WaterBilling_API.Model.Settings;
 using MVC_WaterBilling_API.Model.User;
 using System.Diagnostics.Metrics;
@@ -20,7 +19,6 @@ namespace MVC_WaterBilling_API.Services
         public DbSet<Bills> Bills { get; set; }
         public DbSet<Payments> Payments { get; set; }
         public DbSet<Advances> Advances { get; set; }
-        public DbSet<Penalties> Penalties { get; set; }
         public DbSet<Settings> Settings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,7 +29,6 @@ namespace MVC_WaterBilling_API.Services
             modelBuilder.Entity<Bills>().HasKey(b => b.BillID);
             modelBuilder.Entity<Payments>().HasKey(p => p.PaymentID);
             modelBuilder.Entity<Advances>().HasKey(a => a.AdvanceID);
-            modelBuilder.Entity<Penalties>().HasKey(p => p.PenaltiesID);
             modelBuilder.Entity<Settings>().HasKey(s => s.SettingID);
 
             base.OnModelCreating(modelBuilder);
