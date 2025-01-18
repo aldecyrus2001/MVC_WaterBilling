@@ -24,19 +24,19 @@ namespace MVC_WaterBilling_API.Controllers
         {
             if (string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
             {
-                return BadRequest("Email and Password Required!");
+                return BadRequest(new { message = "Email and Password Required!" });
             }
 
             var user = await _authData.GetUserByEmailAsync(loginRequest.Email);
             if (user == null)
             {
-                return Unauthorized("Invalid Email or Password");
+                return Unauthorized(new { message = "Invalid Email or Password" });
             }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginRequest.Password);
             if (result != PasswordVerificationResult.Success)
             {
-                return Unauthorized("Invalid Email or Password");
+                return Unauthorized(new { message = "Invalid Email or Password" });
             }
 
             var token = _authData.GenerateSecureToken();

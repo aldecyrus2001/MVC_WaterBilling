@@ -1,0 +1,53 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = MVC_FrontEnd
+build_property.RootNamespace = MVC_FrontEnd
+build_property.ProjectDir = C:\Users\Anonymous\source\repos\Best_Project\MVC_WaterBilling_API\MVC_FrontEnd\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Anonymous\source\repos\Best_Project\MVC_WaterBilling_API\MVC_FrontEnd
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/Layout/AuthenticationLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XEF1dGhlbnRpY2F0aW9uTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/Pages/Authentication/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/Pages/Cashier/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzaGllclxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-5w49l5n9v5
+
+[C:/Users/Anonymous/source/repos/Best_Project/MVC_WaterBilling_API/MVC_FrontEnd/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-d5ezebw7an

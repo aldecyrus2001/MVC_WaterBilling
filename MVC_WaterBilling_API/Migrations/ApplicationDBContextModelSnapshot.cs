@@ -40,7 +40,7 @@ namespace MVC_WaterBilling_API.Migrations
                     b.Property<DateTime>("DateInserted")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateUsed")
+                    b.Property<DateTime?>("DateUsed")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -149,6 +149,9 @@ namespace MVC_WaterBilling_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Reading_Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -193,8 +196,8 @@ namespace MVC_WaterBilling_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PenaltyIncluded")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("PenaltyIncluded")
+                        .HasColumnType("float");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
@@ -202,29 +205,6 @@ namespace MVC_WaterBilling_API.Migrations
                     b.HasKey("PaymentID");
 
                     b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("MVC_WaterBilling_API.Model.Penalty.Penalties", b =>
-                {
-                    b.Property<int>("PenaltiesID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PenaltiesID"));
-
-                    b.Property<string>("ConsumerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateImplemented")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("PenaltyAmount")
-                        .HasColumnType("float");
-
-                    b.HasKey("PenaltiesID");
-
-                    b.ToTable("Penalties");
                 });
 
             modelBuilder.Entity("MVC_WaterBilling_API.Model.Settings.Settings", b =>
@@ -235,16 +215,19 @@ namespace MVC_WaterBilling_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SettingID"));
 
-                    b.Property<double>("AmountPerCubic")
+                    b.Property<double?>("AmountPerCubic")
                         .HasColumnType("float");
 
-                    b.Property<double>("PenaltyAmount")
+                    b.Property<double?>("PenaltyAmount")
                         .HasColumnType("float");
 
                     b.Property<string>("SystemName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SettingID");
+
+                    b.HasIndex("SettingID")
+                        .IsUnique();
 
                     b.ToTable("Settings");
                 });

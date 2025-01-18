@@ -1,0 +1,19 @@
+﻿@page "/Cashier-Dashboard"
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@inject NavigationManager navManager
+@inject AuthenticationService authService
+
+<h3>Index</h3>
+
+@code {
+
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await authService.CheckAuthenticationAsync();
+    }
+
+    
+
+}
