@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_WaterBilling_API", "MVC_WaterBilling_API\MVC_WaterBilling_API.csproj", "{45B054C1-0E2C-44A4-97F8-25209F20C76F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_FrontEnd", "MVC_FrontEnd\MVC_FrontEnd.csproj", "{3CC6DA51-5957-435B-9CC0-D94B22A1AF79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{45B054C1-0E2C-44A4-97F8-25209F20C76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B054C1-0E2C-44A4-97F8-25209F20C76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B054C1-0E2C-44A4-97F8-25209F20C76F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC6DA51-5957-435B-9CC0-D94B22A1AF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC6DA51-5957-435B-9CC0-D94B22A1AF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC6DA51-5957-435B-9CC0-D94B22A1AF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC6DA51-5957-435B-9CC0-D94B22A1AF79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

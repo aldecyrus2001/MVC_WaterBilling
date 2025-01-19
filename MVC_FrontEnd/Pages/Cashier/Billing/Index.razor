@@ -1,0 +1,61 @@
+﻿@page "/Billing"
+@inject AuthenticationService authService
+@using MVC_FrontEnd.Models
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h2>Billing Records</h2>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if (Bills == null || !Bills.Any())
+{
+	<p><em>No Records Available!</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Meter ID</th>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Reading Date</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var bills in Bills)
+			{
+				<tr>
+				<td>@bills.Meter_Number</td>
+				<td>@(bills.Firstname + " " + bills.Lastname)</td>
+				<td>@bills.Address</td>
+				<td>@bills.Reading_Date</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center"> 
+							<a href="/Bill_Payment?id=@bills.BillID" class="btn btn-success btn-sm" type="button">Pay</a>
+						</div>
+					</td>
+				</tr>
+			}
+			
+		</tbody>
+	</table>
+}
+
+
+
+
+@code {
+
+	private List<Bills>? Bills;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await authService.CheckAuthenticationAsync();
+		Bills = await Http.GetFromJsonAsync<List<Bills>>("http://localhost:5142/api/Bill");
+	}
+
+}

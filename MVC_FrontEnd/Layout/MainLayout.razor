@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject UserState UserStateService
+
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -16,5 +18,15 @@
 </div>
 
 @code {
-    private string UserRole = "";
+    private string UserRole => UserStateService.UserRole;
+
+    protected override void OnInitialized()
+    {
+        UserStateService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        UserStateService.OnChange -= StateHasChanged;
+    }
 }

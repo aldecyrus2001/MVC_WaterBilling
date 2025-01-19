@@ -1,0 +1,60 @@
+﻿@page "/Users"
+@inject AuthenticationService authService
+@using MVC_FrontEnd.Models
+@using MVC_FrontEnd.Services
+@inject URLs urls
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h2>Users Records</h2>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if(Users == null || !Users.Any())
+{
+	<p><em>No Users Records</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>User ID</th>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var users in Users)
+			{
+				<tr>
+					<td>@users.UserID</td>
+					<td>@(users.Firstname + " " + users.Lastname)</td>
+					<td>@users.Gender</td>
+					<td>@users.Email</td>
+					<td>@users.Role</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							<a href="/Bill_Payment?id=@users.UserID" class="btn btn-success btn-sm" type="button">Pay</a>
+						</div>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<Users>? Users;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await authService.CheckAuthenticationAsync();
+		Users = await Http.GetFromJsonAsync<List<Users>>(urls.FetchUsers);
+	}
+}

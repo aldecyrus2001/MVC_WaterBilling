@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Cpq7MLdbawqOnlB//72x2xAdOQoRL85iO7cC7FcTsyU=",
+  "Hash": "rDYtLw8PR2hiPYCrQxfHJ7EDsZppt3FgXwAGW2K1HMQ=",
   "Source": "MVC_FrontEnd",
   "BasePath": "/",
   "Mode": "Root",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "ppn4i40ocb",
-      "Integrity": "DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak=",
+      "Fingerprint": "i8rkry6s4x",
+      "Integrity": "4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\blazor.boot.json"
@@ -57,6 +57,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\9.0.1\\build\\net9.0\\blazor.webassembly.js"
+    },
+    {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.LocalStorage.wasm",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage#[.{fingerprint}]!.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "12n6dz54qr",
+      "Integrity": "OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\Blazored.LocalStorage.wasm"
     },
     {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.SessionStorage.wasm",
@@ -393,6 +414,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\Microsoft.AspNetCore.Metadata.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.WebUtilities.wasm",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.WebUtilities#[.{fingerprint}]!.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "zh6nzsctj0",
+      "Integrity": "p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\Microsoft.AspNetCore.WebUtilities.wasm"
     },
     {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.CSharp.wasm",
@@ -752,6 +794,27 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\Microsoft.JSInterop.WebAssembly.wasm"
     },
     {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Net.Http.Headers.wasm",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Net.Http.Headers#[.{fingerprint}]!.wasm",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "WasmResource",
+      "AssetTraitValue": "runtime",
+      "Fingerprint": "7bx3u90d58",
+      "Integrity": "nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\Microsoft.Net.Http.Headers.wasm"
+    },
+    {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.VisualBasic.Core.wasm",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
@@ -871,8 +934,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "s2dp40135z",
-      "Integrity": "jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=",
+      "Fingerprint": "2px5njpafv",
+      "Integrity": "KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\MVC_FrontEnd.pdb"
@@ -892,8 +955,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "86nvf4oqku",
-      "Integrity": "8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=",
+      "Fingerprint": "plia1uf5mm",
+      "Integrity": "rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\webcil\\MVC_FrontEnd.wasm"
@@ -4532,6 +4595,27 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1alesgn0ab-zh6nzsctj0.gz",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.AspNetCore.WebUtilities#[.{fingerprint=zh6nzsctj0}]!.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.WebUtilities.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "dwoq1wkr6s",
+      "Integrity": "c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.WebUtilities.wasm"
+    },
+    {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1dffe3gys8-2w82csd6tr.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
@@ -6443,7 +6527,7 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Extensions.FileProviders.Physical.wasm"
     },
     {
-      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-j2whcbtoca.gz",
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-9ixv8hfwvf.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
@@ -6457,8 +6541,8 @@
       "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "254hgwe2fy",
-      "Integrity": "Nh9Bhys9MtJY9K6P/dUXNhIhgxYF92PPFoCzSGWc3Hc=",
+      "Fingerprint": "gzwqnheryj",
+      "Integrity": "hNsINV/HVSLeSTw9XUnAdcmI90QVyLsIXY/YKYJK6yE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build"
@@ -6798,6 +6882,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Security.AccessControl.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\grhwmc6808-7bx3u90d58.gz",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Microsoft.Net.Http.Headers#[.{fingerprint=7bx3u90d58}]!.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Net.Http.Headers.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "7aj5pdy6v2",
+      "Integrity": "351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Net.Http.Headers.wasm"
     },
     {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\h4fil0e6dt-i0dqersjke.gz",
@@ -7661,7 +7766,7 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Components.Web.wasm"
     },
     {
-      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-pyhb0l6fuc.gz",
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-dmhiivbz12.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
@@ -7766,12 +7871,12 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Resources.Writer.wasm"
     },
     {
-      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-86nvf4oqku.gz",
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-plia1uf5mm.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/MVC_FrontEnd#[.{fingerprint=86nvf4oqku}]!.wasm.gz",
+      "RelativePath": "_framework/MVC_FrontEnd#[.{fingerprint=plia1uf5mm}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7780,8 +7885,8 @@
       "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "4668e0io17",
-      "Integrity": "PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE=",
+      "Fingerprint": "67ot4r9hk0",
+      "Integrity": "wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.wasm"
@@ -7808,7 +7913,7 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-ppn4i40ocb.gz",
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-i8rkry6s4x.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
@@ -7822,8 +7927,8 @@
       "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "d5k1yq0x0m",
-      "Integrity": "v5k0HshawZjZYvt3c/R8RzFuLUdGpR4POQkdB3Lqc+Q=",
+      "Fingerprint": "qhadn76x17",
+      "Integrity": "XgmvTn3QN8cKzx3OXpFryaWfBxWsGf2KsTHVGyogwqg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -7892,12 +7997,12 @@
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Private.Uri.wasm"
     },
     {
-      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-s2dp40135z.gz",
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-2px5njpafv.gz",
       "SourceId": "MVC_FrontEnd",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/MVC_FrontEnd#[.{fingerprint=s2dp40135z}]!.pdb.gz",
+      "RelativePath": "_framework/MVC_FrontEnd#[.{fingerprint=2px5njpafv}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7906,8 +8011,8 @@
       "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "imp2wgtg4e",
-      "Integrity": "Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo=",
+      "Fingerprint": "1hjzxr1qo1",
+      "Integrity": "qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.pdb"
@@ -8373,6 +8478,27 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Web.wasm"
+    },
+    {
+      "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\szmcjvpsn2-12n6dz54qr.gz",
+      "SourceId": "MVC_FrontEnd",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Blazored.LocalStorage#[.{fingerprint=12n6dz54qr}]!.wasm.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.LocalStorage.wasm",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "q6oiaip7ys",
+      "Integrity": "8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo=",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.LocalStorage.wasm"
     },
     {
       "Identity": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\t3lsfkj15r-46ein0sx1k.gz",
@@ -9775,8 +9901,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerJs",
-      "Fingerprint": "pyhb0l6fuc",
-      "Integrity": "scPFkW+9b7tvSxTcC5j4nTHk7FXXtBNJO4HvNIqo2vg=",
+      "Fingerprint": "dmhiivbz12",
+      "Integrity": "SziaIXuJb3+ikd7NvakbZGO6TmAYmwLzrUdN2X9ruBk=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "wwwroot\\service-worker.js"
@@ -9796,8 +9922,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "BlazorServiceWorker",
       "AssetTraitValue": "ServiceWorkerManifest",
-      "Fingerprint": "j2whcbtoca",
-      "Integrity": "myREYcacp4UsP2R7A/gLzSoU5AiSjtyi1mfpFXro6KM=",
+      "Fingerprint": "9ixv8hfwvf",
+      "Integrity": "YZeNFVcV3dIRc2A5Csv0Ke8h1tjLjJrIwgxrkAx2q4M=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\service-worker\\service-worker-assets.js.build"
@@ -10907,7 +11033,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39377"
+          "Value": "39971"
         },
         {
           "Name": "Content-Type",
@@ -10915,11 +11041,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak=\""
+          "Value": "\"4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10929,18 +11055,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak="
+          "Value": "sha256-4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-ppn4i40ocb.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-i8rkry6s4x.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000080651665"
+          "Quality": "0.000079459674"
         }
       ],
       "ResponseHeaders": [
@@ -10950,15 +11076,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12398"
+          "Value": "12584"
         },
         {
           "Name": "ETag",
-          "Value": "\"v5k0HshawZjZYvt3c/R8RzFuLUdGpR4POQkdB3Lqc+Q=\""
+          "Value": "\"XgmvTn3QN8cKzx3OXpFryaWfBxWsGf2KsTHVGyogwqg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:04:56 GMT"
+          "Value": "Sun, 19 Jan 2025 11:04:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -10978,19 +11104,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak=\""
+          "Value": "W/\"4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak="
+          "Value": "sha256-4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-ppn4i40ocb.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\ol0918z1yt-i8rkry6s4x.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -10999,7 +11125,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12398"
+          "Value": "12584"
         },
         {
           "Name": "Content-Type",
@@ -11007,11 +11133,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"v5k0HshawZjZYvt3c/R8RzFuLUdGpR4POQkdB3Lqc+Q=\""
+          "Value": "\"XgmvTn3QN8cKzx3OXpFryaWfBxWsGf2KsTHVGyogwqg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:04:56 GMT"
+          "Value": "Sun, 19 Jan 2025 11:04:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11029,7 +11155,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-v5k0HshawZjZYvt3c/R8RzFuLUdGpR4POQkdB3Lqc+Q="
+          "Value": "sha256-XgmvTn3QN8cKzx3OXpFryaWfBxWsGf2KsTHVGyogwqg="
         }
       ]
     },
@@ -11167,6 +11293,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-C8sFFlTouzLtqtRyeQRNMFLPF4W+BCiy3mRTsrDEK1U="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.12n6dz54qr.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.LocalStorage.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32021"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "12n6dz54qr"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazored.LocalStorage.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.12n6dz54qr.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\szmcjvpsn2-12n6dz54qr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000074222519"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13472"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "12n6dz54qr"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazored.LocalStorage.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.12n6dz54qr.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\szmcjvpsn2-12n6dz54qr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13472"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "12n6dz54qr"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Blazored.LocalStorage.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Blazored.LocalStorage.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32021"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\szmcjvpsn2-12n6dz54qr.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000074222519"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13472"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Blazored.LocalStorage.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\szmcjvpsn2-12n6dz54qr.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13472"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 09:26:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8mwLt5eEjW5kvTsT5hQhpXExfD2uJ6DPsH3L7t9/bxo="
         }
       ]
     },
@@ -15935,6 +16359,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-e0SJ7RYeCSIc3jy7TprVOQj6K0h3R29XQjJ4Mw0Labs="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.WebUtilities.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "96021"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1alesgn0ab-zh6nzsctj0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000024805894"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40312"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1alesgn0ab-zh6nzsctj0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40312"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.zh6nzsctj0.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.WebUtilities.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "96021"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zh6nzsctj0"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.AspNetCore.WebUtilities.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.zh6nzsctj0.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1alesgn0ab-zh6nzsctj0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000024805894"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40312"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zh6nzsctj0"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.AspNetCore.WebUtilities.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.AspNetCore.WebUtilities.zh6nzsctj0.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\1alesgn0ab-zh6nzsctj0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40312"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zh6nzsctj0"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.AspNetCore.WebUtilities.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-c97qUH6JhWzYJjO7QpVm3e9+XmSmp4ePfWmT7Oj6E38="
         }
       ]
     },
@@ -21005,6 +21727,304 @@
       ]
     },
     {
+      "Route": "_framework/Microsoft.Net.Http.Headers.7bx3u90d58.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Net.Http.Headers.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "75029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7bx3u90d58"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.Net.Http.Headers.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Net.Http.Headers.7bx3u90d58.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\grhwmc6808-7bx3u90d58.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000030472940"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32815"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7bx3u90d58"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.Net.Http.Headers.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Net.Http.Headers.7bx3u90d58.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\grhwmc6808-7bx3u90d58.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32815"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7bx3u90d58"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Microsoft.Net.Http.Headers.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Net.Http.Headers.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.Net.Http.Headers.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "75029"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Net.Http.Headers.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\grhwmc6808-7bx3u90d58.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000030472940"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32815"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Microsoft.Net.Http.Headers.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\grhwmc6808-7bx3u90d58.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32815"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 08:56:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-351rWu7PaD4faoqzyUS/HcSrfIgP9+XZx85YQjqxnnc="
+        }
+      ]
+    },
+    {
       "Route": "_framework/Microsoft.VisualBasic.Core.bcw8auwqwc.wasm",
       "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.VisualBasic.Core.wasm",
       "Selectors": [],
@@ -22495,168 +23515,7 @@
       ]
     },
     {
-      "Route": "_framework/MVC_FrontEnd.86nvf4oqku.wasm",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "29973"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "86nvf4oqku"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/MVC_FrontEnd.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.86nvf4oqku.wasm",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-86nvf4oqku.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000084990651"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11765"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "86nvf4oqku"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/MVC_FrontEnd.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.86nvf4oqku.wasm.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-86nvf4oqku.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11765"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "86nvf4oqku"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/MVC_FrontEnd.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.pdb",
+      "Route": "_framework/MVC_FrontEnd.2px5njpafv.pdb",
       "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -22666,7 +23525,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28276"
+          "Value": "42884"
         },
         {
           "Name": "Content-Type",
@@ -22674,148 +23533,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=\""
+          "Value": "\"KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.pdb",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-s2dp40135z.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000048868690"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "20462"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.pdb.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-s2dp40135z.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "20462"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/MVC_FrontEnd.s2dp40135z.pdb",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "28276"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22825,7 +23547,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "s2dp40135z"
+          "Value": "2px5njpafv"
         },
         {
           "Name": "label",
@@ -22833,18 +23555,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM="
+          "Value": "sha256-KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug="
         }
       ]
     },
     {
-      "Route": "_framework/MVC_FrontEnd.s2dp40135z.pdb",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-s2dp40135z.gz",
+      "Route": "_framework/MVC_FrontEnd.2px5njpafv.pdb",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-2px5njpafv.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000048868690"
+          "Quality": "0.000031930519"
         }
       ],
       "ResponseHeaders": [
@@ -22854,15 +23576,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "20462"
+          "Value": "31317"
         },
         {
           "Name": "ETag",
-          "Value": "\"Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo=\""
+          "Value": "\"qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22882,13 +23604,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=\""
+          "Value": "W/\"KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "s2dp40135z"
+          "Value": "2px5njpafv"
         },
         {
           "Name": "label",
@@ -22896,13 +23618,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM="
+          "Value": "sha256-KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug="
         }
       ]
     },
     {
-      "Route": "_framework/MVC_FrontEnd.s2dp40135z.pdb.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-s2dp40135z.gz",
+      "Route": "_framework/MVC_FrontEnd.2px5njpafv.pdb.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-2px5njpafv.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -22911,7 +23633,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "20462"
+          "Value": "31317"
         },
         {
           "Name": "Content-Type",
@@ -22919,11 +23641,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo=\""
+          "Value": "\"qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22941,7 +23663,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "s2dp40135z"
+          "Value": "2px5njpafv"
         },
         {
           "Name": "label",
@@ -22949,7 +23671,305 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Oh7l+6t7aqEIC7APrDXpKXfAnzoExdHAVZcaRLOprdo="
+          "Value": "sha256-qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.pdb",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.pdb",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-2px5njpafv.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000031930519"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31317"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.pdb.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\p24o2jtouv-2px5njpafv.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "31317"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qxWslaJce0rXtE7zNHy0Dsq7gZo7p1TrwpsBlzFlgXY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.plia1uf5mm.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MVC_FrontEnd.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "60181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "plia1uf5mm"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/MVC_FrontEnd.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.plia1uf5mm.wasm",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-plia1uf5mm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000048997991"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20408"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "plia1uf5mm"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/MVC_FrontEnd.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/MVC_FrontEnd.plia1uf5mm.wasm.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-plia1uf5mm.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "20408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "plia1uf5mm"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/MVC_FrontEnd.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4="
         }
       ]
     },
@@ -22964,7 +23984,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "29973"
+          "Value": "60181"
         },
         {
           "Name": "Content-Type",
@@ -22972,11 +23992,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=\""
+          "Value": "\"rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -22986,18 +24006,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg="
+          "Value": "sha256-rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM="
         }
       ]
     },
     {
       "Route": "_framework/MVC_FrontEnd.wasm",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-86nvf4oqku.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-plia1uf5mm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000084990651"
+          "Quality": "0.000048997991"
         }
       ],
       "ResponseHeaders": [
@@ -23007,15 +24027,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11765"
+          "Value": "20408"
         },
         {
           "Name": "ETag",
-          "Value": "\"PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE=\""
+          "Value": "\"wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -23035,19 +24055,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=\""
+          "Value": "W/\"rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg="
+          "Value": "sha256-rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM="
         }
       ]
     },
     {
       "Route": "_framework/MVC_FrontEnd.wasm.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-86nvf4oqku.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\o0w6eierns-plia1uf5mm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -23056,7 +24076,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11765"
+          "Value": "20408"
         },
         {
           "Name": "Content-Type",
@@ -23064,11 +24084,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE=\""
+          "Value": "\"wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -23086,7 +24106,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-PL9+f72EyMcrQv2stkoSyRfgTgK8ixyFWYS80o4eezE="
+          "Value": "sha256-wr/YK6q9ecNtPJsFzzg5pI+YcLKvTWrGWfVDOU12Kv4="
         }
       ]
     },
@@ -86894,7 +87914,7 @@
     },
     {
       "Route": "service-worker.js",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-pyhb0l6fuc.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-dmhiivbz12.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -86917,7 +87937,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -86937,13 +87957,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"scPFkW+9b7tvSxTcC5j4nTHk7FXXtBNJO4HvNIqo2vg=\""
+          "Value": "W/\"SziaIXuJb3+ikd7NvakbZGO6TmAYmwLzrUdN2X9ruBk=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-scPFkW+9b7tvSxTcC5j4nTHk7FXXtBNJO4HvNIqo2vg="
+          "Value": "sha256-SziaIXuJb3+ikd7NvakbZGO6TmAYmwLzrUdN2X9ruBk="
         }
       ]
     },
@@ -86966,7 +87986,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"scPFkW+9b7tvSxTcC5j4nTHk7FXXtBNJO4HvNIqo2vg=\""
+          "Value": "\"SziaIXuJb3+ikd7NvakbZGO6TmAYmwLzrUdN2X9ruBk=\""
         },
         {
           "Name": "Last-Modified",
@@ -86980,13 +88000,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-scPFkW+9b7tvSxTcC5j4nTHk7FXXtBNJO4HvNIqo2vg="
+          "Value": "sha256-SziaIXuJb3+ikd7NvakbZGO6TmAYmwLzrUdN2X9ruBk="
         }
       ]
     },
     {
       "Route": "service-worker.js.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-pyhb0l6fuc.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\nrq00vuvkk-dmhiivbz12.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -87007,7 +88027,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -87031,12 +88051,12 @@
     },
     {
       "Route": "service-worker-assets.js",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-j2whcbtoca.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-9ixv8hfwvf.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000076511094"
+          "Quality": "0.000075557235"
         }
       ],
       "ResponseHeaders": [
@@ -87046,15 +88066,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13069"
+          "Value": "13234"
         },
         {
           "Name": "ETag",
-          "Value": "\"Nh9Bhys9MtJY9K6P/dUXNhIhgxYF92PPFoCzSGWc3Hc=\""
+          "Value": "\"hNsINV/HVSLeSTw9XUnAdcmI90QVyLsIXY/YKYJK6yE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -87074,13 +88094,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"myREYcacp4UsP2R7A/gLzSoU5AiSjtyi1mfpFXro6KM=\""
+          "Value": "W/\"YZeNFVcV3dIRc2A5Csv0Ke8h1tjLjJrIwgxrkAx2q4M=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-myREYcacp4UsP2R7A/gLzSoU5AiSjtyi1mfpFXro6KM="
+          "Value": "sha256-YZeNFVcV3dIRc2A5Csv0Ke8h1tjLjJrIwgxrkAx2q4M="
         }
       ]
     },
@@ -87095,7 +88115,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39162"
+          "Value": "39629"
         },
         {
           "Name": "Content-Type",
@@ -87103,11 +88123,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"myREYcacp4UsP2R7A/gLzSoU5AiSjtyi1mfpFXro6KM=\""
+          "Value": "\"YZeNFVcV3dIRc2A5Csv0Ke8h1tjLjJrIwgxrkAx2q4M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -87117,13 +88137,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-myREYcacp4UsP2R7A/gLzSoU5AiSjtyi1mfpFXro6KM="
+          "Value": "sha256-YZeNFVcV3dIRc2A5Csv0Ke8h1tjLjJrIwgxrkAx2q4M="
         }
       ]
     },
     {
       "Route": "service-worker-assets.js.gz",
-      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-j2whcbtoca.gz",
+      "AssetFile": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\Debug\\net9.0\\compressed\\dx5xo22j2z-9ixv8hfwvf.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -87132,7 +88152,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13069"
+          "Value": "13234"
         },
         {
           "Name": "Content-Type",
@@ -87140,11 +88160,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Nh9Bhys9MtJY9K6P/dUXNhIhgxYF92PPFoCzSGWc3Hc=\""
+          "Value": "\"hNsINV/HVSLeSTw9XUnAdcmI90QVyLsIXY/YKYJK6yE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 14:09:43 GMT"
+          "Value": "Sun, 19 Jan 2025 11:06:14 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -87162,7 +88182,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Nh9Bhys9MtJY9K6P/dUXNhIhgxYF92PPFoCzSGWc3Hc="
+          "Value": "sha256-hNsINV/HVSLeSTw9XUnAdcmI90QVyLsIXY/YKYJK6yE="
         }
       ]
     }

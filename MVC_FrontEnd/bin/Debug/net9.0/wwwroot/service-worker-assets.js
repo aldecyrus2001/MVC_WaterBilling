@@ -1,21 +1,25 @@
 self.assetsManifest = {
-  "version": "gDKMJ5rn",
+  "version": "UFroudLJ",
   "assets": [
     {
       "hash": "sha256-X5eZDy8KQdwPU/9OZFfoPy79JBGNKHE1S/yvcnQHHAg=",
       "url": "MVC_FrontEnd.styles.css"
     },
     {
+      "hash": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
+      "url": "_framework/Blazored.LocalStorage.12n6dz54qr.wasm"
+    },
+    {
       "hash": "sha256-nQXuCGHos7iwp2WxRUgarKmWgJYChaVQp2NajgNU3V8=",
       "url": "_framework/Blazored.SessionStorage.34xr2ein7y.wasm"
     },
     {
-      "hash": "sha256-8HnWRsHfxcjsbGgV4nisBavxYrZqCyOSO4K7CClIRZg=",
-      "url": "_framework/MVC_FrontEnd.86nvf4oqku.wasm"
+      "hash": "sha256-KhOSomWMDBKLSLJXZ3ZrSux6JRj/Q3FUWHHSrY9zzug=",
+      "url": "_framework/MVC_FrontEnd.2px5njpafv.pdb"
     },
     {
-      "hash": "sha256-jJ2cYzsG7xLmIwldTtkOuY4QHEILti0D/UDGGrTK5pM=",
-      "url": "_framework/MVC_FrontEnd.s2dp40135z.pdb"
+      "hash": "sha256-rYWnby7aJiFvA8gINN7dxpv/D3hRIVk9wsCq2XYS5YM=",
+      "url": "_framework/MVC_FrontEnd.plia1uf5mm.wasm"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -40,6 +44,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-4cwypYnAi4rj5KOaa6JhniDEFacv1aXC85uiheBnFzE=",
       "url": "_framework/Microsoft.AspNetCore.Metadata.f0dx7f7ser.wasm"
+    },
+    {
+      "hash": "sha256-p3NAtU398P5/kCkWUqgfSHXqp64Z7R2HL5S60wxpryY=",
+      "url": "_framework/Microsoft.AspNetCore.WebUtilities.zh6nzsctj0.wasm"
     },
     {
       "hash": "sha256-QJKG5agfskYhNg4CWMzF8EqwsNALoPtT7h5pO9k6aHk=",
@@ -108,6 +116,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-wG2lM2idoDLOwqFHD84hv6SbaH0Yt59g1BsijrC8V1U=",
       "url": "_framework/Microsoft.JSInterop.gkumi7kxvo.wasm"
+    },
+    {
+      "hash": "sha256-nVIuajuunl36Hx7DNOuDrrdXBFABZJBVU68FTH62MzQ=",
+      "url": "_framework/Microsoft.Net.Http.Headers.7bx3u90d58.wasm"
     },
     {
       "hash": "sha256-Raj1ha4M/EXL7zvyW9Evn28B9GxWHE0gaLR/NXPSrdk=",
@@ -774,7 +786,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.ovqw333kan.wasm"
     },
     {
-      "hash": "sha256-DTOJJOlS+ZRvIOrRHBAaWXe9sl8pBBiXvygYomTm6ak=",
+      "hash": "sha256-4undGVMPTWVyLDiIgobVuIAUeyBiGpJMklof4ARluQk=",
       "url": "_framework/blazor.boot.json"
     },
     {

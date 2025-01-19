@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager NavigationManager
+@inject UserState UserStateService
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -14,12 +15,12 @@
         @if (UserRole == "Cashier")
         {
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/CashierDashboard" Match="NavLinkMatch.All">
+                <NavLink class="nav-link" href="/Cashier-Dashboard" Match="NavLinkMatch.All">
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
                 </NavLink>
             </div>
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="Index_Billing" Match="NavLinkMatch.All">
+                <NavLink class="nav-link" href="/Billing" Match="NavLinkMatch.All">
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Billing
                 </NavLink>
             </div>
@@ -39,15 +40,15 @@
                 </NavLink>
             </div>
         }
-        else if (UserRole == "Admin")
+        else if (UserRole == "Administrator")
         {
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <NavLink class="nav-link" href="/Administrator" Match="NavLinkMatch.All">
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
                 </NavLink>
             </div>
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <NavLink class="nav-link" href="/Users" Match="NavLinkMatch.All">
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Manage Users
                 </NavLink>
             </div>
@@ -76,8 +77,17 @@
 </div>
 
 @code {
-    [Parameter]
-    public string UserRole { get; set; }
+    protected override void OnInitialized()
+    {
+        UserStateService.OnChange += StateHasChanged;
+    }
+
+    public string UserRole => UserStateService.UserRole;
+
+    public void Dispose()
+    {
+        UserStateService.OnChange -= StateHasChanged;
+    }
 
     private bool collapseNavMenu = true;
 

@@ -32,7 +32,7 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="form-check mb-0">
-                        <input class="form-check-input me-2" type="checkbox" value="" id="RememberMe" />
+                        <input class="form-check-input me-2" type="checkbox" id="RememberMe" @bind="RememberMe" />
                         <label class="form-check-label" for="RememberMe">Remember me</label>
                     </div>
                     <a href="#!" class="text-body">Forgot Password?</a>
@@ -47,8 +47,8 @@
 </div>
 
 
-@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 @inject NavigationManager navManager
+@inject UserState UserStateService
 
 
 @code {
@@ -56,6 +56,7 @@
     public JsonNode Errors { set; get; } = new JsonObject();
     public string UserRole { set; get; } = string.Empty;
     public string Message { set; get; } = string.Empty;
+    public bool RememberMe { get; set; } = false;
 
     protected async Task Login()
     {
@@ -72,13 +73,18 @@
                     Message = jsonResponse["message"]?.ToString() ?? "Login Successful";  // Default to 'Login Successful' if no message field
 
                     UserRole = jsonResponse["role"]?.ToString() ?? string.Empty;
+                    UserStateService.SetUserRole(UserRole);
                     var userId = jsonResponse["userId"]?.ToString();
                     var token = jsonResponse["token"]?.ToString();
+                    var role = jsonResponse["role"]?.ToString();
 
                     if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(token))
                     {
+                        
                         await sessionStorage.SetItemAsync("userId", userId);
                         await sessionStorage.SetItemAsync("token", token);
+                        await sessionStorage.SetItemAsync("role", role);
+                        
                     }
 
                     // Add logic for handling different roles (optional)
@@ -88,7 +94,7 @@
                             navManager.NavigateTo("/Cashier-Dashboard");
                             break;
                         case "Administrator":
-                            Message = "Welcome, Administrator!";
+                            navManager.NavigateTo("/Administrator");
                             break;
                         case "Consumer":
                             Message = "Welcome, Consumer!";

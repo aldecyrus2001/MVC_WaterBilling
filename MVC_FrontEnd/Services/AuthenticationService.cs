@@ -18,6 +18,7 @@ public class AuthenticationService
     {
         var userId = await _sessionStorage.GetItemAsync<string>("userId");
         var token = await _sessionStorage.GetItemAsync<string>("token");
+        var role = await _sessionStorage.GetItemAsync<string>("role");
 
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
         {
