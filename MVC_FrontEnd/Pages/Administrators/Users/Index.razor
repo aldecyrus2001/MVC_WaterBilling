@@ -1,8 +1,5 @@
 ﻿@page "/Users"
-@inject AuthenticationService authService
-@using MVC_FrontEnd.Models
-@using MVC_FrontEnd.Services
-@inject URLs urls
+
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 	<h2>Users Records</h2>
@@ -39,7 +36,9 @@ else
 					<td>@users.Role</td>
 					<td class="text-end" style="vertical-align: middle;">
 						<div class="d-flex justify-content-center">
-							<a href="/Bill_Payment?id=@users.UserID" class="btn btn-success btn-sm" type="button">Pay</a>
+							<a href="/UserView?Id=@users.UserID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+							<a href="/UpdateUser?Id=@users.UserID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
+							<a href="/UserView?Id=@users.UserID" class="btn btn-danger btn-sm" type="button">Delete</a>
 						</div>
 					</td>
 				</tr>

@@ -50,7 +50,7 @@ namespace MVC_WaterBilling_API.Controllers
             var user = new Users
             {
                 Firstname = userDTO.Firstname,
-                Middlename = userDTO.Middlename,
+                Middlename = userDTO.Middlename ?? string.Empty,
                 Lastname = userDTO.Lastname,
                 Gender = userDTO.Gender,
                 PhoneNumber = userDTO.PhoneNumber,

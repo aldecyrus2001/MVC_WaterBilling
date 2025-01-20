@@ -1,0 +1,30 @@
+﻿<div class="col">
+	<label for="@InputID" class="form-label">@label</label>
+	<input type="@InputType" id="@InputID" class="form-control" @bind="@Value" disabled="@IsDisabled">
+</div>
+
+@code {
+	[Parameter]
+	public string InputType { get; set; } = string.Empty;
+	[Parameter]
+	public string label { get; set; } = string.Empty;
+
+	[Parameter]
+	public bool IsDisabled { get; set; } = false;
+
+	[Parameter]
+	public string InputID { get; set; } = string.Empty;
+
+	[Parameter]
+	public string Value { get; set; } = string.Empty;
+
+	[Parameter]
+	public EventCallback<string> ValueChanged { get; set; }
+
+	private void OnValueChanged(ChangeEventArgs e)
+	{
+		Value = e.Value?.ToString() ?? string.Empty;
+		ValueChanged.InvokeAsync(Value);
+	}
+
+}
