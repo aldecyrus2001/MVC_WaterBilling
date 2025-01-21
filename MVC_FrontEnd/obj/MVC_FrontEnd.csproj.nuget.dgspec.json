@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\MVC_FrontEnd.csproj": {}
+    "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\MVC_FrontEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\MVC_FrontEnd.csproj": {
+    "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\MVC_FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\MVC_FrontEnd.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\MVC_FrontEnd.csproj",
         "projectName": "MVC_FrontEnd",
-        "projectPath": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\MVC_FrontEnd.csproj",
-        "packagesPath": "C:\\Users\\Anonymous\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Anonymous\\source\\repos\\Best_Project\\MVC_WaterBilling_API\\MVC_FrontEnd\\obj\\",
+        "projectPath": "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\MVC_FrontEnd.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Anonymous\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -57,6 +57,10 @@
             "Blazored.SessionStorage": {
               "target": "Package",
               "version": "[2.4.0, )"
+            },
+            "Blazored.Toast": {
+              "target": "Package",
+              "version": "[4.2.1, )"
             },
             "Microsoft.AspNetCore.Components.WebAssembly": {
               "target": "Package",

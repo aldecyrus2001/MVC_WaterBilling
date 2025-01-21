@@ -19,9 +19,58 @@ namespace MVC_FrontEnd.Services
 
         public async Task<Users?> GetUserByIdAsync(int id)
         {
-            var url = $"{_uRLs.FetchUsers}/{id}";
+            var url = $"{_uRLs.Users}/{id}";
             return await _httpClient.GetFromJsonAsync<Users>(url);
         }
-        
+
+        public async Task<bool> AddUsers(UsersDTO userData)
+        {
+            try
+            {
+                var url = $"{_uRLs.Users}";
+                var response = await _httpClient.PostAsJsonAsync(url, userData);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error Inserting user: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateUserAsync(int id, UsersDTO userData)
+        {
+            try
+            {
+                var url = $"{_uRLs.Users}/{id}";
+                var response = await _httpClient.PutAsJsonAsync(url, userData);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating user: {ex.Message}");
+                return false;
+            }
+
+        }
+
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            try
+            {
+                var url = $"{_uRLs.Users}/{id}/delete";
+                var response = await _httpClient.DeleteAsync(url);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting user: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }

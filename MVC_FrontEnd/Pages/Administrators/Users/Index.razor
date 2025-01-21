@@ -38,7 +38,7 @@ else
 						<div class="d-flex justify-content-center">
 							<a href="/UserView?Id=@users.UserID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
 							<a href="/UpdateUser?Id=@users.UserID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
-							<a href="/UserView?Id=@users.UserID" class="btn btn-danger btn-sm" type="button">Delete</a>
+							<button class="btn btn-danger btn-sm" type="button" @onclick="() => ConfirmDelete(users.UserID)">Delete</button>
 						</div>
 					</td>
 				</tr>
@@ -51,9 +51,37 @@ else
 @code {
 	private List<Users>? Users;
 
+	[Inject]
+	private UsersServices usersServices { get; set; }
+
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		Users = await Http.GetFromJsonAsync<List<Users>>(urls.FetchUsers);
+		Users = await Http.GetFromJsonAsync<List<Users>>(urls.Users);
 	}
+
+	private async Task ConfirmDelete(int id)
+	{
+		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this user?");
+		if (confirmed)
+		{
+			await DeleteUserData(id);
+		}
+	}
+
+	protected async Task DeleteUserData(int Id)
+	{
+		bool isDeleted = await usersServices.DeleteUserAsync(Id);
+
+		if (isDeleted)
+		{
+			ToastService.ShowSuccess("User deleted successfully!");
+			navManager.NavigateTo("/Users");
+		}
+		else
+		{
+			Console.WriteLine("Failed to delete user.");
+		}
+	}
+
 }

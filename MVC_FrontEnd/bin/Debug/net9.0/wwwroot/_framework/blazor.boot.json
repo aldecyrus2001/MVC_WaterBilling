@@ -1,10 +1,11 @@
 {
   "mainAssemblyName": "MVC_FrontEnd",
   "resources": {
-    "hash": "sha256-5gyjEcB1K/rQ+g2ZYYfP6ONz92fj65C4BrV7XaeDv4g=",
+    "hash": "sha256-MMwU/IqQxZXRCUnhBGsgKgtNUoX90tOv7faXGQP8Ju0=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "Blazored.SessionStorage.34xr2ein7y.wasm": "Blazored.SessionStorage.wasm",
+      "Blazored.Toast.4gbrhkrum5.wasm": "Blazored.Toast.wasm",
       "Microsoft.AspNetCore.Authorization.n41ua9ceve.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.h4ild4sjod.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Forms.9at76jd5um.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
@@ -205,8 +206,8 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "MVC_FrontEnd.s0mys802ag.wasm": "MVC_FrontEnd.wasm",
-      "MVC_FrontEnd.lbq581o66c.pdb": "MVC_FrontEnd.pdb"
+      "MVC_FrontEnd.pctukai9fb.wasm": "MVC_FrontEnd.wasm",
+      "MVC_FrontEnd.6665wotc49.pdb": "MVC_FrontEnd.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.8o8n7iomrf.js": "sha256-WIUiy49hHQ3kOAtRdCtUzm3Yg5BnOqCC+Q+kri9Fi1g="
@@ -229,6 +230,7 @@
     "assembly": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
       "Blazored.SessionStorage.34xr2ein7y.wasm": "sha256-nQXuCGHos7iwp2WxRUgarKmWgJYChaVQp2NajgNU3V8=",
+      "Blazored.Toast.4gbrhkrum5.wasm": "sha256-tCNYnYuB69ZO7+n7obUv//+KkNP809fARvATEkvPug4=",
       "Microsoft.AspNetCore.Authorization.n41ua9ceve.wasm": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
       "Microsoft.AspNetCore.Components.h4ild4sjod.wasm": "sha256-AYyXG0WrvwNEEX2QtbpR9AtYu26WKG+S10Q398vbgqY=",
       "Microsoft.AspNetCore.Components.Forms.9at76jd5um.wasm": "sha256-AZJqGXJM2Sos31wIr7syLy0TWCLYEWzemxDkwUyfPyk=",
@@ -420,10 +422,10 @@
       "WindowsBase.ovqw333kan.wasm": "sha256-7LCr4nX9JSGuwzMr8Rk8TGvC6ApzQNxCDiMV/0I9JlI=",
       "mscorlib.l6md3pggqy.wasm": "sha256-jZgH0LixLeQKqaq33akQgDGhfE7vbXbHtvCId5HC0Yo=",
       "netstandard.lij9csiyuf.wasm": "sha256-DeeBl9s8G34N3IfYRQ+MoY807amodj8cvpuvUSNaWE4=",
-      "MVC_FrontEnd.s0mys802ag.wasm": "sha256-BCCuKxR9a3uA7zbcswAwYBroOWqMOu3P+yKgYqncMfQ="
+      "MVC_FrontEnd.pctukai9fb.wasm": "sha256-GUzbDCAWoBdrfw0q/EuP3KJIxquVfOp2V4cuywIMhTY="
     },
     "pdb": {
-      "MVC_FrontEnd.lbq581o66c.pdb": "sha256-gcBQJ+wbq9gIPP6dtBo265Ouh6pLWIj4hoSgFTksXHE="
+      "MVC_FrontEnd.6665wotc49.pdb": "sha256-fv5+BT/anZQQsH+FRMy7leNbSewKYXgFrzL9PuJZ6d4="
     }
   },
   "cacheBootResources": true,

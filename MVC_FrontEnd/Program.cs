@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
 using Blazored.SessionStorage;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MVC_FrontEnd;
@@ -19,6 +20,7 @@ builder.Services.AddScoped<UserState>();
 builder.Services.AddScoped<URLStringServices>();
 builder.Services.AddScoped<URLs>();
 builder.Services.AddScoped<ComponentServices>();
+builder.Services.AddBlazoredToast();
 
 //User Registration
 builder.Services.AddScoped<AuthenticationService>();

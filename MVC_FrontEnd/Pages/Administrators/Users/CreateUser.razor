@@ -1,0 +1,71 @@
+﻿@page "/CreateUser"
+
+<h5 class="mb-3" id="exampleModalLabel">Create User</h5>
+
+<div class="row g-2 mb-2">
+	<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="userData.Firstname" />
+	<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="userData.Middlename" />
+	<InputComponent InputType="text" InputID="LastName" IsDisabled="false" label="Last Name" @bind-Value="userData.Lastname" />
+</div>
+<div class="row g-2 mb-2">
+	<SelectComponent label="Gender" SelectID="genderSelect" SelectedValue="@userData.Gender" Options="@GenderOptions" IsDisabled="false" />
+	<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="false" label="Phone Number" @bind-Value="userData.PhoneNumber" />
+	<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="false" label="Email Address" @bind-Value="userData.Email" />
+
+</div>
+<hr />
+<div class="row g-2 mb-2">
+	<InputComponent InputType="password" InputID="Password" IsDisabled="false" label="Password" @bind-Value="userData.Password" />
+	<InputComponent InputType="password" InputID="ConfirmPassword" IsDisabled="false" label="ConfirmPassword" @bind-Value="confirmPassword" />
+	<SelectComponent label="Position" SelectID="Position" SelectedValue="@userData.Role" Options="@PositionOptions" isDisabled="false" />
+</div>
+
+<div class="d-flex justify-content-end">
+	<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
+	<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal" onclick="AddUser()">Create</button>
+</div>
+
+@code {
+
+	public UsersDTO userData { set; get; } = new();
+
+	public string? confirmPassword { get; set; }
+
+	[Inject]
+	private ComponentServices componentServices { get; set; }
+	[Inject]
+	private UsersServices usersServices { get; set; }
+
+	public List<SelectOptions> GenderOptions { get; set; }
+	public List<SelectOptions> PositionOptions { get; set; }
+
+	protected override async void OnInitialized()
+	{
+		GenderOptions = componentServices.GenderOptions;
+		PositionOptions = componentServices.PositionOptions;
+	}
+
+	protected async Task AddUser()
+	{
+		if (userData.Password != confirmPassword)
+		{
+			ToastService.ShowError("Password Mismatch!");
+		}
+		else
+		{
+			bool isAdded = await usersServices.AddUsers(userData);
+
+			if (isAdded)
+			{
+				ToastService.ShowSuccess("Data inserted successfully!");
+				navManager.NavigateTo("/Users");
+			}
+			else
+			{
+				ToastService.ShowError("Failed to insert user!");
+			}
+		}
+	}
+
+
+}

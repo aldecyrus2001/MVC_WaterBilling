@@ -1,43 +1,44 @@
 ﻿@page "/UpdateUser"
 
-<h5 class="mb-3" id="exampleModalLabel">View User | @Id</h5>
+@if(Id == null)
+{
+	<p><em>Loading...</em></p>
+}
+else 
+{
+	<h5 class="mb-3" id="exampleModalLabel">Update User | @Id</h5>
 
-<div class="row g-2 mb-2">
-	<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="Firstname" />
-	<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="Middlename" />
-	<InputComponent InputType="text" InputID="LastName" IsDisabled="false" label="Last Name" @bind-Value="Lastname" />
-</div>
-<div class="row g-2 mb-2">
-	<SelectComponent label="Gender" SelectID="genderSelect" SelectedValue="@SelectedGender" Options="@GenderOptions" IsDisabled="false"/>
-	<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="false" label="Phone Number" @bind-Value="PhoneNumber" />
-	<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="false" label="Email Address" @bind-Value="EmailAddress" />
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="Firstname" />
+		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="Middlename" />
+		<InputComponent InputType="text" InputID="LastName" IsDisabled="false" label="Last Name" @bind-Value="Lastname" />
+	</div>
+	<div class="row g-2 mb-2">
+		<SelectComponent label="Gender" SelectID="genderSelect" SelectedValue="@SelectedGender" Options="@GenderOption" IsDisabled="false" />
+		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="false" label="Phone Number" @bind-Value="PhoneNumber" />
+		<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="false" label="Email Address" @bind-Value="EmailAddress" />
 
-</div>
-<hr />
-<div class="row g-2 mb-2">
-	<InputComponent InputType="date" InputID="DateCreated" IsDisabled="false" label="Date Created" @bind-Value="DateCreated" />
-	<InputComponent InputType="text" InputID="Role" IsDisabled="false" label="Role" @bind-Value="Role" />
-</div>
+	</div>
+	<hr />
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Role" IsDisabled="false" label="Role" @bind-Value="Role" />
+	</div>
 
-<div class="d-flex justify-content-end">
-	<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
-	<a href="/" type="button" class="btn btn-success me-3" data-bs-dismiss="modal">update</a>
-</div>
+	<div class="d-flex justify-content-end">
+		<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
+		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal" onclick="UpdateUserData()">update</button>
+	</div>
+}
+
 
 
 
 @code {
-	protected override async void OnInitialized()
-	{
-		Id = URLStringServices.GetURLStringValueAsInt("id");
-		// await authService.CheckAuthenticationAsync();
-		await Task.CompletedTask;
-
-	}
 
 	public int? Id { set; get; }
 	private Users? users;
 	private UsersDTO? userData;
+
 
 	public string Firstname { get; set; } = string.Empty;
 	public string Middlename { get; set; } = string.Empty;
@@ -45,7 +46,6 @@
 	public string SelectedGender { get; set; } = string.Empty;
 	public string PhoneNumber { get; set; } = string.Empty;
 	public string EmailAddress { get; set; } = string.Empty;
-	public string DateCreated { get; set; } = string.Empty;
 	public string Role { get; set; } = string.Empty;
 
 	[Inject]
@@ -53,11 +53,19 @@
 
 	[Inject]
 	private UsersServices usersServices { get; set; }
-
 	[Inject]
 	private ComponentServices componentServices { get; set; }
 
+	public List<SelectOptions> GenderOption { get; set; } = new();
 
+	protected override async void OnInitialized()
+	{
+		Id = URLStringServices.GetURLStringValueAsInt("id");
+		GenderOption = componentServices.GenderOptions;
+		// await authService.CheckAuthenticationAsync();
+		await Task.CompletedTask;
+
+	}
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -77,7 +85,6 @@
 						SelectedGender = users.Gender;
 						PhoneNumber = users.PhoneNumber;
 						EmailAddress = users.Email;
-						DateCreated = users.Date_Created.ToString("yyyy-MM-dd");
 						Role = users.Role;
 
 						componentServices.UpdateInputField(userData, "Firstname", users.Firstname);
@@ -86,7 +93,6 @@
 						componentServices.UpdateInputField(userData, "Gender", users.Gender);
 						componentServices.UpdateInputField(userData, "PhoneNumber", users.PhoneNumber);
 						componentServices.UpdateInputField(userData, "Email", users.Email);
-						componentServices.UpdateInputField(userData, "DateCreated", users.Date_Created.ToString("yyyy-MM-dd"));
 						componentServices.UpdateInputField(userData, "Role", users.Role);
 
 					};
@@ -101,11 +107,25 @@
 		}
 	}
 
-	private List<SelectOptions> GenderOptions { get; set; } = new()
+	protected async Task UpdateUserData()
 	{
-		new SelectOptions {Value = "Male", Text = "Male"},
-		new SelectOptions {Value = "Female", Text = "Female"}
-	};
+		if (Id.HasValue)
+		{
+			bool isUpdated = await usersServices.UpdateUserAsync(Id.Value, userData);
+
+			if (isUpdated)
+			{
+				navManager.NavigateTo("/Users");
+			}
+			else
+			{
+				Console.WriteLine("Failed to update user.");
+			}
+		}
+	}
+
+	
+	
 
 
 

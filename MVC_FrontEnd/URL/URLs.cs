@@ -4,6 +4,6 @@
     {
         private string _BaseURL = "http://localhost:5142/api/";
         public string AuthenticationURL => _BaseURL + "Authentication";
-        public string FetchUsers => _BaseURL + "User";
+        public string Users => _BaseURL + "User";
     }
 }
