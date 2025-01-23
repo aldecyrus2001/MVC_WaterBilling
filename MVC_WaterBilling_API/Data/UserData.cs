@@ -18,6 +18,13 @@ namespace MVC_WaterBilling_API.Data
             return await _db.Users.Where(u => u.Status != "Deleted").OrderByDescending(u => u.UserID).ToListAsync();
         }
 
+        public async Task<IEnumerable<Users>> GetUsersByRoleAsync(string role)
+        {
+            return await _db.Users
+                .Where(u => u.Role == role && u.Status != "Deleted")
+                .ToListAsync();
+        }
+
         public async Task<Users?> GetUserByIdAsync(int id)
         {
             return await _db.Users.FindAsync(id);

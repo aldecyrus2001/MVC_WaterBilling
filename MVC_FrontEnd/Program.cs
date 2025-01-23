@@ -25,6 +25,7 @@ builder.Services.AddBlazoredToast();
 //User Registration
 builder.Services.AddScoped<AuthenticationService>();
 builder.Services.AddScoped<UsersServices>();
+builder.Services.AddScoped<ConsumerServices>();
 
 
 

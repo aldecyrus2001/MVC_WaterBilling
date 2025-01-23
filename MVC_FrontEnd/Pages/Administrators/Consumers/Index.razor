@@ -1,0 +1,90 @@
+﻿@page "/Consumers"
+
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<div class="d-flex">
+		<h5>Consumers Records |</h5>
+		<a href="/ApplyConsumer" class="btn btn-primary px-2 py-1">Apply</a>
+	</div>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if (ConsumerInformations == null || !ConsumerInformations.Any())
+{
+	<p><em>No Consumers Records</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Meter ID</th>
+				<th>Consumer's Name</th>
+				<th>Address</th>
+				<th>Date Installed</th>
+				<th>Connection Type</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var consumerData in ConsumerInformations)
+			{
+				<tr>
+					<td>@consumerData.Meter_Number</td>
+					<td>@(consumerData.Firstname + " " + consumerData.Lastname)</td>
+					<td>@consumerData.Address</td>
+					<td>@consumerData.Connection_Date</td>
+					<td>@consumerData.ConnectionType</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							<a href="/ConsumerView?Id=@consumerData.ConsumerID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+							<a href="/UpdateConsumer?Id=@consumerData.ConsumerID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
+							<button class="btn btn-danger btn-sm" type="button" @onclick="() => DeactivateConsumer(consumerData.ConsumerID)">Delete</button>
+						</div>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<ConsumersInformations>? ConsumerInformations;
+
+	[Inject]
+	private ConsumerServices consumerServices { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		await authService.CheckAuthenticationAsync();
+		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumersInformations>>(urls.Consumer);
+	}
+
+	private async Task DeactivateConsumer(int id)
+	{
+		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to deactivate this consumer?");
+		if (confirmed)
+		{
+			await DeactivateConsumerData(id);
+		}
+	}
+
+	protected async Task DeactivateConsumerData(int Id)
+	{
+		// bool isDeleted = await consumerServices.DeleteUserAsync(Id);
+
+		// if (isDeleted)
+		// {
+		// 	toastService.ShowSuccess("Consumer deleted successfully!");
+		// 	navManager.NavigateTo("/Meters");
+		// }
+		// else
+		// {
+		// 	Console.WriteLine("Failed to delete user.");
+		// }
+	}
+
+}

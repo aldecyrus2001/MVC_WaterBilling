@@ -436,5 +436,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.UserController",
+    "Method": "GetUsersByRole",
+    "RelativePath": "api/User/role/{userRole}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userRole",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

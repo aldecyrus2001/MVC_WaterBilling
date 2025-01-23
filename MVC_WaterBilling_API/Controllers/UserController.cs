@@ -17,10 +17,23 @@ namespace MVC_WaterBilling_API.Controllers
             _userData = userData;
         }
 
-        [HttpGet]
+        [HttpGet()]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _userData.GetUsersAsync();
+            return Ok(users);
+        }
+
+        [HttpGet("role/{userRole}")]
+        public async Task<IActionResult> GetUsersByRole(string userRole)
+        {
+            var users = await _userData.GetUsersByRoleAsync(userRole);
+
+            if (users == null || !users.Any())
+            {
+                return NotFound($"No users found with the role '{userRole}'.");
+            }
+
             return Ok(users);
         }
 

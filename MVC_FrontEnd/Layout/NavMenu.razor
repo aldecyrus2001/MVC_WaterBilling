@@ -52,6 +52,11 @@
                 </NavLink>
             </div>
             <div class="nav-item px-3">
+                <NavLink class="nav-link" href="/Consumers" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Manage Consumers
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
                 <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                     <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Cashiers Reports
                 </NavLink>
@@ -76,9 +81,10 @@
 </div>
 
 @code {
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         UserStateService.OnChange += StateHasChanged;
+        await UserStateService.LoadUserRoleAsync();
     }
 
     public string UserRole => UserStateService.UserRole;

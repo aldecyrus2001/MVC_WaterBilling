@@ -26,6 +26,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<UserData>();
 builder.Services.AddScoped<AuthenticationData>();
 builder.Services.AddScoped<BillData>();
+builder.Services.AddScoped<ConsumerData>();
 
 var app = builder.Build();
 

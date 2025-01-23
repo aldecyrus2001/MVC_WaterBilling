@@ -71,7 +71,7 @@
                     Message = jsonResponse["message"]?.ToString() ?? "Login Successful";  // Default to 'Login Successful' if no message field
 
                     UserRole = jsonResponse["role"]?.ToString() ?? string.Empty;
-                    UserStateService.SetUserRole(UserRole);
+                    await UserStateService.SetUserRoleAsync(UserRole);
                     var userId = jsonResponse["userId"]?.ToString();
                     var token = jsonResponse["token"]?.ToString();
                     var role = jsonResponse["role"]?.ToString();
