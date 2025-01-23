@@ -2,7 +2,10 @@
 
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-	<h2>Users Records</h2>
+	<div class="d-flex">
+		<h5>Consumers Records |</h5>
+		<a href="/CreateUser" class="btn btn-primary px-2 py-1">Apply</a>
+	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
@@ -36,9 +39,14 @@ else
 					<td>@users.Role</td>
 					<td class="text-end" style="vertical-align: middle;">
 						<div class="d-flex justify-content-center">
+							@if(users.Role == "Consumer")
+							{
+								<a href="/ApplyConsumer?Id=@users.UserID" class="btn btn-warning btn-sm" type="button" style="margin-right: 10px;">Apply</a>
+							}
 							<a href="/UserView?Id=@users.UserID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
 							<a href="/UpdateUser?Id=@users.UserID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
 							<button class="btn btn-danger btn-sm" type="button" @onclick="() => ConfirmDelete(users.UserID)">Delete</button>
+							
 						</div>
 					</td>
 				</tr>

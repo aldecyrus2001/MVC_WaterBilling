@@ -16,6 +16,12 @@ namespace MVC_FrontEnd.Services
             _uRLs = uRLs;
         }
 
+        public async Task<ConsumersInformations?> GetUserByIdAsync(int id)
+        {
+            var url = $"{_uRLs.Users}/{id}";
+            return await _httpClient.GetFromJsonAsync<ConsumersInformations>(url);
+        }
+
         public async Task<ConsumersInformations?> GetConsumerByID(int id)
         {
             var url = $"{_uRLs.Consumer}/{id}";

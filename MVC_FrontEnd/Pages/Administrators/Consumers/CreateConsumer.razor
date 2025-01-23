@@ -1,7 +1,98 @@
 ﻿@page "/ApplyConsumer"
 
-<h3>CreateConsumer</h3>
+
+@if (userData == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<h5 class="mb-3" id="exampleModalLabel">Apply User | @Id</h5>
+
+
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Firstname" IsDisabled="true" label="First Name" @bind-Value="userData.Firstname" />
+		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="userData.Middlename" />
+		<InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="userData.Lastname" />
+	</div>
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Gender" IsDisabled="true" label="Phone Number" @bind-Value="userData.Gender" />
+		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="userData.PhoneNumber" />
+		<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="userData.Email" />
+	</div>
+
+	<hr/>
+
+	<div class="d-flex justify-content-end">
+		<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
+		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal">update</button>
+	</div>
+}
 
 @code {
+	public int? Id { set; get; }
+	private UsersDTO userData;
+	private Users? users;
 
+	public string Firstname { get; set; } = string.Empty;
+	public string MiddleName { get; set; } = string.Empty;
+	public string LastName { get; set; } = string.Empty;
+	public string Gender { get; set; } = string.Empty;
+	public string PhoneNumber { get; set; } = string.Empty;
+	public string EmailAddress { get; set; } = string.Empty;
+
+	[Inject]
+	private URLStringServices URLStringServices { get; set; }
+
+	[Inject]
+	private UsersServices userService { get; set; }
+
+	[Inject]
+	private ComponentServices componentServices { get; set; }
+
+
+	protected override async void OnInitialized()
+	{
+		Id = URLStringServices.GetURLStringValueAsInt("id");
+		await Task.CompletedTask;
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			if (Id.HasValue)
+			{
+				users = await userService.GetUserByIdAsync(Id.Value);
+				if (users != null)
+				{
+					userData ??= new UsersDTO();
+
+					{
+						Firstname = users.Firstname;
+						MiddleName = users.Middlename;
+						LastName = users.Lastname;
+						Gender = users.Gender;
+						PhoneNumber = users.PhoneNumber;
+						EmailAddress = users.Email;
+
+						componentServices.UpdateInputField(userData, "Firstname", users.Firstname);
+						componentServices.UpdateInputField(userData, "Middlename", users.Middlename);
+						componentServices.UpdateInputField(userData, "Lastname", users.Lastname);
+						componentServices.UpdateInputField(userData, "Gender", users.Gender);
+						componentServices.UpdateInputField(userData, "PhoneNumber", users.PhoneNumber);
+						componentServices.UpdateInputField(userData, "Email", users.Email);
+						componentServices.UpdateInputField(userData, "Role", users.Role);
+
+					};
+
+				}
+			}
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine("Exception : " + ex.Message);
+		}
+	}
 }
