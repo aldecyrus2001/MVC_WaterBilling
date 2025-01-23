@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "MVC_FrontEnd",
   "resources": {
-    "hash": "sha256-/i+7aNTjQH9CGdDAymz4zv8pPYg4HUxIFtvx+LyjhoA=",
+    "hash": "sha256-5rEvY1wRkfCyMMOChrYj1aQe0VoTYPVWJ569+uol01A=",
     "fingerprinting": {
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "Blazored.SessionStorage.34xr2ein7y.wasm": "Blazored.SessionStorage.wasm",
@@ -206,8 +206,8 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "MVC_FrontEnd.cp4sm9b4tw.wasm": "MVC_FrontEnd.wasm",
-      "MVC_FrontEnd.i36oz0l34v.pdb": "MVC_FrontEnd.pdb"
+      "MVC_FrontEnd.eimuiktpp5.wasm": "MVC_FrontEnd.wasm",
+      "MVC_FrontEnd.amitpb9nax.pdb": "MVC_FrontEnd.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.8o8n7iomrf.js": "sha256-WIUiy49hHQ3kOAtRdCtUzm3Yg5BnOqCC+Q+kri9Fi1g="
@@ -422,10 +422,10 @@
       "WindowsBase.ovqw333kan.wasm": "sha256-7LCr4nX9JSGuwzMr8Rk8TGvC6ApzQNxCDiMV/0I9JlI=",
       "mscorlib.l6md3pggqy.wasm": "sha256-jZgH0LixLeQKqaq33akQgDGhfE7vbXbHtvCId5HC0Yo=",
       "netstandard.lij9csiyuf.wasm": "sha256-DeeBl9s8G34N3IfYRQ+MoY807amodj8cvpuvUSNaWE4=",
-      "MVC_FrontEnd.cp4sm9b4tw.wasm": "sha256-0FDTxzX8C6wIDAwq7iZc4nEnjVvOhXGQtiu3b+F6Yok="
+      "MVC_FrontEnd.eimuiktpp5.wasm": "sha256-dv9t9otT+N4Z6kkH5f3WiadWplq4TImtllODt9lhPy8="
     },
     "pdb": {
-      "MVC_FrontEnd.i36oz0l34v.pdb": "sha256-3kd5P4c9+zIxW8s8YLidNjf6APKYtdUvfI5YCf1ttBQ="
+      "MVC_FrontEnd.amitpb9nax.pdb": "sha256-ghhoJvdxLFpUcaGrfu7sZeVTe6Pukciho54u2j3wj+Y="
     }
   },
   "cacheBootResources": true,

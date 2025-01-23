@@ -29,5 +29,11 @@
             new SelectOptions {Value = "Reader", Text = "Reader"},
             new SelectOptions {Value = "Cashier", Text = "Cashier"}
         };
+
+        public List<SelectOptions> ConnectionType { get; set; } = new()
+        {
+            new SelectOptions {Value = "Residential", Text= "Residential"},
+            new SelectOptions {Value = "Commercial", Text= "Commercial"}
+        };
     }
 }

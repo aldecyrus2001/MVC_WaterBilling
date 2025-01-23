@@ -23,6 +23,34 @@ else
 
 	<hr/>
 
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Meter Number" IsDisabled="false" label="Meter Number" @bind-Value="consumerData.Address" />
+
+	</div>
+
+	<div class="row g-2 mb-2">
+		<div class="col">
+			<label for="Connection" class="form-label">Connection Type</label>
+			<select id="Connection" class="form-select" @bind="consumerData.ConnectionType">
+				<option value="n/a" selected disabled>-- Please Select Gender --</option>
+				@if (ConnectionType != null)
+				{
+					foreach (var option in ConnectionType)
+					{
+						<option value="@option.Value">@option.Text</option>
+					}
+				}
+			</select>
+		</div>
+
+		<InputComponent InputType="date" InputID="DateConnection" IsDisabled="false" label="Connection Date" @bind-Value="consumerData.Connection_Date"/>
+
+		<InputComponent InputType="text" InputID="Address" IsDisabled="false" label="Address" @bind-Value="consumerData.Address" />
+
+	</div>
+
+
+
 	<div class="d-flex justify-content-end">
 		<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
 		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal">update</button>
@@ -33,6 +61,7 @@ else
 	public int? Id { set; get; }
 	private UsersDTO userData;
 	private Users? users;
+	private ConsumerDTO consumerData { set; get; } = new();
 
 	public string Firstname { get; set; } = string.Empty;
 	public string MiddleName { get; set; } = string.Empty;
@@ -50,10 +79,13 @@ else
 	[Inject]
 	private ComponentServices componentServices { get; set; }
 
+	public List<SelectOptions> ConnectionType { get; set; }
+
 
 	protected override async void OnInitialized()
 	{
 		Id = URLStringServices.GetURLStringValueAsInt("id");
+		ConnectionType = componentServices.ConnectionType;
 		await Task.CompletedTask;
 	}
 
@@ -95,4 +127,6 @@ else
 			Console.WriteLine("Exception : " + ex.Message);
 		}
 	}
+
+	
 }
