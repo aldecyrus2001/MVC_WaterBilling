@@ -57,7 +57,7 @@ namespace MVC_WaterBilling_API.Controllers
                 Email = userDTO.Email,
                 Password = hashedPassword,
                 Date_Created = DateTime.Now,
-                Status = userDTO.Status,
+                Status = "Active",
                 Role = userDTO.Role,
             };
 
@@ -67,7 +67,7 @@ namespace MVC_WaterBilling_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> EditUser(int id, [FromBody] UsersDTO userDTO)
+        public async Task<IActionResult> EditUser(int id, [FromBody] UserUpdateDTO userDTO)
         {
             var user = await _userData.GetUserByIdAsync(id);
             if (user == null)

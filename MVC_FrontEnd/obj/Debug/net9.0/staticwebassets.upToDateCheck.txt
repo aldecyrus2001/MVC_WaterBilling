@@ -41,6 +41,7 @@ C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\d
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\MB.js
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
 C:\Users\User\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
@@ -95,6 +96,7 @@ wwwroot\lib\bootstrap\dist\js\bootstrap.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
 wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\MB.js
 wwwroot\logo.png
 wwwroot\manifest.webmanifest
 wwwroot\sample-data\weather.json

@@ -1,6 +1,6 @@
 ﻿<div class="col">
 	<label for="@InputID" class="form-label">@label</label>
-	<input type="@InputType" id="@InputID" class="form-control" @bind="@Value" disabled="@IsDisabled">
+	<input type="@InputType" id="@InputID" class="form-control" @bind="@Value" disabled="@IsDisabled" @oninput="OnValueChanged" />
 </div>
 
 @code {

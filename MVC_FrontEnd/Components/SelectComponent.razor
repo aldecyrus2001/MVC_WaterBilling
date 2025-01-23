@@ -1,42 +1,21 @@
 ﻿<div class="col">
-	<label for="@SelectID" class="form-label">@label</label>
-	<select id="@SelectID" class="form-select" @bind="@SelectedValue" disabled="@isDisabled">
-		<option value="" selected disabled>-- Please Select @label --</option>
-		@if(Options != null)
-		{
-			foreach (var option in Options)
-			{
-				<option value="@option.Value">@option.Text</option>
-			}
-		}
-	</select>
+    <label for="@Id" class="form-label">@Label</label>
+    <select id="@Id" class="form-select" @bind="@SelectedValue">
+        <option value="n/a" disabled>-- Please Select @Label --</option>
+        @if (Options != null)
+        {
+            foreach (var option in Options)
+            {
+                <option value="@option.Value">@option.Text</option>
+            }
+        }
+    </select>
 </div>
 
 @code {
-	[Parameter]
-	public string SelectID { get; set; } = string.Empty;
-
-	[Parameter]
-	public string label { get; set; } = string.Empty;
-
-	[Parameter]
-	public string SelectedValue { get; set; } = string.Empty;
-
-	[Parameter]
-	public bool isDisabled { get; set; } = false;
-
-	[Parameter]
-	public EventCallback<string> SelectedValueChanged { get; set; }
-
-	[Parameter]
-	public List<SelectOptions> Options { get; set; } = new();
-
-	private void OnValueChanged(ChangeEventArgs e)
-	{
-		SelectedValue = e.Value?.ToString() ?? string.Empty;
-		SelectedValueChanged.InvokeAsync(SelectedValue);
-	}
-
-	
-
+    [Parameter] public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Parameter] public string Label { get; set; } = "Select";
+    [Parameter] public List<SelectOptions> Options { get; set; } = new List<SelectOptions>();
+    [Parameter] public string SelectedValue { set; get; }
+    
 }

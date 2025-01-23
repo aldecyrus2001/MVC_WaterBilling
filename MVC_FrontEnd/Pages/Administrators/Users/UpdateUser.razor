@@ -1,6 +1,6 @@
 ﻿@page "/UpdateUser"
 
-@if(Id == null)
+@if (userData == null || GenderOption == null || PositionOption == null)
 {
 	<p><em>Loading...</em></p>
 }
@@ -8,25 +8,53 @@ else
 {
 	<h5 class="mb-3" id="exampleModalLabel">Update User | @Id</h5>
 
+	<EditForm Model="userData">
+
+	</EditForm>
+
 	<div class="row g-2 mb-2">
-		<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="Firstname" />
-		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="Middlename" />
-		<InputComponent InputType="text" InputID="LastName" IsDisabled="false" label="Last Name" @bind-Value="Lastname" />
+		<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="userData.Firstname" />
+		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="userData.Middlename" />
+		<InputComponent InputType="text" InputID="LastName" IsDisabled="false" label="Last Name" @bind-Value="userData.Lastname" />
 	</div>
 	<div class="row g-2 mb-2">
-		<SelectComponent label="Gender" SelectID="genderSelect" SelectedValue="@SelectedGender" Options="@GenderOption" IsDisabled="false" />
-		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="false" label="Phone Number" @bind-Value="PhoneNumber" />
-		<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="false" label="Email Address" @bind-Value="EmailAddress" />
-
+		<div class="col">
+			<label for="Gender" class="form-label">Gender</label>
+			<select id="Gender" class="form-select" @bind="userData.Gender">
+				<option value="n/a" selected disabled>-- Please Select Gender --</option>
+				@if (GenderOption != null)
+				{
+					foreach (var option in GenderOption)
+					{
+						<option value="@option.Value">@option.Text</option>
+					}
+				}
+			</select>
+		</div>
+		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="false" label="Phone Number" @bind-Value="userData.PhoneNumber" />
+		<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="false" label="Email Address" @bind-Value="userData.Email" />
 	</div>
 	<hr />
 	<div class="row g-2 mb-2">
-		<InputComponent InputType="text" InputID="Role" IsDisabled="false" label="Role" @bind-Value="Role" />
+		<div class="col">
+			<label for="Position" class="form-label">Position</label>
+			<select id="Position" class="form-select" @bind="userData.Role">
+				<option value="n/a" selected disabled>-- Please Select Position --</option>
+				@if (PositionOption != null)
+				{
+					foreach (var option in PositionOption)
+					{
+						<option value="@option.Value">@option.Text</option>
+					}
+				}
+			</select>
+		</div>
 	</div>
+
 
 	<div class="d-flex justify-content-end">
 		<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
-		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal" onclick="UpdateUserData()">update</button>
+		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal" @onclick="UpdateUserData">update</button>
 	</div>
 }
 
@@ -46,7 +74,7 @@ else
 	public string SelectedGender { get; set; } = string.Empty;
 	public string PhoneNumber { get; set; } = string.Empty;
 	public string EmailAddress { get; set; } = string.Empty;
-	public string Role { get; set; } = string.Empty;
+	public string SelectedRole { get; set; } = string.Empty;
 
 	[Inject]
 	private URLStringServices URLStringServices { get; set; }
@@ -57,11 +85,13 @@ else
 	private ComponentServices componentServices { get; set; }
 
 	public List<SelectOptions> GenderOption { get; set; } = new();
+	public List<SelectOptions> PositionOption { get; set; } = new();
 
 	protected override async void OnInitialized()
 	{
 		Id = URLStringServices.GetURLStringValueAsInt("id");
 		GenderOption = componentServices.GenderOptions;
+		PositionOption = componentServices.PositionOptions;
 		// await authService.CheckAuthenticationAsync();
 		await Task.CompletedTask;
 
@@ -85,7 +115,7 @@ else
 						SelectedGender = users.Gender;
 						PhoneNumber = users.PhoneNumber;
 						EmailAddress = users.Email;
-						Role = users.Role;
+						SelectedRole = users.Role;
 
 						componentServices.UpdateInputField(userData, "Firstname", users.Firstname);
 						componentServices.UpdateInputField(userData, "Middlename", users.Middlename);

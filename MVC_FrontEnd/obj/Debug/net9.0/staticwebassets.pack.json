@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\wwwroot\\lib\\MB.js",
+      "PackagePath": "staticwebassets\\lib\\MB.js"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },

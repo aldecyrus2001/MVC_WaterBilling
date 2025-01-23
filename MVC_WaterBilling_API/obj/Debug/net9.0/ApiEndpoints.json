@@ -394,7 +394,7 @@
       },
       {
         "Name": "userDTO",
-        "Type": "MVC_WaterBilling_API.Model.User.UsersDTO",
+        "Type": "MVC_WaterBilling_API.Model.User.UserUpdateDTO",
         "IsRequired": true
       }
     ],
