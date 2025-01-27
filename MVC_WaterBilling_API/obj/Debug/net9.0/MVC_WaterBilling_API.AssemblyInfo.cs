@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MVC_WaterBilling_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c8cf17081e6d510e52cc518f0f7baa55fc91eea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94595c4185dce5044fab323a094d86d3e02a077f")]
 [assembly: System.Reflection.AssemblyProductAttribute("MVC_WaterBilling_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MVC_WaterBilling_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

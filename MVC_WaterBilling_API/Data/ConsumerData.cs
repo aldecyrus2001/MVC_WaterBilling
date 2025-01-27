@@ -13,11 +13,21 @@ namespace MVC_WaterBilling_API.Data
             _db = db;
         }
 
-        public async Task<List<Consumers>> GetConsumersAsync()
+        public async Task<List<ConsumerWithUserDTO>> GetConsumersAsync()
         {
             return await _db.Consumers
                 .Where(c => c.Consumer_Status != "Disconnected")
-                .OrderByDescending(c => c.ConsumerID)
+                .Join(
+                    _db.Users,
+                    consumer => consumer.UserID,
+                    user => user.UserID.ToString(),
+                    (consumer, user) => new ConsumerWithUserDTO
+                    {
+                        Consumer = consumer,
+                        User = user
+                    }
+                )
+                .OrderByDescending(c => c.Consumer.ConsumerID)
                 .ToListAsync();
         }
 
@@ -41,6 +51,11 @@ namespace MVC_WaterBilling_API.Data
         public async Task<bool> isUserIdUsedAsync(string UserID)
         {
             return await _db.Consumers.AnyAsync(c => c.UserID == UserID);
+        }
+
+        public async Task<bool> isMeterNumberUsedAsync(string MeterID)
+        {
+            return await _db.Consumers.AnyAsync(c => c.Meter_Number == MeterID);
         }
 
         public async Task CreateConsumerAsync(Consumers consumers)

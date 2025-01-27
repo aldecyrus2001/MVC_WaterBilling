@@ -1,0 +1,113 @@
+﻿@page "/UpdateConsumer"
+
+@if (consumerData == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<h5 class="mb-3" id="exampleModalLabel">Apply User | @Id</h5>
+
+
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Firstname" IsDisabled="true" label="First Name" @bind-Value="consumerData.User.Firstname" />
+		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="consumerData.User.Middlename" />
+		<InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="consumerData.User.Lastname" />
+	</div>
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Gender" IsDisabled="true" label="Phone Number" @bind-Value="consumerData.User.Gender" />
+		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="consumerData.User.PhoneNumber" />
+		<InputComponent InputType="email" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="consumerData.User.Email" />
+	</div>
+
+	<hr />
+
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="Meter Number" IsDisabled="false" label="Meter Number" @bind-Value="consumerData.Consumer.Meter_Number" />
+
+	</div>
+
+	<div class="row g-2 mb-2">
+		<div class="col">
+			<label for="Connection" class="form-label">Connection Type</label>
+			<select id="Connection" class="form-select" @bind="consumerData.Consumer.ConnectionType">
+				<option value="n/a" selected disabled>-- Please Select Gender --</option>
+				@if (ConnectionType != null)
+				{
+					foreach (var option in ConnectionType)
+					{
+						<option value="@option.Value">@option.Text</option>
+					}
+				}
+			</select>
+		</div>
+
+		<InputComponent InputType="text" InputID="DateConnection" IsDisabled="false" label="Connection Date" @bind-Value="consumerData.Consumer.Connection_Date" />
+
+		<InputComponent InputType="text" InputID="Address" IsDisabled="false" label="Address" @bind-Value="consumerData.Consumer.Address" />
+
+	</div>
+
+
+
+	<div class="d-flex justify-content-end">
+		<a href="/Consumers" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
+		<button href="/Consumers" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal" @onclick="UpdateConsumerData">Update</button>
+	</div>
+}
+
+@code {
+	public int? Id { set; get; }
+	private ConsumerWithUserDTO? consumerData;
+
+	[Inject]
+	private URLStringServices URLStringServices { get; set; }
+
+	[Inject]
+	private ConsumerServices consumerServices { get; set; }
+
+	public List<SelectOptions> ConnectionType { get; set; }
+
+	[Inject]
+	private ComponentServices componentServices { get; set; }
+
+	protected override async void OnInitialized()
+	{
+		Id = URLStringServices.GetURLStringValueAsInt("id");
+		ConnectionType = componentServices.ConnectionType;
+
+
+		await Task.CompletedTask;
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			if (Id.HasValue)
+			{
+				consumerData = await consumerServices.GetConsumerByID(Id.Value);
+				StateHasChanged();
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error Exception : {ex.Message}");
+		}
+	}
+
+	protected async Task UpdateConsumerData()
+	{
+		bool isUpdated = await consumerServices.UpdateConsumerDataASync(Id.Value, consumerData);
+
+		if(isUpdated)
+		{
+			Console.WriteLine("Updated Successfully!");
+			navManager.NavigateTo("/Consumers");
+		}
+		else
+		{
+			Console.WriteLine("Update Failed");
+		}
+	}
+}

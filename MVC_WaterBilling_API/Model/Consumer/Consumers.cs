@@ -10,4 +10,5 @@
         public string Meter_Number { get; set; }
         public string Consumer_Status { get; set; } //Disconnected, Connected
     }
+
 }

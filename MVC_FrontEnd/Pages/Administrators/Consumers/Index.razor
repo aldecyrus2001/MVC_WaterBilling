@@ -29,16 +29,16 @@ else
 			@foreach (var consumerData in ConsumerInformations)
 			{
 				<tr>
-					<td>@consumerData.Meter_Number</td>
-					<td>@(consumerData.Firstname + " " + consumerData.Lastname)</td>
-					<td>@consumerData.Address</td>
-					<td>@consumerData.Connection_Date</td>
-					<td>@consumerData.ConnectionType</td>
+					<td>@consumerData.Consumer.Meter_Number</td>
+					<td>@(consumerData.User.Firstname + " " + consumerData.User.Lastname)</td>
+					<td>@consumerData.Consumer.Address</td>
+					<td>@consumerData.Consumer.Connection_Date</td>
+					<td>@consumerData.Consumer.ConnectionType</td>
 					<td class="text-end" style="vertical-align: middle;">
 						<div class="d-flex justify-content-center">
-							<a href="/ConsumerView?Id=@consumerData.ConsumerID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
-							<a href="/UpdateConsumer?Id=@consumerData.ConsumerID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
-							<button class="btn btn-danger btn-sm" type="button" @onclick="() => DeactivateConsumer(consumerData.ConsumerID)">Delete</button>
+							<a href="/ConsumerView?Id=@consumerData.Consumer.ConsumerID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+							<a href="/UpdateConsumer?Id=@consumerData.Consumer.ConsumerID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
+							<button class="btn btn-danger btn-sm" type="button" @onclick="() => ConfirmDeactivateConsumer(consumerData.Consumer.ConsumerID)">Delete</button>
 						</div>
 					</td>
 				</tr>
@@ -49,7 +49,7 @@ else
 }
 
 @code {
-	private List<ConsumersInformations>? ConsumerInformations;
+	private List<ConsumerWithUserDTO>? ConsumerInformations;
 
 	[Inject]
 	private ConsumerServices consumerServices { get; set; }
@@ -57,10 +57,10 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumersInformations>>(urls.Consumer);
+		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumerWithUserDTO>>(urls.Consumer);
 	}
 
-	private async Task DeactivateConsumer(int id)
+	private async Task ConfirmDeactivateConsumer(int id)
 	{
 		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to deactivate this consumer?");
 		if (confirmed)
@@ -69,19 +69,19 @@ else
 		}
 	}
 
-	protected async Task DeactivateConsumerData(int Id)
+	private async Task DeactivateConsumerData(int id)
 	{
-		// bool isDeleted = await consumerServices.DeleteUserAsync(Id);
+		bool isDeactivated = await consumerServices.DeactivateConsumerAsync(id);
 
-		// if (isDeleted)
-		// {
-		// 	toastService.ShowSuccess("Consumer deleted successfully!");
-		// 	navManager.NavigateTo("/Meters");
-		// }
-		// else
-		// {
-		// 	Console.WriteLine("Failed to delete user.");
-		// }
+		if (isDeactivated)
+		{
+			await JSRuntime.InvokeVoidAsync("alert", $"Successfully Deactivated Account!");
+			await JSRuntime.InvokeVoidAsync("location.reload");
+		}
+		else
+		{
+			await JSRuntime.InvokeVoidAsync("alert", $"Failed To Deactivate Account!");
+		}
 	}
 
 }

@@ -45,23 +45,34 @@ namespace MVC_WaterBilling_API.Controllers
                     message = "User Has already been already a member!"
                 });
             }
-
-            var consumer = new Consumers
+            else if (await _consumerData.isMeterNumberUsedAsync(consumersDTO.Meter_Number))
             {
-                UserID = consumersDTO.UserID,
-                Address = consumersDTO.Address,
-                ConnectionType = consumersDTO.ConnectionType,
-                Connection_Date = consumersDTO.Connection_Date,
-                Meter_Number = consumersDTO.Meter_Number,
-                Consumer_Status = "Connected"
-            };
-
-            await _consumerData.CreateConsumerAsync(consumer);
-
-            return Ok(new
+                return BadRequest(new
+                {
+                    message = "Meter Number Has already been already taken!"
+                });
+            }
+            else
             {
-                message = "Consumer applied successfully!"
-            });
+                var consumer = new Consumers
+                {
+                    UserID = consumersDTO.UserID,
+                    Address = consumersDTO.Address,
+                    ConnectionType = consumersDTO.ConnectionType,
+                    Connection_Date = consumersDTO.Connection_Date,
+                    Meter_Number = consumersDTO.Meter_Number,
+                    Consumer_Status = "Connected"
+                };
+
+                await _consumerData.CreateConsumerAsync(consumer);
+
+                return Ok(new
+                {
+                    message = "Consumer applied successfully!"
+                });
+            }
+
+            
 
         }
 

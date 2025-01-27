@@ -1,6 +1,8 @@
 ﻿using MVC_FrontEnd.Models;
 using MVC_FrontEnd.URL;
+using MVC_WaterBilling_API.Services;
 using System.Net.Http.Json;
+using Newtonsoft.Json;
 
 namespace MVC_FrontEnd.Services
 {
@@ -16,16 +18,70 @@ namespace MVC_FrontEnd.Services
             _uRLs = uRLs;
         }
 
-        public async Task<ConsumersInformations?> GetUserByIdAsync(int id)
+        public async Task<ConsumerWithUserDTO?> GetUserByIdAsync(int id)
         {
             var url = $"{_uRLs.Users}/{id}";
-            return await _httpClient.GetFromJsonAsync<ConsumersInformations>(url);
+            return await _httpClient.GetFromJsonAsync<ConsumerWithUserDTO>(url);
         }
 
-        public async Task<ConsumersInformations?> GetConsumerByID(int id)
+        public async Task<ConsumerWithUserDTO?> GetConsumerByID(int id)
         {
             var url = $"{_uRLs.Consumer}/{id}";
-            return await _httpClient.GetFromJsonAsync<ConsumersInformations>(url);
+            return await _httpClient.GetFromJsonAsync<ConsumerWithUserDTO>(url);
+        }
+
+        public async Task<(bool IsSuccess, string Message)> AddConsumer(ConsumerDTO consumerData)
+        {
+            try
+            {
+                var url = $"{_uRLs.Consumer}";
+                var response = await _httpClient.PostAsJsonAsync(url, consumerData);
+
+                var responseMessage = await response.Content.ReadAsStringAsync();
+
+                ApiResponse apiResponse = JsonConvert.DeserializeObject<ApiResponse>(responseMessage);
+
+
+                return (response.IsSuccessStatusCode, apiResponse.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error inserting consumer: {ex.Message}");
+                return (false, $"Error: {ex.Message}");
+            }
+        }
+
+        public async Task<bool> UpdateConsumerDataASync(int id, ConsumerWithUserDTO consumerData)
+        {
+            try
+            {
+                var url = $"{_uRLs.Consumer}/{id}";
+                var response = await _httpClient.PutAsJsonAsync(url, consumerData.Consumer);
+                return response.IsSuccessStatusCode;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error Inserting consumer: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DeactivateConsumerAsync(int id)
+        {
+            try
+            {
+                var url = $"{_uRLs.Consumer}/{id}/disconnect";
+                var response = await _httpClient.PutAsync(url, null);
+
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                // Log the error and provide user feedback
+                Console.WriteLine($"Error Deactivating consumer: {ex.Message}");
+                return false;
+            }
         }
     }
 

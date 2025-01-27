@@ -24,7 +24,7 @@ else
 	<hr/>
 
 	<div class="row g-2 mb-2">
-		<InputComponent InputType="text" InputID="Meter Number" IsDisabled="false" label="Meter Number" @bind-Value="consumerData.Address" />
+		<InputComponent InputType="text" InputID="Meter Number" IsDisabled="false" label="Meter Number" @bind-Value="consumerData.Meter_Number" />
 
 	</div>
 
@@ -53,7 +53,7 @@ else
 
 	<div class="d-flex justify-content-end">
 		<a href="/Users" type="button" class="btn btn-danger me-3" data-bs-dismiss="modal">Close</a>
-		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal">update</button>
+		<button type="button" class="btn btn-success me-3" data-bs-dismiss="modal" @onclick="AddConsumer">update</button>
 	</div>
 }
 
@@ -77,6 +77,9 @@ else
 	private UsersServices userService { get; set; }
 
 	[Inject]
+	private ConsumerServices consumerServices { get; set; }
+
+	[Inject]
 	private ComponentServices componentServices { get; set; }
 
 	public List<SelectOptions> ConnectionType { get; set; }
@@ -85,6 +88,9 @@ else
 	protected override async void OnInitialized()
 	{
 		Id = URLStringServices.GetURLStringValueAsInt("id");
+
+		consumerData.UserID = Id.ToString();
+
 		ConnectionType = componentServices.ConnectionType;
 		await Task.CompletedTask;
 	}
@@ -128,5 +134,20 @@ else
 		}
 	}
 
+	protected async Task AddConsumer()
+	{
+		var (isAdded, message) = await consumerServices.AddConsumer(consumerData);
+
+		if (isAdded)
+		{
+			await JSRuntime.InvokeVoidAsync("alert", $"Success: {message}");
+			navManager.NavigateTo("/Consumers");
+		}
+		else
+		{
+			await JSRuntime.InvokeVoidAsync("alert", $"Failed: {message}");
+			navManager.NavigateTo("/Users");
+		}
+	}
 	
 }
