@@ -27,6 +27,8 @@ builder.Services.AddScoped<UserData>();
 builder.Services.AddScoped<AuthenticationData>();
 builder.Services.AddScoped<BillData>();
 builder.Services.AddScoped<ConsumerData>();
+builder.Services.AddScoped<MeterReadingData>();
+builder.Services.AddScoped<AdvanceData>();
 
 var app = builder.Build();
 

@@ -49,7 +49,7 @@ else
 }
 
 @code {
-	private List<ConsumerWithUserDTO>? ConsumerInformations;
+	private List<ConsumerWithUser>? ConsumerInformations;
 
 	[Inject]
 	private ConsumerServices consumerServices { get; set; }
@@ -57,7 +57,7 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumerWithUserDTO>>(urls.Consumer);
+		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumerWithUser>>(urls.Consumer);
 	}
 
 	private async Task ConfirmDeactivateConsumer(int id)

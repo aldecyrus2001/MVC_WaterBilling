@@ -44,7 +44,7 @@ namespace MVC_WaterBilling_API.Controllers
                 From = billDTO.From,
                 To = billDTO.To,
                 DueDate = billDTO.DueDate,
-                BillDate = billDTO.BillDate,
+                BillDate = DateTime.Now,
                 BillStatus = "Unpaid"
             };
 

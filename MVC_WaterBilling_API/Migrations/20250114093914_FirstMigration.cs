@@ -73,7 +73,7 @@ namespace MVC_WaterBilling_API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Meter_Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReaderID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Previous_Reading = table.Column<double>(type: "float", nullable: false),
+                    Previous_Reading = table.Column<double>(type: "float", nullable: true),
                     Current_Reading = table.Column<double>(type: "float", nullable: false),
                     Usage = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)

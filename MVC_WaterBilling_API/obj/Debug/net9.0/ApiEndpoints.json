@@ -186,6 +186,22 @@
   },
   {
     "ContainingType": "MVC_WaterBilling_API.Controllers.ConsumerController",
+    "Method": "GetConsumerByMeterNumber",
+    "RelativePath": "api/Consumer/{meterNumber}/meterNumber",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "meterNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.ConsumerController",
     "Method": "SearchConsumer",
     "RelativePath": "api/Consumer/{meterNumber}/searchConsumer",
     "HttpMethod": "GET",
@@ -252,6 +268,22 @@
     "Parameters": [
       {
         "Name": "meterNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
+    "Method": "GetMeterReadingByMeterNumber",
+    "RelativePath": "api/Meter/{meternumber}/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "meternumber",
         "Type": "System.String",
         "IsRequired": true
       }

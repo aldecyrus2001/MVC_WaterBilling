@@ -65,7 +65,7 @@ else
 
 	public int? Id { set; get; }
 	private Users? users;
-	private UsersDTO? userData;
+	private Users? userData;
 
 
 	public string Firstname { get; set; } = string.Empty;
@@ -106,7 +106,7 @@ else
 				users = await usersServices.GetUserByIdAsync(Id.Value);
 				if (users != null)
 				{
-					userData ??= new UsersDTO();
+					userData ??= new Users();
 
 					{
 						Firstname = users.Firstname;

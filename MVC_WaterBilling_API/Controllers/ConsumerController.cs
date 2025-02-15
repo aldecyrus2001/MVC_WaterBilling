@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WaterBilling_API.Data;
 using MVC_WaterBilling_API.Model.Consumer;
+using MVC_WaterBilling_API.Model.Meter_Reading;
 using System.Data;
 using System.Net;
 
@@ -27,6 +28,18 @@ namespace MVC_WaterBilling_API.Controllers
         public async Task<IActionResult> GetConsumer(int id)
         {
             var consumer = await _consumerData.GetConsumerByIdAsync(id);
+            if (consumer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(consumer);
+        }
+
+        [HttpGet("{meterNumber}/meterNumber")]
+        public async Task<IActionResult> GetConsumerByMeterNumber(string meterNumber)
+        {
+            var consumer = await _consumerData.GetConsumerByMeterNumberAsync(meterNumber);
             if (consumer == null)
             {
                 return NotFound();
@@ -64,7 +77,18 @@ namespace MVC_WaterBilling_API.Controllers
                     Consumer_Status = "Connected"
                 };
 
-                await _consumerData.CreateConsumerAsync(consumer);
+                var meterReading = new MeterReading
+                {
+                    Meter_Number = consumersDTO.Meter_Number,
+                    ReaderID = "",
+                    Previous_Reading = 0,
+                    Current_Reading = 0,
+                    Usage = 0,
+                    Status = "Billed",
+                    Reading_Date = DateTime.UtcNow
+                };
+
+                await _consumerData.CreateConsumerAsync(consumer, meterReading);
 
                 return Ok(new
                 {

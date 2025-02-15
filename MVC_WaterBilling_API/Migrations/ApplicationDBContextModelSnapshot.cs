@@ -73,8 +73,8 @@ namespace MVC_WaterBilling_API.Migrations
                     b.Property<double>("Consumed_Amount")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DueDate")
+                        .HasColumnType("date");
 
                     b.Property<DateOnly>("From")
                         .HasColumnType("date");
@@ -139,6 +139,10 @@ namespace MVC_WaterBilling_API.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Meter_Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MonthOf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

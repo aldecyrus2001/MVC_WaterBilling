@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC_WaterBilling_API.Model.Consumer;
+using MVC_WaterBilling_API.Model.Meter_Reading;
 using MVC_WaterBilling_API.Services;
 
 namespace MVC_WaterBilling_API.Data
@@ -48,6 +49,13 @@ namespace MVC_WaterBilling_API.Data
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Consumers?> GetConsumerByMeterNumberAsync(string meterNumber)
+        {
+            return await _db.Consumers
+                .Where(c => c.Meter_Number == meterNumber)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<bool> isUserIdUsedAsync(string UserID)
         {
             return await _db.Consumers.AnyAsync(c => c.UserID == UserID);
@@ -58,12 +66,12 @@ namespace MVC_WaterBilling_API.Data
             return await _db.Consumers.AnyAsync(c => c.Meter_Number == MeterID);
         }
 
-        public async Task CreateConsumerAsync(Consumers consumers)
+        public async Task CreateConsumerAsync(Consumers consumers, MeterReading meterReading)
         {
             _db.Consumers.Add(consumers);
+            _db.Meters.Add(meterReading);
             await _db.SaveChangesAsync();
         }
-
         public async Task UpdateConsumerAsync(Consumers consumers)
         {
             _db.Consumers.Update(consumers);

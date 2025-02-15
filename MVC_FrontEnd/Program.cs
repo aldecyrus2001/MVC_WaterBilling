@@ -7,6 +7,7 @@ using MVC_FrontEnd;
 using MVC_FrontEnd.Models;
 using MVC_FrontEnd.Services;
 using MVC_FrontEnd.URL;
+using Neodynamic.Blazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -22,10 +23,17 @@ builder.Services.AddScoped<URLs>();
 builder.Services.AddScoped<ComponentServices>();
 builder.Services.AddBlazoredToast();
 
+//Printer
+builder.Services.AddJSPrintManager();
+
+
 //User Registration
 builder.Services.AddScoped<AuthenticationService>();
 builder.Services.AddScoped<UsersServices>();
 builder.Services.AddScoped<ConsumerServices>();
+builder.Services.AddScoped<ReadingServices>();
+builder.Services.AddScoped<BillingService>();
+builder.Services.AddScoped<AdvanceServices>();
 
 
 

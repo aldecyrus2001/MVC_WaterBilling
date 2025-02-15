@@ -1,0 +1,156 @@
+﻿@page "/ReadingView"
+
+@if(readingData == null){
+    <p><em>Loading...</em></p>
+}
+else {
+    <h5 class="mb-3" id="exampleModalLabel">View Reading Record | @Id</h5>
+
+    <div class="">
+        <header>Consumer Information</header>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">First Name</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Firstname" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Previous" class="form-label">Middle Name</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Middlename" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Previous" class="form-label">Last Name</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Lastname" disabled />
+            </div>
+
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Gender</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Gender" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Previous" class="form-label">PhoneNumber</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.PhoneNumber" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Previous" class="form-label">Email Address</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Email" disabled />
+            </div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Meter Number</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Meter_Number" disabled />
+            </div>
+            <div class="col">
+                <label for="Previous" class="form-label">Date Connection</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Connection_Date" disabled />
+            </div>
+            <div class="col">
+                <label for="Previous" class="form-label">Address</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Address" disabled />
+            </div>
+            
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="">
+        <header>Reading Information</header>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Previous Reading</label>
+                <input type="text" id="Previous" class="form-control" @bind="readingData.meterReading.Previous_Reading" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">Current Reading</label>
+                <input type="text" id="Current" class="form-control" @bind="readingData.meterReading.Current_Reading"  disabled/>
+            </div>
+
+            <div class="col">
+                <label for="Usage" class="form-label">Usage</label>
+                <input type="text" id="Usage" class="form-control" @bind="readingData.meterReading.Usage" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Usage" class="form-label">Month Of</label>
+                <input type="text" id="Usage" class="form-control" @bind="readingData.meterReading.MonthOf" disabled />
+            </div>
+
+            <div class="col">
+                <label for="DateBilled" class="form-label">Bill Date</label>
+                <input type="date" id="DateBilled" class="form-control" @bind="billReading.Bills.BillDate" disabled/>
+            </div>
+
+        </div>
+
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Consumed Amount</label>
+                <input type="text" id="Previous" class="form-control" @bind="billReading.Bills.Consumed_Amount" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">From Date</label>
+                <input type="date" id="Current" class="form-control" @bind="billReading.Bills.From" disabled/>
+            </div>
+
+            <div class="col">
+                <label for="To" class="form-label">To Date</label>
+                <input type="date" id="To" class="form-control" @bind="billReading.Bills.To" disabled/>
+            </div>
+
+            <div class="col">
+                <label for="DueDate" class="form-label">Due Date</label>
+                <input type="date" id="DueDate" class="form-control" @bind="billReading.Bills.DueDate" disabled/>
+            </div>
+
+            <div class="col">
+                <label for="Advance" class="form-label">Advance</label>
+                <input type="text" id="Advance" class="form-control" @bind="advanceAmount" disabled />
+            </div>
+
+        </div>
+
+        <a href="/Reading" class="btn btn-succes">Close</a>
+
+    </div>
+}
+
+@code {
+    public int? Id;
+    private ReadingConsumerUser? readingData;
+
+    private ReadingWithBilling? billReading = new()
+        {
+            Reading = new Reading(),
+            Bills = new Bills()
+        };
+
+    public double advanceAmount;
+
+    [Inject]
+    private URLStringServices URLStringServices { get; set; }
+
+    [Inject]
+    private ReadingServices readingServices { get; set; }
+
+    [Inject]
+    private BillingService? billingService { get; set; }
+
+    [Inject]
+    private AdvanceServices advanceServices { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        Id = URLStringServices.GetURLStringValueAsInt("id");
+        
+    }
+}

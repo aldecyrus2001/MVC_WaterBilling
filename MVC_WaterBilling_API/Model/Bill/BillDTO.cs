@@ -20,10 +20,7 @@ namespace MVC_WaterBilling_API.Model.Bill
         public DateOnly To { get; set; }
 
         [Required(ErrorMessage = "Due Date is required!")]
-        public DateTime DueDate { get; set; }
-
-        [Required(ErrorMessage = "Bill Date is required!")]
-        public DateTime BillDate { get; set; }
+        public DateOnly DueDate { get; set; }
     }
 
     public class BillWithReadingConsumerUser
@@ -31,5 +28,6 @@ namespace MVC_WaterBilling_API.Model.Bill
         public MeterReading MeterReading { get; set; }
         public Consumers Consumers { get; set; }
         public Users Users { get; set; }
+        public Bills Billing { get; set; }
     }
 }

@@ -1,0 +1,63 @@
+﻿@page "/Readings"
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<div class="d-flex flex-row gap-2 align-items-baseline">
+		<h5>Readings Records</h5>
+		<span> | </span>
+		<a href="/CreateReading" class="btn btn-success p-1">Create Reading</a>
+	</div>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if (ReadingInformations == null || !ReadingInformations.Any())
+{
+	<p><em>No Consumers Readings</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Meter ID</th>
+				<th>Consumer's Name</th>
+				<th>Address</th>
+				<th>Usage</th>
+				<th>Status</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var reading in ReadingInformations)
+			{
+				<tr>
+					<td>@reading.meterReading.ReadingID</td>
+					<td>@(reading.users.Firstname + " " + reading.users.Firstname)</td>
+					<td>@reading.consumers.Address</td>
+					<td>@reading.meterReading.Usage</td>
+					<td>@reading.meterReading.Usage</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							<a href="/ReadingView?Id=@reading.meterReading.ReadingID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+							<a href="/UpdateConsumer?Id=@reading.meterReading.ReadingID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
+							<a href="/Payment?Id=@reading.meterReading.ReadingID" class="btn btn-danger btn-sm" type="button" style="margin-right: 10px;">Payment</a>
+						</div>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<ReadingConsumerUser>? ReadingInformations;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await authService.CheckAuthenticationAsync();
+		ReadingInformations = await Http.GetFromJsonAsync<List<ReadingConsumerUser>>(urls.Reading);
+	}
+
+}

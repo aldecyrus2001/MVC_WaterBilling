@@ -509,6 +509,28 @@
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets": {}
         }
       },
+      "Neodynamic.Blazor.JSPrintManager/7.0.24.521": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "5.0.6"
+        },
+        "compile": {
+          "lib/net5.0/Neodynamic.Blazor.JSPrintManager.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Neodynamic.Blazor.JSPrintManager.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Neodynamic.Blazor.JSPrintManager.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Neodynamic.Blazor.JSPrintManager.props": {}
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -1029,6 +1051,28 @@
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets": {}
+        }
+      },
+      "Neodynamic.Blazor.JSPrintManager/7.0.24.521": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "5.0.6"
+        },
+        "compile": {
+          "lib/net5.0/Neodynamic.Blazor.JSPrintManager.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Neodynamic.Blazor.JSPrintManager.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Neodynamic.Blazor.JSPrintManager.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Neodynamic.Blazor.JSPrintManager.props": {}
         }
       },
       "Newtonsoft.Json/13.0.3": {
@@ -2006,6 +2050,26 @@
         "tools/net9.0/Microsoft.NET.WebAssembly.Webcil.dll"
       ]
     },
+    "Neodynamic.Blazor.JSPrintManager/7.0.24.521": {
+      "sha512": "pYkG1SyHNtKdL9rJHXFDu3WaKQdZkQviqhEZoEBz3aq/W6B/xsaQ0pnfy05bNhDwMSO0Si1uaKr0paXdo94obw==",
+      "type": "package",
+      "path": "neodynamic.blazor.jsprintmanager/7.0.24.521",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "EULA-v13.txt",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "build/Neodynamic.Blazor.JSPrintManager.props",
+        "buildMultiTargeting/Neodynamic.Blazor.JSPrintManager.props",
+        "buildTransitive/Neodynamic.Blazor.JSPrintManager.props",
+        "jspm-blazor-128.png",
+        "lib/net5.0/Neodynamic.Blazor.JSPrintManager.dll",
+        "lib/net5.0/Neodynamic.Blazor.JSPrintManager.xml",
+        "neodynamic.blazor.jsprintmanager.7.0.24.521.nupkg.sha512",
+        "neodynamic.blazor.jsprintmanager.nuspec",
+        "staticwebassets/JSPrintManagerBlazor.js"
+      ]
+    },
     "Newtonsoft.Json/13.0.3": {
       "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
@@ -2047,6 +2111,7 @@
       "Microsoft.AspNetCore.WebUtilities >= 9.0.1",
       "Microsoft.NET.ILLink.Tasks >= 9.0.1",
       "Microsoft.NET.Sdk.WebAssembly.Pack >= 9.0.1",
+      "Neodynamic.Blazor.JSPrintManager >= 7.0.24.521",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
@@ -2136,6 +2201,10 @@
             "target": "Package",
             "version": "[9.0.1, )",
             "autoReferenced": true
+          },
+          "Neodynamic.Blazor.JSPrintManager": {
+            "target": "Package",
+            "version": "[7.0.24.521, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

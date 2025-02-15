@@ -87,6 +87,10 @@
               "version": "[9.0.1, )",
               "autoReferenced": true
             },
+            "Neodynamic.Blazor.JSPrintManager": {
+              "target": "Package",
+              "version": "[7.0.24.521, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

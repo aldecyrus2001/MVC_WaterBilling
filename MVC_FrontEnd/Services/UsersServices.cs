@@ -23,7 +23,7 @@ namespace MVC_FrontEnd.Services
             return await _httpClient.GetFromJsonAsync<Users>(url);
         }
 
-        public async Task<bool> AddUsers(UsersDTO userData)
+        public async Task<bool> AddUsers(Users userData)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace MVC_FrontEnd.Services
             }
         }
 
-        public async Task<bool> UpdateUserAsync(int id, UsersDTO userData)
+        public async Task<bool> UpdateUserAsync(int id, Users userData)
         {
             try
             {

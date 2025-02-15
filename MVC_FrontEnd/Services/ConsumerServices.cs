@@ -18,19 +18,20 @@ namespace MVC_FrontEnd.Services
             _uRLs = uRLs;
         }
 
-        public async Task<ConsumerWithUserDTO?> GetUserByIdAsync(int id)
-        {
-            var url = $"{_uRLs.Users}/{id}";
-            return await _httpClient.GetFromJsonAsync<ConsumerWithUserDTO>(url);
-        }
 
-        public async Task<ConsumerWithUserDTO?> GetConsumerByID(int id)
+        public async Task<ConsumerWithUser?> GetConsumerByID(int id)
         {
             var url = $"{_uRLs.Consumer}/{id}";
-            return await _httpClient.GetFromJsonAsync<ConsumerWithUserDTO>(url);
+            return await _httpClient.GetFromJsonAsync<ConsumerWithUser>(url);
         }
 
-        public async Task<(bool IsSuccess, string Message)> AddConsumer(ConsumerDTO consumerData)
+        public async Task<Consumers> GetConsumerByMeterNumber(string MeterNumber)
+        {
+            var url = $"{_uRLs.Consumer}/{MeterNumber}/meterNumber";
+            return await _httpClient.GetFromJsonAsync<Consumers>(url);
+        }
+
+        public async Task<(bool IsSuccess, string Message)> AddConsumer(Consumers consumerData)
         {
             try
             {
@@ -40,8 +41,6 @@ namespace MVC_FrontEnd.Services
                 var responseMessage = await response.Content.ReadAsStringAsync();
 
                 ApiResponse apiResponse = JsonConvert.DeserializeObject<ApiResponse>(responseMessage);
-
-
                 return (response.IsSuccessStatusCode, apiResponse.Message);
             }
             catch (Exception ex)
@@ -51,7 +50,7 @@ namespace MVC_FrontEnd.Services
             }
         }
 
-        public async Task<bool> UpdateConsumerDataASync(int id, ConsumerWithUserDTO consumerData)
+        public async Task<bool> UpdateConsumerDataASync(int id, ConsumerWithUser consumerData)
         {
             try
             {

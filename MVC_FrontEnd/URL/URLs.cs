@@ -6,6 +6,9 @@
         public string AuthenticationURL => _BaseURL + "Authentication";
         public string Users => _BaseURL + "User";
         public string Consumer => _BaseURL + "Consumer";
+        public string Reading => _BaseURL + "Meter";
+        public string Advance => _BaseURL + "Advance";
+        public string Billing => _BaseURL + "Bill";
         public string UsersByRole(string role) => $"{_BaseURL}User/role/{role}";
     }
 }

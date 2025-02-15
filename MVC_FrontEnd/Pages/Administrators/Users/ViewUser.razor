@@ -28,8 +28,7 @@
 @code {
 
 	public int? Id { set; get; }
-	private Users? users;
-	private UsersDTO? userData;
+	private Users? userData;
 
 	public string Firstname { get; set; } = string.Empty;
 	public string Middlename { get; set; } = string.Empty;
@@ -64,29 +63,29 @@
 		{
 			if(Id.HasValue)
 			{
-				users = await usersServices.GetUserByIdAsync(Id.Value);
-				if (users != null)
+				userData = await usersServices.GetUserByIdAsync(Id.Value);
+				if (userData != null)
 				{
-					userData ??= new UsersDTO();
+					userData ??= new Users();
 					{
-						Firstname = users.Firstname;
-						Middlename = users.Middlename;
-						Lastname = users.Lastname;
-						SelectedGender = users.Gender;
-						PhoneNumber = users.PhoneNumber;
-						EmailAddress = users.Email;
-						DateCreated = users.Date_Created.ToString("yyyy-MM-dd");
-						Role = users.Role;
+						Firstname = userData.Firstname;
+						Middlename = userData.Middlename;
+						Lastname = userData.Lastname;
+						SelectedGender = userData.Gender;
+						PhoneNumber = userData.PhoneNumber;
+						EmailAddress = userData.Email;
+						DateCreated = userData.Date_Created.ToString("yyyy-MM-dd");
+						Role = userData.Role;
 
 
-						componentServices.UpdateInputField(userData, "Firstname", users.Firstname);
-						componentServices.UpdateInputField(userData, "Middlename", users.Middlename);
-						componentServices.UpdateInputField(userData, "Lastname", users.Lastname);
-						componentServices.UpdateInputField(userData, "Gender", users.Gender);
-						componentServices.UpdateInputField(userData, "PhoneNumber", users.PhoneNumber);
-						componentServices.UpdateInputField(userData, "Email", users.Email);
-						componentServices.UpdateInputField(userData, "DateCreated", users.Date_Created.ToString("yyyy-MM-dd"));
-						componentServices.UpdateInputField(userData, "Role", users.Role);
+						componentServices.UpdateInputField(userData, "Firstname", userData.Firstname);
+						componentServices.UpdateInputField(userData, "Middlename", userData.Middlename);
+						componentServices.UpdateInputField(userData, "Lastname", userData.Lastname);
+						componentServices.UpdateInputField(userData, "Gender", userData.Gender);
+						componentServices.UpdateInputField(userData, "PhoneNumber", userData.PhoneNumber);
+						componentServices.UpdateInputField(userData, "Email", userData.Email);
+						componentServices.UpdateInputField(userData, "DateCreated", userData.Date_Created.ToString("yyyy-MM-dd"));
+						componentServices.UpdateInputField(userData, "Role", userData.Role);
 
 					};
 

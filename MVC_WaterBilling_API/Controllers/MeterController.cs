@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_WaterBilling_API.Data;
+using MVC_WaterBilling_API.Model.Consumer;
 using MVC_WaterBilling_API.Model.Meter_Reading;
 
 namespace MVC_WaterBilling_API.Controllers
@@ -34,6 +35,19 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(meterReading);
         }
 
+        [HttpGet("{meternumber}/Search")]
+        public async Task<IActionResult> GetMeterReadingByMeterNumber(string meternumber)
+        {
+            var meterReading = await _meterReadingData.GetMeterReadingByMeterNumberAsync(meternumber);
+            if (meterReading == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(meterReading);
+        }
+
+
         [HttpGet("{meterNumber}/Previous-Reading")]
         public async Task<IActionResult> GetPreviousReading(string meterNumber)
         {
@@ -46,27 +60,39 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(prevReading);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> CreateReading([FromBody] MeterReadingDTO meterReadingDTO)
         {
             var meterReading = new MeterReading
             {
-                Meter_Number = meterReadingDTO.Meter_Number,
-                ReaderID = meterReadingDTO.ReaderID,
-                Previous_Reading = meterReadingDTO.Previous_Reading,
-                Current_Reading = meterReadingDTO.Current_Reading,
-                Usage = meterReadingDTO.Usage,
-                Status = meterReadingDTO.Status,
-                Reading_Date = meterReadingDTO.Reading_Date
+                Meter_Number = meterReadingDTO.meter_Number,
+                ReaderID = meterReadingDTO.readerID,
+                Previous_Reading = meterReadingDTO.previous_Reading,
+                Current_Reading = meterReadingDTO.current_Reading,
+                Usage = meterReadingDTO.usage,
+                Status = "Unpaid",
+                Reading_Date = DateTime.Now
             };
 
-            await _meterReadingData.CreateMeterReadingAsync(meterReading);
+            bool isInserted = await _meterReadingData.CreateMeterReadingAsync(meterReading);
 
-            return Ok(new
+            if (!isInserted)
             {
-                message = "Reading successfully inserted!"
-            });
+                return BadRequest(new
+                {
+                    message = "Invalid Action, Meter Number Has Been Issued Reciept!."
+                });
+            }
+            else
+            {
+                return Ok(new
+                {
+                    message = "Reading successfully inserted!",
+                    readingId = meterReading.ReadingID
+                });
+            }
+
+            
         }
 
     }

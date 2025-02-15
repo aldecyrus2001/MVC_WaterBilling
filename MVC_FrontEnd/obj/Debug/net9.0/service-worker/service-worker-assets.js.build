@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "XibtkWcJ",
+  "version": "cbxlvqYc",
   "assets": [
     {
       "hash": "sha256-NXtJ8OwW76Wk4O+r7tZwZA6jjflWTLYnm73Ia2C/e7s=",
@@ -8,6 +8,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-Jpy8GsZRrXfBBSxMmBBAzhap27c5/Nt85Nt7V3JT3B4=",
       "url": "_content/Blazored.Toast/Blazored.Toast.bundle.scp.css"
+    },
+    {
+      "hash": "sha256-hfxC+rEeg6KreH+bljT/96b/APTDtDSNYvZhXQmqQGA=",
+      "url": "_content/Neodynamic.Blazor.JSPrintManager/JSPrintManagerBlazor.js"
     },
     {
       "hash": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
@@ -22,12 +26,12 @@ self.assetsManifest = {
       "url": "_framework/Blazored.Toast.4gbrhkrum5.wasm"
     },
     {
-      "hash": "sha256-7OBKb0hqTwPm+Wr3S57Js66FzDR59Y9O+EKCOvqx49c=",
-      "url": "_framework/MVC_FrontEnd.0t8225pa4w.wasm"
+      "hash": "sha256-+Pu0OvQ3LwqR76aKyNGAFAZ5bu5veXZRTqYUm6HE+Ak=",
+      "url": "_framework/MVC_FrontEnd.8shcjfd78j.wasm"
     },
     {
-      "hash": "sha256-45Gd0XkY8wtHBkdVN8A0QRonHZ8Pbcxtoqc4hayaQZ0=",
-      "url": "_framework/MVC_FrontEnd.nnps9yfzc6.pdb"
+      "hash": "sha256-aBmSxX3CRF+ZRi8w9EfZDj8fKz3m9qPmtP+xaYO1yJA=",
+      "url": "_framework/MVC_FrontEnd.gmv610mg4j.pdb"
     },
     {
       "hash": "sha256-N6/4dp+rtuEu+iWs7ZZs30QrZzpGpF9KC6ulCWZCo2w=",
@@ -144,6 +148,10 @@ self.assetsManifest = {
     {
       "hash": "sha256-sMbuu2+9aoI7Hg1VxqD7awy9/80c7+mSA2IpQJ9cIiw=",
       "url": "_framework/Microsoft.Win32.Registry.krtg4e9rjb.wasm"
+    },
+    {
+      "hash": "sha256-fnG37tPJShYpS81VHKDVVY12eX50dCeE5x5fWYluzMA=",
+      "url": "_framework/Neodynamic.Blazor.JSPrintManager.ivpuf9mgmb.wasm"
     },
     {
       "hash": "sha256-GlXMWKvDs45M2pACoR3Y4Qh8mcrOZGljqmvJY+6JZ5s=",
@@ -798,7 +806,7 @@ self.assetsManifest = {
       "url": "_framework/WindowsBase.ovqw333kan.wasm"
     },
     {
-      "hash": "sha256-JbcxvNG+3KDj3oeQGRhMGqAiZ4NAM2ei+BO5A4NVuLU=",
+      "hash": "sha256-QWbjEnlypvfAmte3TRuG75h/CMfndr3pkBY9+2QEM7o=",
       "url": "_framework/blazor.boot.json"
     },
     {

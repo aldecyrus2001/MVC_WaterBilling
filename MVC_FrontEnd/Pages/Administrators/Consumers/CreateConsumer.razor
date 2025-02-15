@@ -59,9 +59,9 @@ else
 
 @code {
 	public int? Id { set; get; }
-	private UsersDTO userData;
+	private Users userData;
 	private Users? users;
-	private ConsumerDTO consumerData { set; get; } = new();
+	private Consumers consumerData { set; get; } = new();
 
 	public string Firstname { get; set; } = string.Empty;
 	public string MiddleName { get; set; } = string.Empty;
@@ -78,6 +78,9 @@ else
 
 	[Inject]
 	private ConsumerServices consumerServices { get; set; }
+
+	[Inject]
+	private ReadingServices readingService { get; set; }
 
 	[Inject]
 	private ComponentServices componentServices { get; set; }
@@ -104,7 +107,7 @@ else
 				users = await userService.GetUserByIdAsync(Id.Value);
 				if (users != null)
 				{
-					userData ??= new UsersDTO();
+					userData ??= new Users();
 
 					{
 						Firstname = users.Firstname;
@@ -136,12 +139,14 @@ else
 
 	protected async Task AddConsumer()
 	{
+		Console.WriteLine(consumerData.Meter_Number);
 		var (isAdded, message) = await consumerServices.AddConsumer(consumerData);
 
 		if (isAdded)
 		{
 			await JSRuntime.InvokeVoidAsync("alert", $"Success: {message}");
 			navManager.NavigateTo("/Consumers");
+			
 		}
 		else
 		{

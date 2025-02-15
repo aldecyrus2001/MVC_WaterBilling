@@ -1,0 +1,409 @@
+﻿@page "/CreateReading"
+@using Neodynamic.Blazor
+@inject JSPrintManager JSPrintManager;
+
+
+<h5 class="mb-3" id="exampleModalLabel">Create Reading</h5>
+
+<div class="d-flex col gap-4 mb-2" style="height: 50px;">
+    <input type="text" id="Search" class="form-control" @bind="meterID" placeholder="Enter Meter Number..."/>
+    <button class="btn btn-success" @onclick="SearchMeterNumber"> Search </button>
+</div>
+
+<hr />
+
+@if (ReadingData == null || UsersData == null || ConsumerData == null)
+{
+    <p><em>Please Search Meter Number, Thank you!</em></p>
+}
+else {
+    <div class="">
+        <header>Consumer Information</header>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Firstname" IsDisabled="true" label="First Name" @bind-Value="UsersData.Firstname" />
+            <InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="UsersData.Middlename" />
+            <InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="UsersData.Lastname" />
+        </div>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Gender" IsDisabled="true" label="Phone Number" @bind-Value="UsersData.Gender" />
+            <InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="UsersData.PhoneNumber" />
+            <InputComponent InputType="email" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="UsersData.Email" />
+        </div>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Meter Number" IsDisabled="true" label="Connection Type" @bind-Value="ConsumerData.ConnectionType" />
+            <InputComponent InputType="text" InputID="DateConnection" IsDisabled="true" label="Connection Date" @bind-Value="ConsumerData.Connection_Date" />
+            <InputComponent InputType="text" InputID="Address" IsDisabled="true" label="Address" @bind-Value="ConsumerData.Address" />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="">
+        <header>Reading Information</header>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Previous Reading</label>
+                <input type="text" id="Previous" class="form-control" @bind="ReadingData.Previous_Reading" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">Current Reading</label>
+                <input type="text" id="Current" class="form-control" @oninput="OnCurrentReadingChanged" />
+            </div>
+
+            <div class="col">
+                <label for="Usage" class="form-label">Usage</label>
+                <input type="text" id="Usage" class="form-control" @bind="ReadingData.Usage" disabled />
+            </div>
+
+            <div class="col">
+                <label for="MonthOf" class="form-label">Month Of</label>
+                <select class="form-control" @bind="ReadingData.MonthOf">
+                    <option value="N/A">-- Month Of --</option>
+                    <option value="January">JANUARY</option>
+                    <option value="February">FEBRUARY</option>
+                    <option value="March">MARCH</option>
+                    <option value="April">APRIL</option>
+                    <option value="May">MAY</option>
+                    <option value="June">JUNE</option>
+                    <option value="July">JULY</option>
+                    <option value="August">AUGUST</option>
+                    <option value="September">SEPTEMBER</option>
+                    <option value="October">OCTOBER</option>
+                    <option value="November">NOVEMBER</option>
+                    <option value="December">DECEMBER</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label for="DateBilled" class="form-label">Bill Date</label>
+                <input type="date" id="DateBilled" class="form-control" @bind="BillData.BillDate" />
+            </div>
+
+        </div>
+
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Consumed Amount</label>
+                <input type="text" id="Previous" class="form-control" @bind="BillData.Consumed_Amount" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">From Date</label>
+                <input type="date" id="Current" class="form-control" @bind="BillData.From" />
+            </div>
+
+            <div class="col">
+                <label for="To" class="form-label">To Date</label>
+                <input type="date" id="To" class="form-control" @bind="BillData.To" />
+            </div>
+
+            <div class="col">
+                <label for="DueDate" class="form-label">Due Date</label>
+                <input type="date" id="DueDate" class="form-control" @bind="BillData.DueDate" />
+            </div>
+
+            <div class="col">
+                <label for="Advance" class="form-label">Advance</label>
+                <input type="text" id="Advance" class="form-control" @bind="advanceAmount" disabled />
+            </div>
+
+        </div>
+
+        <button class="btn btn-succes" @onclick="addReading">Print</button>
+
+    </div>
+}
+
+@code {
+    private Reading? ReadingData;
+    private Users? UsersData;
+    private Consumers? ConsumerData;
+    private Bills? BillData;
+
+    private Advances advanceData;
+
+    public string meterID;
+    public double advanceAmount;
+    private double consumedAmount;
+
+
+    private double pricePerCubic = 12.0;
+
+    [Inject]
+    private ConsumerServices consumerServices { get; set; }
+
+    [Inject]
+    private UsersServices usersServices { get; set; }
+
+    [Inject]
+    private ReadingServices readingServices { get; set; }
+
+    [Inject]
+    private BillingService? billingService { get; set; }
+
+    [Inject]
+    private AdvanceServices advanceServices { get; set; }
+
+    protected override void OnInitialized()
+    {
+        BillData ??= new Bills // Use null-coalescing assignment to create if null
+            {
+                BillDate = DateTime.Today, // Default Bill Date
+                Consumed_Amount = 0, // Or your desired default
+                From = DateOnly.FromDateTime(DateTime.Today),    // Default From Date
+                To = DateOnly.FromDateTime(DateTime.Today),      // Default To Date
+                DueDate = DateOnly.FromDateTime(DateTime.Today)   // Default Due Date
+            };
+
+        advanceAmount = 0;
+    }
+
+
+    protected async Task SearchMeterNumber()
+    {
+        try
+        {
+            if(meterID == null)
+            {
+                await JSRuntime.InvokeVoidAsync("alert", "Please Enter Valid Meter Number!");
+            }
+            else {
+                try
+                {
+                    ReadingData = await readingServices.GetReadingByMeterNumber(meterID);
+                    ConsumerData = await consumerServices.GetConsumerByMeterNumber(meterID);
+                    UsersData = await usersServices.GetUserByIdAsync(int.Parse(ConsumerData.UserID));
+                    StateHasChanged();
+
+                    ReadingData.Previous_Reading = ReadingData.Current_Reading;
+                    BillData.BillDate = DateTime.UtcNow;
+                    BillData.From = DateOnly.FromDateTime(DateTime.Now);
+                    BillData.To = DateOnly.FromDateTime(DateTime.Now);
+                    BillData.DueDate = DateOnly.FromDateTime(DateTime.Now);
+                    ReadingData.Meter_Number = meterID;
+                    ReadingData.ReaderID = "1";
+
+
+                }
+                catch (Exception ex)
+                {
+                    if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Meter Number Not Found!");
+                        meterID = "";
+                    }
+                    else 
+                    {
+                        Console.WriteLine($"Error1: {ex.Message}");
+                    }
+                }
+
+                try
+                {
+                    advanceData = await advanceServices.getAdvanceWithConsumerID(ConsumerData.ConsumerID);
+                    StateHasChanged();
+
+                    advanceAmount = advanceData.totalAmount;
+
+                }
+                catch (Exception ex)
+                {
+                    if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        await JSRuntime.InvokeVoidAsync("alert", "Advance Not Found!");
+                        advanceAmount = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error1: {ex.Message}");
+                    }
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error : {ex.Message}");
+        }
+    }
+
+    private void OnCurrentReadingChanged(ChangeEventArgs e)
+    {
+
+        if (e.Value != null && double.TryParse(e.Value.ToString(), out double currentReadingValue))
+        {
+            ReadingData.Current_Reading = currentReadingValue;
+            ReadingData.Usage = ReadingData.Current_Reading - ReadingData.Previous_Reading;
+            consumedAmount = ReadingData.Usage * pricePerCubic;
+            BillData.Consumed_Amount = (ReadingData.Usage * pricePerCubic) - advanceAmount;
+        }
+        else
+        {
+            ReadingData.Current_Reading = 0;
+            ReadingData.Usage = 0;
+            BillData.Consumed_Amount = 0;
+        }
+
+    }
+
+
+    protected async Task addReading()
+    {
+        var (isCreated, message, readingID) = await readingServices.createReading(ReadingData);
+        if(isCreated && readingID.HasValue)
+        {
+            BillData.ReadingID = readingID.Value.ToString();
+            var (isBillCreated, Billmessage) = await billingService.createBilling(BillData);
+            if (isBillCreated)
+            {
+                await JSRuntime.InvokeVoidAsync("alert", $"Success: {message}");
+                navManager.NavigateTo("/Readings");
+                DoPrint();
+            }
+            
+        }
+        else
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"Failed: Billing is failed to create. Please try again!");
+        }
+        
+        
+
+        
+    }
+
+
+    // Printer Settings 
+
+    private bool UseDefaultPrinter = true;
+
+    private void DoPrint()
+    {
+        if(JSPrintManager.Status == JSPMWSStatus.Open)
+        {
+            var cpj = new ClientPrintJob();
+
+            cpj.ClientPrinter = new DefaultPrinter();
+
+            var esc = (char)0x1B; //ESC byte in hex notation
+            var newLine = (char)0x0A; //LF byte in hex notation
+            var alignLeft = esc + "a" + (char)0;  // Left-aligned
+            var alignCenter = esc + "a" + (char)1; // Center-aligned
+            var alignRight = esc + "a" + (char)2;  // Right-aligned
+
+
+            var cmds = esc + "@"; // Initializes the printer (ESC @)
+            cmds += esc + "!" + (char)0x38; //Emphasized + Double-height + Double-width mode selected (ESC ! (8 + 16 + 32)) 56 dec => 38 hex
+            cmds += alignCenter + "BILLING INVOICE"; //Header text
+            cmds += newLine;
+            cmds += esc + "!" + (char)0x00; //Reset to normal mode (ESC ! 0)
+            cmds += newLine;
+            cmds += alignLeft + $"Date: {BillData.BillDate}";
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignLeft + $"Account No. {ConsumerData.ConsumerID}";
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += newLine;
+            cmds += alignLeft + $"NAME : {UsersData.Lastname}, {UsersData.Firstname}";
+            cmds += newLine;
+            cmds += alignLeft + $"Connection Type: {ConsumerData.ConnectionType}";
+            cmds += newLine;
+            cmds += alignLeft + $"Address : {ConsumerData.Address}";
+            cmds += newLine;
+            cmds += alignLeft + $"Meter Number : {ReadingData.Meter_Number}";
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignLeft + "From: " + BillData.From;
+            cmds += newLine;
+            cmds += alignLeft + "To: " + BillData.To;
+            cmds += newLine;
+            cmds += alignLeft + "Due Date: " + BillData.DueDate;
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignLeft + "Prev. Rdg: " + ReadingData.Previous_Reading;
+            cmds += newLine;
+            cmds += "Pres. Rdg: " + ReadingData.Current_Reading + "   ";
+            cmds += "Usage: " + ReadingData.Usage + " m3";
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignLeft + "Current Bill: " + consumedAmount;
+            cmds += newLine;
+            cmds += alignLeft + "Advance: " + advanceAmount;
+            cmds += newLine;
+            cmds += alignLeft + "Price/m3: " + pricePerCubic;
+            cmds += newLine;
+            cmds += esc + "!" + (char)0x38;
+            cmds += alignLeft + "Total: " + BillData.Consumed_Amount;
+            cmds += esc + "!" + (char)0x00;
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignLeft + "Normal Reading";
+            cmds += newLine;
+            cmds += alignLeft + ReadingData.ReadingID;
+            cmds += newLine;
+            cmds += alignCenter + "==============================";
+            cmds += newLine;
+            cmds += alignCenter + $"Please ensure that your water{newLine}bill is settled on or before the{newLine}due date to avoid any penal-{newLine}ties or service interruptions.{newLine}If payment is not received{newLine}by the due date, a late{newLine}fee may be applied to your{newLine}next billing statement.";
+            cmds += newLine; 
+            cmds += newLine;
+            cmds += newLine;
+            cmds += newLine;
+            cmds += newLine;
+
+
+            cpj.PrinterCommands = cmds;
+            JSPrintManager.SendClientPrintJob(cpj);
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Handle OnGetPrinters event...
+            JSPrintManager.OnGetPrinters += () =>
+            {
+                if (JSPrintManager.Printers != null &&
+                    JSPrintManager.Printers.Length > 0)
+                {
+                    // Display installed printers...
+                    StateHasChanged();
+                }
+                else
+                {
+                    Console.WriteLine("No printers found...");
+                }
+
+            };
+
+            // Handle OnStatusChanged event to detect any WSS status change
+            JSPrintManager.OnStatusChanged += () =>
+            {
+                StateHasChanged();
+
+                // Status = Open means that JSPM Client App is up and running!
+                if (JSPrintManager.Status == JSPMWSStatus.Open)
+                {
+                    //Try getting local printers...
+                    JSPrintManager.TryGetPrinters();
+                }
+            };
+
+            // Start WebSocket comm
+            JSPrintManager.Start();
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+
+
+
+}

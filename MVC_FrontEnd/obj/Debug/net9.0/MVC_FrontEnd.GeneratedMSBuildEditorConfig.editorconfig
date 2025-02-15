@@ -40,6 +40,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XEF1dGhlbnRpY2F0aW9uTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Billings/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcQmlsbGluZ3NcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Billings/ViewBilling.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcQmlsbGluZ3NcVmlld0JpbGxpbmcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Cashier/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcQ2FzaGllclxJbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Consumers/CreateConsumer.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcQ29uc3VtZXJzXENyZWF0ZUNvbnN1bWVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,6 +70,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Readings/CreateReading.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcUmVhZGluZ3NcQ3JlYXRlUmVhZGluZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Readings/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcUmVhZGluZ3NcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Readings/ViewReading.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5pc3RyYXRvcnNcUmVhZGluZ3NcVmlld1JlYWRpbmcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Administrators/Users/CreateUser.razor]
