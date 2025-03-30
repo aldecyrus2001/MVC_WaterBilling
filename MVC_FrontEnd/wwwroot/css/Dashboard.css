@@ -1,0 +1,17 @@
+﻿.card {
+    background-color: #fff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-title, .card-text {
+    color: #1a203a !important;
+}
+
+.card-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-text {
+    font-size: 30px;
+}

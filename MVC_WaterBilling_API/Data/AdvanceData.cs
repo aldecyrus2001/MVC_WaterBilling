@@ -47,10 +47,6 @@ namespace MVC_WaterBilling_API.Data
             await _db.SaveChangesAsync();
         }
 
-        public async Task UpdateMultipleAdvanceStatusAsync(List<Advances> advances)
-        {
-            _db.Advances.UpdateRange(advances);
-            await _db.SaveChangesAsync();
-        }
+        
     }
 }

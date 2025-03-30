@@ -7,13 +7,14 @@ namespace MVC_WaterBilling_API.Data
     {
         private readonly ApplicationDBContext _db;
 
-        private SettingsData(ApplicationDBContext db)
+        public SettingsData(ApplicationDBContext db)
         {
             _db = db;
         }
 
-        public async Task<Settings?> GetSettingsByIdAsync(int id)
+        public async Task<Settings?> GetSettingsByIdAsync()
         {
+            int id = 1;
             return await _db.Settings.FindAsync(id);
         }
 

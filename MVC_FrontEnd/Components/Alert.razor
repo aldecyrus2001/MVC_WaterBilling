@@ -1,0 +1,71 @@
+﻿
+<link href="css/Alert.css" rel="stylesheet" />
+
+
+@if (IsNotificationVisible)
+{
+    <div class="overlay">
+        <div class="notifications-container">
+            <div class="@color">
+                <div class="flex">
+                    <div class="success-prompt-wrap">
+                        <p class="success-prompt-heading">
+                            @Message <!-- Dynamically insert message -->
+                        </p>
+                        @if (showButton)
+                        {
+                            <div class="success-button-container">
+                                <button @onclick="Confirm" class="success-button-main">Confirm</button>
+                                <button @onclick="HideNotification" class="success-button-secondary">Close</button>
+                            </div>
+                        }
+                        else 
+                        {
+                            <div class="success-button-container">
+                                <button @onclick="HideNotification" class="success-button-secondary">Close</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool IsNotificationVisible = false;
+    private bool showButton = false;
+    private string color = "success";
+    private string Message { get; set; } = string.Empty;
+
+    [Parameter] public EventCallback<bool> OnNotificationResponse { get; set; }
+
+    private TaskCompletionSource<bool>? notificationTaskCompletion;
+
+    public Task<bool> ShowNotification(string message, bool showBtns = false, string alertType = "success")
+    {
+        Message = message;
+        IsNotificationVisible = true;
+        showButton = showBtns;
+        color = alertType;
+        StateHasChanged();
+
+        notificationTaskCompletion = new TaskCompletionSource<bool>();
+        return notificationTaskCompletion.Task;
+    }
+
+    private void HideNotification()
+    {
+        IsNotificationVisible = false;
+        notificationTaskCompletion?.SetResult(false); // Notify waiting function that alert was closed
+        StateHasChanged();
+    }
+
+    private void Confirm()
+    {
+        IsNotificationVisible = false;
+        notificationTaskCompletion?.SetResult(true); // Notify waiting function that confirm was clicked
+        StateHasChanged();
+    }
+}

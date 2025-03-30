@@ -9,6 +9,8 @@
         public string Reading => _BaseURL + "Meter";
         public string Advance => _BaseURL + "Advance";
         public string Billing => _BaseURL + "Bill";
+        public string Payment => _BaseURL + "Payment";
+        public string Settings => _BaseURL + "Settings";
         public string UsersByRole(string role) => $"{_BaseURL}User/role/{role}";
     }
 }

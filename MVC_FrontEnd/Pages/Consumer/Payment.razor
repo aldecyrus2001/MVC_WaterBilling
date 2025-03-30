@@ -1,0 +1,368 @@
+﻿@page "/Consumer/PayBilling";
+@using Neodynamic.Blazor
+@inject JSPrintManager JSPrintManager;
+
+<h5 class="mb-3" id="exampleModalLabel">Payment</h5>
+
+@if (BillData == null || ReadingData == null || ConsumersData == null || UserData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
+    <div class="">
+        <header>Consumer Information</header>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Firstname" IsDisabled="true" label="First Name" @bind-Value="UserData.Firstname" />
+            <InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="UserData.Middlename" />
+            <InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="UserData.Lastname" />
+        </div>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Gender" IsDisabled="true" label="Phone Number" @bind-Value="UserData.Gender" />
+            <InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="UserData.PhoneNumber" />
+            <InputComponent InputType="email" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="UserData.Email" />
+        </div>
+        <div class="row g-2 mb-2">
+            <InputComponent InputType="text" InputID="Meter Number" IsDisabled="true" label="Connection Type" @bind-Value="ConsumersData.ConnectionType" />
+            <InputComponent InputType="text" InputID="DateConnection" IsDisabled="true" label="Connection Date" @bind-Value="ConsumersData.Connection_Date" />
+            <InputComponent InputType="text" InputID="Address" IsDisabled="true" label="Address" @bind-Value="ConsumersData.Address" />
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="">
+        <header>Reading Information</header>
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Previous Reading</label>
+                <input type="text" id="Previous" class="form-control" @bind="ReadingData.Previous_Reading" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">Current Reading</label>
+                <input type="text" id="Current" class="form-control" @bind="ReadingData.Current_Reading" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Usage" class="form-label">Usage</label>
+                <input type="text" id="Usage" class="form-control" @bind="ReadingData.Usage" disabled />
+            </div>
+
+            <div class="col">
+                <label for="MonthOf" class="form-label">Month Of</label>
+                <input type="text" id="MonthOf" class="form-control" @bind="ReadingData.MonthOf" disabled />
+            </div>
+
+            <div class="col">
+                <label for="DateBilled" class="form-label">Bill Date</label>
+                <input type="date" id="DateBilled" class="form-control" @bind="BillData.BillDate" disabled />
+            </div>
+
+        </div>
+
+        <div class="row g-2 mb-2">
+            <div class="col">
+                <label for="Previous" class="form-label">Consumed Amount</label>
+                <input type="text" id="Previous" class="form-control" @bind="TotalAmount" disabled />
+            </div>
+
+            <div class="col">
+                <label for="Current" class="form-label">From Date</label>
+                <input type="date" id="Current" class="form-control" @bind="BillData.From" disabled />
+            </div>
+
+            <div class="col">
+                <label for="To" class="form-label">To Date</label>
+                <input type="date" id="To" class="form-control" @bind="BillData.To" disabled />
+            </div>
+
+            <div class="col">
+                <label for="DueDate" class="form-label">Due Date</label>
+                <input type="date" id="DueDate" class="form-control" @bind="BillData.DueDate" disabled />
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <hr />
+
+    <div class="">
+        <header>Payment</header>
+        <div class="row g-2 mb-2">
+            <label for="MonthOf" class="form-label">Mode of Payment</label>
+            <select class="form-control" @bind="selectedPaymentMethod">
+                <option value="" disabled selected>-- Select Mode of Payment --</option>
+                <option value="Gcash">Gcash</option>
+            </select>
+
+            @if (selectedPaymentMethod == "Gcash" && SettingsData?.GcashQr != null)
+            {
+                <div class="alert alert-info text-center">
+                    <p>Please scan this QR Code</p>
+                    <img src="@GetBase64QrCode()" alt="Gcash QR Code" class="img-fluid" style="max-width: 200px;">
+                </div>
+
+                <div class="col">
+                    <label for="Previous" class="form-label">Total</label>
+                    <input type="text" id="Previous" class="form-control" @bind="totalAmounts" disabled />
+                </div>
+
+                <div class="col">
+                    <label for="Previous" class="form-label">Amount Paid</label>
+                    <input type="text" id="Previous" class="form-control" @oninput="OnAmountPaidChange" />
+                </div>
+
+                <div class="col">
+                    <label for="Usage" class="form-label">Change</label>
+                    <input type="text" id="Usage" class="form-control" @bind="changeAmount" disabled />
+                </div>
+
+                <div class="col">
+                    <label for="Previous" class="form-label">Reference No.</label>
+                    <input type="text" id="Previous" class="form-control" @bind="paymentData.PaymentReferenceNumber" />
+                </div>
+            }
+
+            
+        </div>
+    </div>
+
+    <button class="btn btn-succes" @onclick="addPayment">Pay</button>
+}
+
+
+@code {
+    public int? Id { set; get; }
+    private Bills? BillData;
+    private Reading? ReadingData;
+    private Consumers? ConsumersData;
+    private Users? UserData;
+    private Advances? advanceData;
+    private Payments paymentData = new Payments();
+    private Settings? SettingsData;
+
+    public double advanceAmount;
+    public double TotalAmount;
+    public double changeAmount;
+    public double totalAmounts;
+
+    private Alert? alertComponent;
+
+    private string FullName { get; set; } = "Guest";
+    private string selectedPaymentMethod { get; set; }
+
+    [Inject]
+    private URLStringServices URLStringServices { get; set; }
+
+    [Inject]
+    private BillingService billingService { get; set; }
+
+    [Inject]
+    private ReadingServices readingServices { get; set; }
+
+    [Inject]
+    private ConsumerServices consumerServices { get; set; }
+
+    [Inject]
+    private UsersServices usersServices { get; set; }
+
+    [Inject]
+    private AdvanceServices advanceServices { get; set; }
+
+    [Inject]
+    private PaymentServices paymentServices { get; set; }
+
+    [Inject]
+    private SettingsServices settingServices { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Id = URLStringServices.GetURLStringValueAsInt("id");
+
+        advanceAmount = 0;
+        TotalAmount = 0;
+        changeAmount = 0;
+        totalAmounts = 0;
+        paymentData.CashierID = "0";
+
+        var storedFullName = await sessionStorage.GetItemAsync<string>("fullName");
+
+        if (!string.IsNullOrEmpty(storedFullName))
+        {
+            FullName = storedFullName;
+        }
+
+        SettingsData = await settingServices.GetSettings();
+
+
+    }
+
+    private string GetBase64QrCode()
+    {
+        if (SettingsData?.GcashQr != null)
+        {
+            var base64String = Convert.ToBase64String(SettingsData?.GcashQr);
+            return $"data:image/png;base64,{base64String}";
+        }
+        return string.Empty;
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            if (!Id.HasValue)
+            {
+                await alertComponent.ShowNotification("Error: No Id Found!", false, "danger");
+
+                return;
+            }
+
+            BillData = await billingService.GetBillingByID(Id);
+            if (BillData == null)
+            {
+                await alertComponent.ShowNotification("Error: BillData is null!", false, "danger");
+
+                return;
+            }
+
+            ReadingData = await readingServices.GetReadingByID(BillData.ReadingID);
+            if (ReadingData == null)
+            {
+                await alertComponent.ShowNotification("Error: ReadingData is null!", false, "danger");
+
+                return;
+            }
+
+            ConsumersData = await consumerServices.GetConsumerByMeterNumber(ReadingData.Meter_Number);
+            if (ConsumersData == null)
+            {
+                await alertComponent.ShowNotification("Error: ConsumersData is null!", false, "danger");
+
+                return;
+            }
+
+
+            UserData = await usersServices.GetUserByIdAsync(int.Parse(ConsumersData.UserID));
+            if (UserData == null)
+            {
+                await alertComponent.ShowNotification("Error: UserData is null!", false, "danger");
+
+                return;
+            }
+            StateHasChanged();
+
+        }
+        catch (Exception ex)
+        {
+            await alertComponent.ShowNotification($"Error Exception: {ex.Message}", false, "danger");
+
+        }
+
+        try
+        {
+            advanceData = await advanceServices.getAdvanceWithConsumerID(ConsumersData.ConsumerID);
+            StateHasChanged();
+
+            TotalAmount = BillData.Consumed_Amount - advanceAmount;
+            totalAmounts = TotalAmount;
+        }
+        catch (Exception ex)
+        {
+            if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                advanceAmount = 0;
+                TotalAmount = BillData.Consumed_Amount;
+                totalAmounts = TotalAmount;
+            }
+            else
+            {
+                await alertComponent.ShowNotification($"Error: {ex.Message}", false, "danger");
+
+            }
+        }
+    }
+
+    private void OnAmountPaidChange(ChangeEventArgs e)
+    {
+        if (e.Value != null && double.TryParse(e.Value.ToString(), out double currentInputAmount))
+        {
+            paymentData.Amount_Paid = currentInputAmount;
+            changeAmount = currentInputAmount - totalAmounts;
+            paymentData.Change = changeAmount;
+        }
+        else
+        {
+            changeAmount = 0;
+            paymentData.Change = changeAmount;
+        }
+    }
+
+    protected async Task addPayment()
+    {
+        bool result = await alertComponent.ShowNotification("Do you want to pay this bill?", true, "success");
+
+        await HandleNotificationResponse(result);
+
+    }
+
+    private async Task HandleNotificationResponse(bool response)
+    {
+        if (response)
+        {
+            paymentData.BillID = BillData.BillID;
+            paymentData.PaymentMethod = selectedPaymentMethod;
+
+            if (advanceAmount == 0)
+            {
+                paymentData.AdvanceIncluded = "";
+            }
+            else
+            {
+                paymentData.AdvanceIncluded = advanceAmount.ToString();
+            }
+
+            paymentData.Remarks = "Pending";
+
+            var (isCreated, PaymentMessage) = await paymentServices.CreatePayment(paymentData);
+            if (isCreated)
+            {
+                //advance
+                if (advanceAmount != 0)
+                {
+                    var (isUpdated, AdvanceMessage) = await advanceServices.UpdateAdvance(advanceData.AdvanceID);
+                    if (!isUpdated)
+                    {
+                        await alertComponent.ShowNotification($"Advance Updating Error: {AdvanceMessage}", false, "danger");
+
+                    }
+                }
+
+
+                //update bill
+                var (isBillUpdated, UpdateMessage) = await billingService.UpdateBilling(BillData.BillID);
+                if (isBillUpdated)
+                {
+                    await alertComponent.ShowNotification($"Success: {PaymentMessage}", false, "success");
+
+                    navManager.NavigateTo("/Consumer/Billings");
+                }
+                else
+                {
+                    await alertComponent.ShowNotification($"Bill Updating Error: {UpdateMessage}", false, "danger");
+
+                }
+
+            }
+        }
+    }
+
+}

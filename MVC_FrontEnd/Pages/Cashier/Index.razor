@@ -1,14 +1,14 @@
-﻿@page "/Cashier-Dashboard"
+﻿@page "/Cashier"
 @inject AuthenticationService authService
 
 <PageTitle>Home</PageTitle>
 
-<h1>Dashboard</h1>
+<link href="css/Dashboard.css" rel="stylesheet" />
 
 <div class="row">
 	
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Paid</h5>
 				<p class="card-text fs-2">00</p>
@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Unpaid</h5>
 				<p class="card-text fs-2">00</p>
@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white ">
 			<div class="card-body">
 				<h5 class="card-title">Today Income</h5>
 				<p class="card-text fs-2">00</p>

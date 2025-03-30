@@ -7,7 +7,7 @@
 		<a href="/CreateUser" class="btn btn-primary px-2 py-1">Apply</a>
 	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
-		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
 </div>
 
@@ -39,14 +39,13 @@ else
 					<td>@users.Role</td>
 					<td class="text-end" style="vertical-align: middle;">
 						<div class="d-flex justify-content-center">
-							@if(users.Role == "Consumer")
+							@if (users.Role == "Consumer" && users.Applied == null)
 							{
 								<a href="/ApplyConsumer?Id=@users.UserID" class="btn btn-warning btn-sm" type="button" style="margin-right: 10px;">Apply</a>
 							}
 							<a href="/UserView?Id=@users.UserID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
 							<a href="/UpdateUser?Id=@users.UserID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
 							<button class="btn btn-danger btn-sm" type="button" @onclick="() => ConfirmDelete(users.UserID)">Delete</button>
-							
 						</div>
 					</td>
 				</tr>
@@ -55,6 +54,8 @@ else
 		</tbody>
 	</table>
 }
+
+
 
 @code {
 	private List<Users>? Users;
@@ -83,13 +84,29 @@ else
 
 		if (isDeleted)
 		{
-			toastService.ShowSuccess("User deleted successfully!");
-			navManager.NavigateTo("/Users");
+			navManager.NavigateTo(navManager.Uri, forceLoad: true);
 		}
 		else
 		{
 			Console.WriteLine("Failed to delete user.");
 		}
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Users + $"/Search?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<Users>>(Urls);
+
+		if (result != null)
+		{
+			Users = result;
+		}
+		else
+		{
+			
+		}
+
 	}
 
 }

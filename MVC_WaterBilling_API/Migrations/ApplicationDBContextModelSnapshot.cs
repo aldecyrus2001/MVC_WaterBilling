@@ -79,7 +79,10 @@ namespace MVC_WaterBilling_API.Migrations
                     b.Property<DateOnly>("From")
                         .HasColumnType("date");
 
-                    b.Property<string>("ReadingID")
+                    b.Property<int>("ReadingID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReferenceNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -143,7 +146,6 @@ namespace MVC_WaterBilling_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MonthOf")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Previous_Reading")
@@ -182,9 +184,8 @@ namespace MVC_WaterBilling_API.Migrations
                     b.Property<double>("Amount_Paid")
                         .HasColumnType("float");
 
-                    b.Property<string>("BillID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BillID")
+                        .HasColumnType("int");
 
                     b.Property<string>("CashierID")
                         .IsRequired()
@@ -198,6 +199,9 @@ namespace MVC_WaterBilling_API.Migrations
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentReferenceNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PenaltyIncluded")
@@ -222,6 +226,12 @@ namespace MVC_WaterBilling_API.Migrations
                     b.Property<double?>("AmountPerCubic")
                         .HasColumnType("float");
 
+                    b.Property<byte[]>("GcashQr")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Gcash_Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double?>("PenaltyAmount")
                         .HasColumnType("float");
 
@@ -243,6 +253,9 @@ namespace MVC_WaterBilling_API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+
+                    b.Property<string>("Applied")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date_Created")
                         .HasColumnType("datetime2");

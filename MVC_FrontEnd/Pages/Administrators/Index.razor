@@ -3,42 +3,42 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Dashboard</h1>
+<link href="css/Dashboard.css" rel="stylesheet" />
 
 <div class="row">
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Cashier</h5>
-				<p class="card-text fs-2">00</p>
+				<p class="card-text">@CashierCount</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Reader</h5>
-				<p class="card-text fs-2">00</p>
+				<p class="card-text ">@ReaderCount</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Consumers</h5>
-				<p class="card-text fs-2">00</p>
+				<p class="card-text ">@ConsumerCount</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="col-md-3">
-		<div class="card text-white bg-primary mb-3">
+		<div class="card text-white mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Today Income</h5>
-				<p class="card-text fs-2">00</p>
+				<p class="card-text ">₱ @TodayAmount</p>
 			</div>
 		</div>
 	</div>
@@ -48,9 +48,29 @@
 
 @code {
 	private bool isAuthenticated = false;
+	private int CashierCount = 0;
+	private int ReaderCount = 0;
+	private int ConsumerCount = 0;
+	private int TodayAmount = 0;
 
 	protected override async Task OnInitializedAsync()
 	{
-		await authService.CheckAuthenticationAsync();
+
+		try {
+			await authService.CheckAuthenticationAsync();
+
+			CashierCount = await Http.GetFromJsonAsync<int>($"{urls.Users}/Cashier/Count");
+
+			ReaderCount = await Http.GetFromJsonAsync<int>($"{urls.Users}/Reader/Count");
+
+			ConsumerCount = await Http.GetFromJsonAsync<int>($"{urls.Users}/Consumer/Count");
+
+			TodayAmount = await Http.GetFromJsonAsync<int>($"{urls.Payment}/totalAmount");
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error fetching datas: {ex.Message}");
+		}
 	}
 }

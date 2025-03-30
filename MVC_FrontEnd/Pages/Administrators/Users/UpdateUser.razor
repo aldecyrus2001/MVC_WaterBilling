@@ -6,6 +6,10 @@
 }
 else 
 {
+
+	<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
+
 	<h5 class="mb-3" id="exampleModalLabel">Update User | @Id</h5>
 
 	<EditForm Model="userData">
@@ -76,6 +80,9 @@ else
 	public string EmailAddress { get; set; } = string.Empty;
 	public string SelectedRole { get; set; } = string.Empty;
 
+	private Alert? alertComponent;
+
+
 	[Inject]
 	private URLStringServices URLStringServices { get; set; }
 
@@ -139,17 +146,31 @@ else
 
 	protected async Task UpdateUserData()
 	{
-		if (Id.HasValue)
-		{
-			bool isUpdated = await usersServices.UpdateUserAsync(Id.Value, userData);
+		bool result = await alertComponent.ShowNotification("Do you want to update this user?", true, "success");
 
-			if (isUpdated)
+		await HandleNotificationResponse(result);
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		if (response)
+		{
+			if (Id.HasValue)
 			{
-				navManager.NavigateTo("/Users");
-			}
-			else
-			{
-				Console.WriteLine("Failed to update user.");
+				bool isUpdated = await usersServices.UpdateUserAsync(Id.Value, userData);
+
+				if (isUpdated)
+				{
+					await alertComponent.ShowNotification("Updated Successfully", false, "success");
+
+					navManager.NavigateTo("/Users");
+				}
+				else
+				{
+					await alertComponent.ShowNotification("Failed to update data, Please Try Again.", false, "danger");
+
+					navManager.NavigateTo("/Users");
+				}
 			}
 		}
 	}

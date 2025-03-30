@@ -4,11 +4,12 @@
 
 .top-row[b-d5ezebw7an] {
     min-height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #101322;
 }
 
 .navbar-brand[b-d5ezebw7an] {
     font-size: 1.1rem;
+    text-align: center;
 }
 
 .bi[b-d5ezebw7an] {
@@ -58,11 +59,13 @@
 .nav-item[b-d5ezebw7an]  a.active {
     background-color: rgba(255,255,255,0.37);
     color: white;
+    padding: 0 20px;
 }
 
 .nav-item[b-d5ezebw7an]  a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
+    padding: 0 20px;
 }
 
 @media (min-width: 641px) {

@@ -16,10 +16,10 @@ namespace MVC_WaterBilling_API.Controllers
             _settingsData = settingsData;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSettings(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetSettings()
         {
-            var settings = await _settingsData.GetSettingsByIdAsync(id);
+            var settings = await _settingsData.GetSettingsByIdAsync();
             if (settings == null)
             {
                 return NotFound();
@@ -28,17 +28,16 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(settings);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateSettings(int id, [FromBody] SettingsDTO settingsDTO)
+        [HttpPut]
+        public async Task<IActionResult> UpdateSettings([FromBody] SettingsDTO settingsDTO)
         {
-            var settings = await _settingsData.GetSettingsByIdAsync(id);
+            var settings = await _settingsData.GetSettingsByIdAsync();
             if (settings == null)
             {
                 return NotFound();
             }
 
             settings.SystemName = settingsDTO.SystemName;
-            settings.PenaltyAmount = settingsDTO.PenaltyAmount;
             settings.AmountPerCubic = settingsDTO.AmountPerCubic;
 
             await _settingsData.UpdateSettingAsync(settings);
@@ -47,6 +46,30 @@ namespace MVC_WaterBilling_API.Controllers
             {
                 message = "Settings Updated Successfully!"
             });
+        }
+
+        [HttpPut("UpdateQr")]
+        public async Task<IActionResult> UpdateQr([FromForm] IFormFile gcashQr, [FromForm] string gcashName)
+        {
+            var settings = await _settingsData.GetSettingsByIdAsync();
+            if (settings == null)
+            {
+                return NotFound();
+            }
+
+            if (gcashQr != null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    await gcashQr.CopyToAsync(ms);
+                    settings.GcashQr = ms.ToArray();
+                }
+            }
+
+            settings.Gcash_Name = gcashName;
+            await _settingsData.UpdateSettingAsync(settings);
+
+            return Ok(new { message = "Settings Updated Successfully!" });
         }
     }
 }

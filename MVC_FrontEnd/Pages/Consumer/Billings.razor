@@ -1,0 +1,79 @@
+﻿@page "/Consumer/Billings"
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<div class="d-flex flex-row gap-2 align-items-baseline">
+		<h5>Bills Record</h5>
+	</div>
+	
+</div>
+
+@if (BillInformation == null)
+{
+	<p><em>No Billing Records</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Bill ID</th>
+				<th>Reading ID</th>
+				<th>Consumed Amount</th>
+				<th>Previous Consumption</th>
+				<th>Current Consumption</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Status</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var billing in BillInformation)
+			{
+				<tr>
+					<td>@billing.billing.BillID</td>
+					<td>@billing.billing.ReadingID</td>
+					<td>@billing.billing.Consumed_Amount</td>
+					<td>@billing.meterReading.Previous_Reading</td>
+					<td>@billing.meterReading.Current_Reading</td>
+					<td>@billing.billing.From</td>
+					<td>@billing.billing.To</td>
+					<td>@billing.billing.BillStatus</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							<a href="/Consumer/PayBilling?Id=@billing.billing.BillID" class="btn btn-danger btn-sm" type="button" style="margin-right: 10px;">Payment</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+
+}
+
+
+@code {
+	private List<BillingReadingConsumerUser>? BillInformation;
+	private string UserId { get; set; }
+
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			var storedUserID = await sessionStorage.GetItemAsync<string>("userId");
+
+			if (!string.IsNullOrEmpty(storedUserID))
+			{
+				UserId = storedUserID;
+			}
+			BillInformation = await Http.GetFromJsonAsync<List<BillingReadingConsumerUser>>($"{urls.Billing}/Consumer/Billings/{UserId}") ?? new List<BillingReadingConsumerUser>();
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error fetching billing data: {ex.Message}");
+		}
+	}
+}

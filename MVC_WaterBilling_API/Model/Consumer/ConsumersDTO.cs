@@ -20,12 +20,12 @@ namespace MVC_WaterBilling_API.Model.Consumer
         [Required(ErrorMessage = "Meter number is required!")]
         public string Meter_Number { get; set; }
 
-        
     }
 
-    public class ConsumerWithUserDTO
+    public class ConsumerWithUser
     {
         public Consumers Consumer { get; set; }
         public Users User { get; set; }
     }
+
 }

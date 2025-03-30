@@ -13,29 +13,28 @@ namespace MVC_WaterBilling_API.Data
             _db = db;
         }
 
+        public async Task<MeterReading?> GetReadingByIdAsync(int readingId)
+        {
+            return await _db.Meters.FirstOrDefaultAsync(m => m.ReadingID == readingId);
+        }
+
         public async Task<List<ReadingConsumerUserDTO>> GetMeterReadingsAsync()
         {
-            return await _db.Meters
-                .Join(
-                    _db.Consumers, // Joining with Consumers
-                    meterReading => meterReading.Meter_Number, // Key from MeterReading
-                    consumer => consumer.Meter_Number, // Key from Consumers
-                    (meterReading, consumer) => new { meterReading, consumer } // Result of first join
-                )
-                .Join(
-                    _db.Users, // Joining with Users
-                    mc => mc.consumer.UserID, // Key from Consumers (UserID)
-                    user => user.UserID.ToString(), // Key from Users (UserID as string)
-                    (mc, user) => new ReadingConsumerUserDTO // Select only the required fields
-                    {
-                        Users = user,           // Mapping user information
-                        Consumers = mc.consumer, // Mapping consumer information
-                        MeterReading = mc.meterReading // Mapping meter reading information
-                    }
-                )
-                .OrderByDescending(m => m.MeterReading.Reading_Date) // Sort by Reading Date
-                .ToListAsync();
+            var result = await (from m in _db.Meters // Start with MeterReadings
+                                join c in _db.Consumers on m.Meter_Number equals c.Meter_Number into consumerGroup
+                                from consumer in consumerGroup.DefaultIfEmpty() // Left Join Consumers
+                                join u in _db.Users on consumer.UserID equals u.UserID.ToString() into userGroup
+                                from user in userGroup.DefaultIfEmpty() // Left Join Users
+                                select new ReadingConsumerUserDTO
+                                {
+                                    MeterReading = m,
+                                    Consumers = consumer,
+                                    Users = user
+                                }).ToListAsync();
+
+            return result;
         }
+
 
 
         public async Task<MeterReading?> GetMeterReadingByMeterNumberAsync(string meterNumber)
@@ -45,6 +44,24 @@ namespace MVC_WaterBilling_API.Data
                 .OrderByDescending(m => m.Reading_Date) // Order by latest reading date
                 .FirstOrDefaultAsync(); // Get the first (and therefore latest) reading
         }
+
+        public async Task<ReadingConsumerUserDTO?> ViewMeterReadingsAsync(int id)
+        {
+            var result = await (from m in _db.Meters // Start with MeterReadings
+                                join c in _db.Consumers on m.Meter_Number equals c.Meter_Number into consumerGroup
+                                from consumer in consumerGroup.DefaultIfEmpty() // Left Join Consumers
+                                join u in _db.Users on consumer.UserID equals u.UserID.ToString() into userGroup
+                                from user in userGroup.DefaultIfEmpty() // Left Join Users
+                                select new ReadingConsumerUserDTO
+                                {
+                                    MeterReading = m,
+                                    Consumers = consumer,
+                                    Users = user
+                                }).FirstOrDefaultAsync();
+
+            return result;
+        }
+
 
         public async Task<MeterReading?> GetMeterReadingsAsync(int id)
         {
@@ -65,7 +82,8 @@ namespace MVC_WaterBilling_API.Data
         public async Task<bool> CreateMeterReadingAsync(MeterReading meterReading)
         {
             bool exists = await _db.Meters
-            .AnyAsync(m => m.Meter_Number == meterReading.Meter_Number && m.MonthOf == meterReading.MonthOf);
+                .AnyAsync(m => m.Meter_Number == meterReading.Meter_Number &&
+                m.MonthOf == meterReading.MonthOf);
 
             if (exists)
             {
@@ -75,6 +93,80 @@ namespace MVC_WaterBilling_API.Data
             _db.Meters.Add(meterReading);
             await _db.SaveChangesAsync();
             return true; // Insertion successful
+        }
+
+        public async Task<bool> DeleteMeterReadingAsync(int Id)
+        {
+            var meterReading = await _db.Meters.FirstOrDefaultAsync(m => m.ReadingID == Id);
+
+            if (meterReading == null)
+            {
+                return false;
+            }
+
+            _db.Meters.Remove(meterReading);
+            await _db.SaveChangesAsync(); // Save changes to apply deletion
+            return true; // Deletion successful
+        }
+
+        public async Task UpdateReadingStatus(MeterReading reading)
+        {
+            _db.Meters.Attach(reading);
+            _db.Entry(reading).Property(r => r.Status).IsModified = true;
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task<List<ReadingConsumerUserDTO>> SearchAsync(string searchQuery)
+        {
+            var query = from m in _db.Meters // Start with MeterReadings
+                        join c in _db.Consumers on m.Meter_Number equals c.Meter_Number into consumerGroup
+                        from consumer in consumerGroup.DefaultIfEmpty() // Left Join Consumers
+                        join u in _db.Users on consumer.UserID equals u.UserID.ToString() into userGroup
+                        from user in userGroup.DefaultIfEmpty() // Left Join Users
+                        where user == null || user.Status != "Deleted" // Exclude Deleted Users
+                        select new ReadingConsumerUserDTO
+                        {
+                            MeterReading = m,
+                            Consumers = consumer,
+                            Users = user
+                        };
+
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                searchQuery = searchQuery.ToLower().Trim(); // Normalize input
+
+                // Try parsing the searchQuery as a DateTime
+                DateTime searchDate;
+                bool isDate = DateTime.TryParse(searchQuery, out searchDate);
+
+                query = query.Where(rcu =>
+                    rcu.Users.Firstname.ToLower().Contains(searchQuery) ||
+                    rcu.Users.Middlename.ToLower().Contains(searchQuery) ||
+                    rcu.Users.Lastname.ToLower().Contains(searchQuery) ||
+                    rcu.Users.Gender.ToLower().Contains(searchQuery) ||
+                    rcu.Users.PhoneNumber.Contains(searchQuery) ||
+                    rcu.Users.Email.ToLower().Contains(searchQuery) ||
+                    rcu.Users.Role.ToLower().Contains(searchQuery) ||
+                    rcu.Consumers.Address.ToLower().Contains(searchQuery) ||
+                    rcu.Consumers.ConnectionType.ToLower().Contains(searchQuery) ||
+                    rcu.Consumers.Meter_Number.Contains(searchQuery) ||
+                    rcu.Consumers.Consumer_Status.ToLower().Contains(searchQuery) ||
+                    rcu.MeterReading.ReaderID.Contains(searchQuery) ||
+                    rcu.MeterReading.Previous_Reading.ToString().Contains(searchQuery) ||
+                    rcu.MeterReading.Current_Reading.ToString().Contains(searchQuery) ||
+                    rcu.MeterReading.Usage.ToString().Contains(searchQuery) ||
+                    rcu.MeterReading.Status.ToLower().Contains(searchQuery) ||
+                    (rcu.MeterReading.MonthOf != null && rcu.MeterReading.MonthOf.ToLower().Contains(searchQuery)) ||
+                    (isDate && rcu.MeterReading.Reading_Date.Date == searchDate.Date) // Compare as DateTime
+                );
+            }
+
+            return await query.OrderByDescending(rcu => rcu.MeterReading.Reading_Date).ToListAsync();
+        }
+
+        public async Task<int> GetCountByReader(string readerId)
+        {
+            return await _db.Meters.CountAsync(m => m.ReaderID == readerId);
         }
 
 

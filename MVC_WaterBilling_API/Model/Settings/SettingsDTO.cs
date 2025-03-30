@@ -6,4 +6,10 @@
         public double PenaltyAmount { get; set; }
         public double AmountPerCubic { get; set; }
     }
+
+    public class SettingsQrDTO
+    {
+        public byte[]? GcashQr { get; set; }
+        public string? Gcash_Name { get; set; }
+    }
 }

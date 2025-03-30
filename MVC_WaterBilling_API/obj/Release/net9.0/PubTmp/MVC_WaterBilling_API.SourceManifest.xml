@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_WaterBilling_API\obj\Release\net9.0\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_WaterBilling_API\obj\Release\net9.0\PubTmp\EFSQLScripts\MVC_WaterBilling_API.Services.ApplicationDBContext.sql" />
+</sitemanifest>

@@ -61,7 +61,7 @@ namespace MVC_FrontEnd.Services
             try
             {
                 var url = $"{_uRLs.Users}/{id}/delete";
-                var response = await _httpClient.DeleteAsync(url);
+                var response = await _httpClient.PutAsJsonAsync(url, id);
 
                 return response.IsSuccessStatusCode;
             }

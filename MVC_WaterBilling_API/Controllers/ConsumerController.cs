@@ -12,28 +12,30 @@ namespace MVC_WaterBilling_API.Controllers
     public class ConsumerController : Controller
     {
         private readonly ConsumerData _consumerData;
-        public ConsumerController(ConsumerData consumerData)
+        private readonly UserData _userData;
+        public ConsumerController(ConsumerData consumerData, UserData userData)
         {
             _consumerData = consumerData;
+            _userData = userData;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetConsumers()
         {
-            var consumers = await _consumerData.GetConsumersAsync();
+            var consumers = await _consumerData.GetConsumersWithUsersAsync();
             return Ok(consumers);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetConsumer(int id)
         {
-            var consumer = await _consumerData.GetConsumerByIdAsync(id);
+            var consumer = await _consumerData.GetConsumerWithUserAsync(id);
             if (consumer == null)
             {
                 return NotFound();
             }
 
-            return Ok(consumer);
+            return Ok(consumer); // Returns both Consumer and User in the response
         }
 
         [HttpGet("{meterNumber}/meterNumber")]
@@ -88,7 +90,14 @@ namespace MVC_WaterBilling_API.Controllers
                     Reading_Date = DateTime.UtcNow
                 };
 
+                var user = await _userData.GetUserByIdAsync(int.Parse(consumer.UserID));
+                if(user != null)
+                {
+                    user.Applied = "Consumer";
+                }
+
                 await _consumerData.CreateConsumerAsync(consumer, meterReading);
+                await _userData.UpdateUserAsync(user);
 
                 return Ok(new
                 {
@@ -103,18 +112,24 @@ namespace MVC_WaterBilling_API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditConsumer(int id, [FromBody] ConsumersDTO consumersDTO)
         {
-            var consumerWithUser = await _consumerData.GetConsumerByIdAsync(id);
-            if (consumerWithUser == null)
+            var consumer = await _consumerData.GetConsumerByIdAsync(id);
+            if (consumer == null)
             {
                 return NotFound();
             }
 
-            var consumer = consumerWithUser.Consumer;
+            if(await _consumerData.isMeterNumberUsedAsync(consumersDTO.Meter_Number) && consumer.Meter_Number != consumersDTO.Meter_Number)
+            {
+                return BadRequest(new
+                {
+                    message = "Meter number already used!"
+                });
+            }
+
             consumer.Address = consumersDTO.Address;
             consumer.ConnectionType = consumersDTO.ConnectionType;
+            consumer.Connection_Date = consumersDTO.Connection_Date;
             consumer.Meter_Number = consumersDTO.Meter_Number;
-
-            await _consumerData.UpdateConsumerAsync(consumer);
 
             return Ok(new
             {
@@ -125,16 +140,15 @@ namespace MVC_WaterBilling_API.Controllers
         [HttpPut("{id}/disconnect")]
         public async Task<IActionResult> DisconnectConsumer(int id)
         {
-            var consumerWithUser = await _consumerData.GetConsumerByIdAsync(id);
-            if (consumerWithUser == null)
+            var consumers = await _consumerData.GetConsumerByIdAsync(id);
+            if (consumers == null)
             {
                 return NotFound();
             }
 
-            var consumer = consumerWithUser.Consumer;
-            consumer.Consumer_Status = "Disconnected";
+            consumers.Consumer_Status = "Disconnected";
 
-            await _consumerData.DisconnectConsumerAsync(consumer);
+            await _consumerData.DisconnectConsumerAsync(consumers);
 
             return Ok(new
             {
@@ -153,6 +167,13 @@ namespace MVC_WaterBilling_API.Controllers
             }
 
             return Ok(consumerWithUser);
+        }
+
+        [HttpGet("Search")]
+        public async Task<IActionResult> SearchCosumer([FromQuery] string? search = null)
+        {
+            var users = await _consumerData.SearchConsumerAsync(search);
+            return Ok(users);
         }
 
     }

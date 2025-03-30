@@ -8,7 +8,10 @@ namespace MVC_WaterBilling_API.Model.Bill
     public class BillDTO
     {
         [Required(ErrorMessage = "Reading ID is required!")]
-        public string ReadingID { get; set; }
+        public int ReadingID { get; set; }
+
+        [Required(ErrorMessage = "Reference Number is required! Meter")]
+        public string ReferenceNumber { get; set; }
 
         [Required(ErrorMessage = "Consumed Amount is required!")]
         public double Consumed_Amount { get; set; } //The total amount consumed by the consumers

@@ -2,27 +2,34 @@
 
 <h5 class="mb-3" id="exampleModalLabel">View User | @Id</h5>
 
-<div class="row g-2 mb-2">
-	<InputComponent InputType="text" InputID="FirstName" IsDisabled="true" label="First Name" @bind-Value="Firstname" />
-	<InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="Middlename" />
-	<InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="Lastname" />
-</div>
-<div class="row g-2 mb-2">
-	<SelectComponent label="Gender" SelectID="genderSelect" SelectedValue="@SelectedGender" Options="@GenderOptions" isDisabled="true"/>
-	<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="PhoneNumber" />
-	<InputComponent InputType="text" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="EmailAddress" />
+@if(userData == null)
+{
+	<p><em>Loading...</em></p>
+}
+else 
+{
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="FirstName" IsDisabled="true" label="First Name" @bind-Value="Firstname" />
+		<InputComponent InputType="text" InputID="MiddleName" IsDisabled="true" label="Middle Name" @bind-Value="Middlename" />
+		<InputComponent InputType="text" InputID="LastName" IsDisabled="true" label="Last Name" @bind-Value="Lastname" />
+	</div>
+	<div class="row g-2 mb-2">
+		<SelectComponent label="Gender" Id="genderSelect" SelectedValue="@SelectedGender" Options="@GenderOptions" isDisabled="true" />
+		<InputComponent InputType="text" InputID="PhoneNumber" IsDisabled="true" label="Phone Number" @bind-Value="PhoneNumber" />
+		<InputComponent InputType="text" InputID="EmailAddress" IsDisabled="true" label="Email Address" @bind-Value="EmailAddress" />
 
-</div>
-<hr />
-<div class="row g-2 mb-2">
-	<InputComponent InputType="text" InputID="DateCreated" IsDisabled="true" label="Date Created" @bind-Value="DateCreated" />
-	<InputComponent InputType="text" InputID="Role" IsDisabled="true" label="Role" @bind-Value="Role" />
-</div>
+	</div>
+	<hr />
+	<div class="row g-2 mb-2">
+		<InputComponent InputType="text" InputID="DateCreated" IsDisabled="true" label="Date Created" @bind-Value="DateCreated" />
+		<InputComponent InputType="text" InputID="Role" IsDisabled="true" label="Role" @bind-Value="Role" />
+	</div>
 
-<div class="d-flex justify-content-end">
-	<a href="/Users" type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">Close</a>
-</div>
+	<div class="d-flex justify-content-end">
+		<a href="/Users" type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal">Close</a>
+	</div>
 
+}
 
 
 @code {

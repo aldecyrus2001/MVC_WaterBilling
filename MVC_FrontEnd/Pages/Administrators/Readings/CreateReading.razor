@@ -2,6 +2,8 @@
 @using Neodynamic.Blazor
 @inject JSPrintManager JSPrintManager;
 
+<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
 
 <h5 class="mb-3" id="exampleModalLabel">Create Reading</h5>
 
@@ -120,15 +122,23 @@ else {
     private Users? UsersData;
     private Consumers? ConsumerData;
     private Bills? BillData;
+    private Settings? SettingsData;
 
     private Advances advanceData;
 
+    private Alert? alertComponent;
+
+
     public string meterID;
     public double advanceAmount;
-    private double consumedAmount;
+
+    private string FullName { get; set; } = "Guest";
+    private string ReaderID { get; set; }
 
 
-    private double pricePerCubic = 12.0;
+    private double pricePerCubic;
+
+    string referenceNumber = GenerateReferenceNumber();
 
     [Inject]
     private ConsumerServices consumerServices { get; set; }
@@ -145,18 +155,45 @@ else {
     [Inject]
     private AdvanceServices advanceServices { get; set; }
 
-    protected override void OnInitialized()
+    [Inject]
+    private SettingsServices settingsService { get; set; }
+
+
+    protected override async void OnInitialized()
     {
-        BillData ??= new Bills // Use null-coalescing assignment to create if null
+        BillData ??= new Bills 
             {
-                BillDate = DateTime.Today, // Default Bill Date
-                Consumed_Amount = 0, // Or your desired default
-                From = DateOnly.FromDateTime(DateTime.Today),    // Default From Date
-                To = DateOnly.FromDateTime(DateTime.Today),      // Default To Date
-                DueDate = DateOnly.FromDateTime(DateTime.Today)   // Default Due Date
+                BillDate = DateTime.Today,
+                Consumed_Amount = 0,
+                From = DateOnly.FromDateTime(DateTime.Today),    
+                To = DateOnly.FromDateTime(DateTime.Today),   
+                DueDate = DateOnly.FromDateTime(DateTime.Today) 
+                
             };
 
         advanceAmount = 0;
+
+        SettingsData = await settingsService.GetSettings();
+
+        if (SettingsData != null)
+        {
+            pricePerCubic = SettingsData.AmountPerCubic;
+        }
+        else
+        {
+            await alertComponent.ShowNotification($"Failed to fetch settings Data", false, "danger");
+
+            pricePerCubic = 0; 
+        }
+
+        var storedFullName = await sessionStorage.GetItemAsync<string>("fullName");
+        var storedReaderID = await sessionStorage.GetItemAsync<string>("userId");
+
+        if (!string.IsNullOrEmpty(storedFullName))
+        {
+            FullName = storedFullName;
+            ReaderID = storedReaderID;
+        }
     }
 
 
@@ -176,13 +213,14 @@ else {
                     UsersData = await usersServices.GetUserByIdAsync(int.Parse(ConsumerData.UserID));
                     StateHasChanged();
 
+                    BillData.ReferenceNumber = referenceNumber;
                     ReadingData.Previous_Reading = ReadingData.Current_Reading;
                     BillData.BillDate = DateTime.UtcNow;
                     BillData.From = DateOnly.FromDateTime(DateTime.Now);
                     BillData.To = DateOnly.FromDateTime(DateTime.Now);
                     BillData.DueDate = DateOnly.FromDateTime(DateTime.Now);
                     ReadingData.Meter_Number = meterID;
-                    ReadingData.ReaderID = "1";
+                    ReadingData.ReaderID = ReaderID;
 
 
                 }
@@ -190,12 +228,14 @@ else {
                 {
                     if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        await JSRuntime.InvokeVoidAsync("alert", "Meter Number Not Found!");
+                        await alertComponent.ShowNotification($"Meter number not found, Please try again!", false, "danger");
+
                         meterID = "";
                     }
                     else 
                     {
-                        Console.WriteLine($"Error1: {ex.Message}");
+                        await alertComponent.ShowNotification($"Error Message: {ex.Message}", false, "danger");
+
                     }
                 }
 
@@ -211,12 +251,12 @@ else {
                 {
                     if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        await JSRuntime.InvokeVoidAsync("alert", "Advance Not Found!");
                         advanceAmount = 0;
                     }
                     else
                     {
-                        Console.WriteLine($"Error1: {ex.Message}");
+                        // await alertComponent.ShowNotification($"Error Message: {ex.Message}", false, "danger");
+
                     }
                 }
 
@@ -224,7 +264,8 @@ else {
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error : {ex.Message}");
+            await alertComponent.ShowNotification($"Error Message: {ex.Message}", false, "danger");
+
         }
     }
 
@@ -235,8 +276,8 @@ else {
         {
             ReadingData.Current_Reading = currentReadingValue;
             ReadingData.Usage = ReadingData.Current_Reading - ReadingData.Previous_Reading;
-            consumedAmount = ReadingData.Usage * pricePerCubic;
-            BillData.Consumed_Amount = (ReadingData.Usage * pricePerCubic) - advanceAmount;
+            BillData.Consumed_Amount = ReadingData.Usage * pricePerCubic;
+
         }
         else
         {
@@ -250,31 +291,44 @@ else {
 
     protected async Task addReading()
     {
-        var (isCreated, message, readingID) = await readingServices.createReading(ReadingData);
-        if(isCreated && readingID.HasValue)
-        {
-            BillData.ReadingID = readingID.Value.ToString();
-            var (isBillCreated, Billmessage) = await billingService.createBilling(BillData);
-            if (isBillCreated)
-            {
-                await JSRuntime.InvokeVoidAsync("alert", $"Success: {message}");
-                navManager.NavigateTo("/Readings");
-                DoPrint();
-            }
-            
-        }
-        else
-        {
-            await JSRuntime.InvokeVoidAsync("alert", $"Failed: Billing is failed to create. Please try again!");
-        }
-        
-        
+        bool result = await alertComponent.ShowNotification("Do you want to add this reading?", true, "success");
+
+        await HandleNotificationResponse(result);
 
         
     }
 
+    private async Task HandleNotificationResponse(bool response)
+    {
+        if (response)
+        {
+            var (isCreated, message, readingID) = await readingServices.createReading(ReadingData);
 
-    // Printer Settings 
+            if (isCreated && readingID.HasValue)
+            {
+                BillData.ReadingID = readingID.Value;
+                var (isBillCreated, Billmessage, billID) = await billingService.createBilling(BillData);
+                if (isBillCreated)
+                {
+                    BillData.BillID = billID;
+                    StateHasChanged();
+                    await alertComponent.ShowNotification("Rading Successfully Added", false, "success");
+                    navManager.NavigateTo("/Readings");
+                    DoPrint();
+                }
+
+            }
+            else
+            {
+                await alertComponent.ShowNotification("Failed: Billing is failed to create. Please try again!", false, "danger");
+
+            }
+
+        }
+    }
+
+
+    
 
     private bool UseDefaultPrinter = true;
 
@@ -286,24 +340,26 @@ else {
 
             cpj.ClientPrinter = new DefaultPrinter();
 
-            var esc = (char)0x1B; //ESC byte in hex notation
-            var newLine = (char)0x0A; //LF byte in hex notation
-            var alignLeft = esc + "a" + (char)0;  // Left-aligned
-            var alignCenter = esc + "a" + (char)1; // Center-aligned
-            var alignRight = esc + "a" + (char)2;  // Right-aligned
+            var esc = (char)0x1B; 
+            var newLine = (char)0x0A; 
+            var alignLeft = esc + "a" + (char)0; 
+            var alignCenter = esc + "a" + (char)1;
+            var alignRight = esc + "a" + (char)2;  
 
 
-            var cmds = esc + "@"; // Initializes the printer (ESC @)
-            cmds += esc + "!" + (char)0x38; //Emphasized + Double-height + Double-width mode selected (ESC ! (8 + 16 + 32)) 56 dec => 38 hex
-            cmds += alignCenter + "BILLING INVOICE"; //Header text
+            var cmds = esc + "@";
+            cmds += esc + "!" + (char)0x38; 
+            cmds += alignCenter + "READING INVOICE";
             cmds += newLine;
-            cmds += esc + "!" + (char)0x00; //Reset to normal mode (ESC ! 0)
+            cmds += esc + "!" + (char)0x00;
             cmds += newLine;
             cmds += alignLeft + $"Date: {BillData.BillDate}";
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
             cmds += alignLeft + $"Account No. {ConsumerData.ConsumerID}";
+            cmds += newLine;
+            cmds += alignLeft + $"Reference No.{BillData.ReferenceNumber}";
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
@@ -316,6 +372,8 @@ else {
             cmds += newLine;
             cmds += alignLeft + $"Meter Number : {ReadingData.Meter_Number}";
             cmds += newLine;
+            cmds += alignLeft + $"Bill Number : {BillData.BillID}";
+            cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
             cmds += alignLeft + "From: " + BillData.From;
@@ -323,6 +381,8 @@ else {
             cmds += alignLeft + "To: " + BillData.To;
             cmds += newLine;
             cmds += alignLeft + "Due Date: " + BillData.DueDate;
+            cmds += newLine;
+            cmds += alignLeft + "Month Of: " + ReadingData.MonthOf;
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
@@ -333,21 +393,21 @@ else {
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
-            cmds += alignLeft + "Current Bill: " + consumedAmount;
+            cmds += alignLeft + "Current Bill: " + BillData.Consumed_Amount;
             cmds += newLine;
             cmds += alignLeft + "Advance: " + advanceAmount;
             cmds += newLine;
             cmds += alignLeft + "Price/m3: " + pricePerCubic;
             cmds += newLine;
             cmds += esc + "!" + (char)0x38;
-            cmds += alignLeft + "Total: " + BillData.Consumed_Amount;
+            cmds += alignLeft + "Total: " + (BillData.Consumed_Amount - advanceAmount);
             cmds += esc + "!" + (char)0x00;
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
             cmds += alignLeft + "Normal Reading";
             cmds += newLine;
-            cmds += alignLeft + ReadingData.ReadingID;
+            cmds += alignLeft + FullName;
             cmds += newLine;
             cmds += alignCenter + "==============================";
             cmds += newLine;
@@ -368,42 +428,48 @@ else {
     {
         if (firstRender)
         {
-            // Handle OnGetPrinters event...
-            JSPrintManager.OnGetPrinters += () =>
+            JSPrintManager.OnGetPrinters += async () =>
             {
                 if (JSPrintManager.Printers != null &&
                     JSPrintManager.Printers.Length > 0)
                 {
-                    // Display installed printers...
                     StateHasChanged();
                 }
                 else
                 {
-                    Console.WriteLine("No printers found...");
+                    await alertComponent.ShowNotification("Error message: Billing is failed to create. Please try again!", false, "danger");
                 }
 
             };
 
-            // Handle OnStatusChanged event to detect any WSS status change
             JSPrintManager.OnStatusChanged += () =>
             {
                 StateHasChanged();
 
-                // Status = Open means that JSPM Client App is up and running!
                 if (JSPrintManager.Status == JSPMWSStatus.Open)
                 {
-                    //Try getting local printers...
                     JSPrintManager.TryGetPrinters();
                 }
             };
 
-            // Start WebSocket comm
             JSPrintManager.Start();
         }
 
         base.OnAfterRender(firstRender);
     }
 
+    static string GenerateReferenceNumber()
+    {
+        Random random = new Random();
 
+        string numericReference = $"{RandomBlock(random)}-{RandomBlock(random)}-{RandomBlock(random)}-{RandomBlock(random)}";
+
+        return numericReference;
+    }
+
+    static string RandomBlock(Random random)
+    {
+        return random.Next(1000, 9999).ToString();
+    }
 
 }

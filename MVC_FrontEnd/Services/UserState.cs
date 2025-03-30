@@ -25,5 +25,8 @@ public class UserState
         NotifyStateChanged();
     }
 
-    private void NotifyStateChanged() => OnChange?.Invoke();
+    public void NotifyStateChanged()
+    {
+        OnChange?.Invoke();
+    }
 }

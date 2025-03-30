@@ -24,6 +24,13 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(users);
         }
 
+        [HttpGet("Search")]
+        public async Task<IActionResult> SearchUsers([FromQuery] string? search = null)
+        {
+            var users = await _userData.SearchUsersAsync(search);
+            return Ok(users);
+        }
+
         [HttpGet("role/{userRole}")]
         public async Task<IActionResult> GetUsersByRole(string userRole)
         {
@@ -141,6 +148,19 @@ namespace MVC_WaterBilling_API.Controllers
             await _userData.UpdateUserAsync(user);
 
             return Ok(new { message = "Password reset successfully." });
+        }
+
+        [HttpGet("{User}/Count")]
+        public async Task<IActionResult> GetUserCount(string User)
+        {
+            var userCount = await _userData.GetUserCountByRole(User);
+
+            if (userCount == 0)
+            {
+                return NotFound("No users found with this role.");
+            }
+
+            return Ok(userCount);
         }
     }
 }

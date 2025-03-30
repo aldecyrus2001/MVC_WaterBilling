@@ -45,6 +45,7 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(new
             {
                 message = "Login Successfully",
+                fullName = user.Firstname + " " + user.Lastname, 
                 userId = user.UserID,
                 role = user.Role,
                 token = token

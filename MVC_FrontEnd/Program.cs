@@ -10,10 +10,13 @@ using MVC_FrontEnd.URL;
 using Neodynamic.Blazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredSessionStorage();
@@ -34,6 +37,8 @@ builder.Services.AddScoped<ConsumerServices>();
 builder.Services.AddScoped<ReadingServices>();
 builder.Services.AddScoped<BillingService>();
 builder.Services.AddScoped<AdvanceServices>();
+builder.Services.AddScoped<PaymentServices>();
+builder.Services.AddScoped<SettingsServices>();
 
 
 

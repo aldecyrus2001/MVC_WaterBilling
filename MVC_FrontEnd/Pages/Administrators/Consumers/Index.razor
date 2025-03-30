@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
 	<h5>Consumers Records</h5>
 	<form method="post" class="d-flex" style="width: 300px;">
-		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
 </div>
 
@@ -57,7 +57,8 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ConsumerInformations = await Http.GetFromJsonAsync<List<ConsumerWithUser>>(urls.Consumer);
+		ConsumerInformations = await consumerServices.GetConsumersWithUsersAsync();
+		StateHasChanged();
 	}
 
 	private async Task ConfirmDeactivateConsumer(int id)
@@ -81,6 +82,22 @@ else
 		else
 		{
 			await JSRuntime.InvokeVoidAsync("alert", $"Failed To Deactivate Account!");
+		}
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Consumer + $"/Search?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<ConsumerWithUser>>(Urls);
+
+		if(result != null)
+		{
+			ConsumerInformations = result;
+		}
+		else
+		{
+
 		}
 	}
 

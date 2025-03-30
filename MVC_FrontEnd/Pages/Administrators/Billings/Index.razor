@@ -1,3 +1,93 @@
 ﻿@page "/Billings"
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<div class="d-flex flex-row gap-2 align-items-baseline">
+		<h5>Bills Record</h5>
+	</div>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if(BillInformation == null)
+{
+	<p><em>No Billing Records</em></p>
+}
+else {
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Bill ID</th>
+				<th>Reading ID</th>
+				<th>Consumed Amount</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Status</th>
+				<th class="text-center">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var billing in BillInformation)
+			{
+				<tr>
+					<td>@billing.BillID</td>
+					<td>@billing.ReadingID</td>
+					<td>@billing.Consumed_Amount</td>
+					<td>@billing.From</td>
+					<td>@billing.To</td>
+					<td>@billing.BillStatus</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							@if (billing.BillStatus == "Unpaid")
+							{
+								<a href="/ReadingView?Id=@billing.ReadingID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+								<a href="/PayBilling?Id=@billing.BillID" class="btn btn-danger btn-sm" type="button" style="margin-right: 10px;">Payment</a>
+							}
+							else 
+							{
+								<a href="/ReadingView?Id=@billing.ReadingID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
+							}
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+
+}
+
+
 @code {
+	private List<Bills>? BillInformation;
+	
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			BillInformation = await Http.GetFromJsonAsync<List<Bills>>(urls.Billing) ?? new List<Bills>();
+			
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error fetching billing data: {ex.Message}");
+		}
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Billing + $"/Search?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<Bills>>(Urls);
+
+		if (result != null)
+		{
+			BillInformation = result;
+		}
+		else
+		{
+
+		}
+	}
 }

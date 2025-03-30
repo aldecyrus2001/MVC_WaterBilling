@@ -1,0 +1,77 @@
+﻿@page "/Payment";
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h5>Payments Records</h5>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if (PaymentInformation == null || !PaymentInformation.Any())
+{
+	<p><em>Loading...</em></p>
+}
+else 
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Reference Number</th>
+				<th>Consumer's Name</th>
+				<th>Usage</th>
+				<th>Amount Used</th>
+				<th>Amount Pay</th>
+				<th>Paid Date</th>
+				<th>Payment Method</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var payment in PaymentInformation)
+			{
+				<tr>
+					<td>@(payment.bills.ReferenceNumber)</td>
+					<td>@($"{payment.user.Firstname} {payment.user.Lastname}")</td>
+					<td>@payment.meterReading.Usage</td>
+					<td>@(payment.bills.Consumed_Amount)</td>
+					<td>@(payment.payments.Amount_Paid)</td>
+					<td>@payment.payments.PaymentDate</td>
+					<td>@payment.payments.PaymentMethod</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<PaymentsWithUserConsumer>? PaymentInformation;
+
+	
+
+	[Inject]
+	private PaymentServices paymentServices { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		PaymentInformation = await paymentServices.GetPaymentsWithUserConsumersAsync();
+
+		Console.WriteLine($"Fetched {PaymentInformation?.Count} records");
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Payment + $"/Search?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<PaymentsWithUserConsumer>>(Urls);
+
+		if (result != null)
+		{
+			PaymentInformation = result;
+		}
+		else
+		{
+
+		}
+	}
+
+
+}

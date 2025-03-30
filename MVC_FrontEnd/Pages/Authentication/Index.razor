@@ -1,49 +1,49 @@
 ﻿@page "/"
 @layout AuthenticationLayout
 
-<div class="container vh-100 d-flex align-items-center justify-content-center">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="/logo.png" alt="Sample Image" class="img-fluid" />
-            </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <div class="d-flex align-items-center mb-3 pb-1">
-                    <span class="h1 fw-bold mb-0">Authenticate</span>
-                </div>
+<link href="css/Login.css" rel="stylesheet" />
 
-                @if (!string.IsNullOrEmpty(Message))
-                {
-                    <div class="alert alert-danger mt-3" role="alert">
-                        @Message
+<div class="login-container">
+    <div class="container">
+        <div class="img">
+            <img src="bg.svg">
+        </div>
+        <div class="login-content">
+            <div class="form">
+                <img src="avatar.svg">
+                <h2 class="title">Welcome</h2>
+                <div class="input-div one">
+                    @if (!string.IsNullOrEmpty(Message))
+                    {
+                        <div class="alert alert-danger mt-3" role="alert">
+                            @Message
+                        </div>
+                    }
+                    <div class="i">
+                        <i class="fas fa-user"></i>
                     </div>
-                }
-
-                <!--Email Input-->
-                <div class="form-outline mb-2" data-mb-input-init>
-                    <input @bind="loginData.Email" type="email" id="EmailAddress" class="form-control form-control-lg" placeholder="Enter Valid Email Address" />
-                </div>
-
-                <!--Password Input-->
-                <div class="form-outline mb-2" data-mb-input-init>
-                    <input @bind="loginData.Password" type="password" id="Password" class="form-control form-control-lg" placeholder="Enter Password" />
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="form-check mb-0">
-                        <input class="form-check-input me-2" type="checkbox" id="RememberMe" @bind="RememberMe" />
-                        <label class="form-check-label" for="RememberMe">Remember me</label>
+                    <div class="div">
+                        <input type="text" class="input" @bind="loginData.Email" placeholder="Email Address">
                     </div>
-                    <a href="#!" class="text-body">Forgot Password?</a>
                 </div>
-
-                <div class="text-center text-lg-center mt-4 pt-2">
-                    <button type="button" data-mb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" @onclick="Login">Login</button>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <input type="password" class="input" @bind="loginData.Password" placeholder="Password">
+                    </div>
                 </div>
+                <a href="#">Forgot Password?</a>
+                <button class="btn" @onclick="Login">Login</button>
             </div>
+
+            
         </div>
     </div>
+
 </div>
+
 
 
 @inject NavigationManager navManager
@@ -73,32 +73,34 @@
                     UserRole = jsonResponse["role"]?.ToString() ?? string.Empty;
                     await UserStateService.SetUserRoleAsync(UserRole);
                     var userId = jsonResponse["userId"]?.ToString();
+                    var fullName = jsonResponse["fullName"]?.ToString();
                     var token = jsonResponse["token"]?.ToString();
                     var role = jsonResponse["role"]?.ToString();
 
                     if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(token))
                     {
-                        
+
                         await sessionStorage.SetItemAsync("userId", userId);
+                        await sessionStorage.SetItemAsync("fullName", fullName);
                         await sessionStorage.SetItemAsync("token", token);
                         await sessionStorage.SetItemAsync("role", role);
-                        
+
                     }
 
                     // Add logic for handling different roles (optional)
                     switch (UserRole)
                     {
                         case "Cashier":
-                            navManager.NavigateTo("/Cashier-Dashboard");
+                            navManager.NavigateTo("/Cashier");
                             break;
                         case "Administrator":
                             navManager.NavigateTo("/Administrator");
                             break;
                         case "Consumer":
-                            Message = "Welcome, Consumer!";
+                            navManager.NavigateTo("/Consumer");
                             break;
                         case "Reader":
-                            Message = "Welcome, Reader!";
+                            navManager.NavigateTo("/Reader");
                             break;
                         default:
                             Message = "Role not recognized.";

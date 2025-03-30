@@ -17,22 +17,6 @@
   },
   {
     "ContainingType": "MVC_WaterBilling_API.Controllers.AdvanceController",
-    "Method": "EditAdvance",
-    "RelativePath": "api/Advance",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "advanceDTOs",
-        "Type": "System.Collections.Generic.List\u00601[[MVC_WaterBilling_API.Model.Advance.AdvanceDTO, MVC_WaterBilling_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MVC_WaterBilling_API.Controllers.AdvanceController",
     "Method": "GetAdvance",
     "RelativePath": "api/Advance/{ConsumerID}",
     "HttpMethod": "GET",
@@ -42,6 +26,22 @@
       {
         "Name": "ConsumerID",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.AdvanceController",
+    "Method": "EditAdvance",
+    "RelativePath": "api/Advance/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -101,6 +101,149 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "EditBillingStatus",
+    "RelativePath": "api/Bill/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "DeleteBill",
+    "RelativePath": "api/Bill/{id}/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "GetBillByReading",
+    "RelativePath": "api/Bill/{id}/ReadingID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "GetMEterReadingByReferenceNumber",
+    "RelativePath": "api/Bill/{referenceNumber}/reference",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "referenceNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "GetBills",
+    "RelativePath": "api/Bill/Consumer/Billings/{UserId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "UpdateBillingStatus",
+    "RelativePath": "api/Bill/Consumers/{billID}/{Status}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "billID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Status",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "EditBillingStatusFromConsumer",
+    "RelativePath": "api/Bill/Consumers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.BillController",
+    "Method": "Search",
+    "RelativePath": "api/Bill/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -217,6 +360,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.ConsumerController",
+    "Method": "SearchCosumer",
+    "RelativePath": "api/Consumer/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
     "Method": "GetMeterReadings",
     "RelativePath": "api/Meter",
@@ -260,6 +419,32 @@
   },
   {
     "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
+    "Method": "DeleteMeterReading",
+    "RelativePath": "api/Meter/{id}/Delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
     "Method": "GetPreviousReading",
     "RelativePath": "api/Meter/{meterNumber}/Previous-Reading",
     "HttpMethod": "GET",
@@ -286,6 +471,38 @@
         "Name": "meternumber",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
+    "Method": "GetUserCount",
+    "RelativePath": "api/Meter/{ReaderId}/Reading/Count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ReaderId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.MeterController",
+    "Method": "Search",
+    "RelativePath": "api/Meter/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -333,10 +550,10 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "MVC_WaterBilling_API.Controllers.SettingsController",
-    "Method": "GetSettings",
-    "RelativePath": "api/Settings/{id}",
-    "HttpMethod": "GET",
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "UpdatePayment",
+    "RelativePath": "api/Payment/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -349,22 +566,151 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "GetConsumersPayment",
+    "RelativePath": "api/Payment/ConsumersPayment/{UserID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "GetOnlinePayments",
+    "RelativePath": "api/Payment/OnlinePayments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "GetPendingPayments",
+    "RelativePath": "api/Payment/Pending/Payments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "Search",
+    "RelativePath": "api/Payment/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "SearchOnlinePayment",
+    "RelativePath": "api/Payment/SearchPendings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "GetPayment",
+    "RelativePath": "api/Payment/totalAmount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.SettingsController",
+    "Method": "GetSettings",
+    "RelativePath": "api/Settings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MVC_WaterBilling_API.Controllers.SettingsController",
     "Method": "UpdateSettings",
-    "RelativePath": "api/Settings/{id}",
+    "RelativePath": "api/Settings",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
         "Name": "settingsDTO",
         "Type": "MVC_WaterBilling_API.Model.Settings.SettingsDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.SettingsController",
+    "Method": "UpdateQr",
+    "RelativePath": "api/Settings/UpdateQr",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "gcashName",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -450,6 +796,22 @@
   },
   {
     "ContainingType": "MVC_WaterBilling_API.Controllers.UserController",
+    "Method": "GetUserCount",
+    "RelativePath": "api/User/{User}/Count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "User",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.UserController",
     "Method": "ResetPassword",
     "RelativePath": "api/User/reset-password/{id}",
     "HttpMethod": "PUT",
@@ -481,6 +843,22 @@
         "Name": "userRole",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.UserController",
+    "Method": "SearchUsers",
+    "RelativePath": "api/User/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

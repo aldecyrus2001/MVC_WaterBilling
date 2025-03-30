@@ -7,7 +7,7 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <span>@FullName</span>
         </div>
 
         <article class="content px-4">
@@ -19,10 +19,19 @@
 
 @code {
     private string UserRole => UserStateService.UserRole;
+    private string FullName { get; set; } = "Guest";
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         UserStateService.OnChange += StateHasChanged;
+
+        var storedFullName = await sessionStorage.GetItemAsync<string>("fullName");
+
+        if (!string.IsNullOrEmpty(storedFullName))
+        {
+            FullName = storedFullName;
+            StateHasChanged();
+        }
     }
 
     public void Dispose()

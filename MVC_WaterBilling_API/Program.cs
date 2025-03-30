@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC_WaterBilling_API.Data;
 using MVC_WaterBilling_API.Services;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,10 @@ builder.Services.AddScoped<BillData>();
 builder.Services.AddScoped<ConsumerData>();
 builder.Services.AddScoped<MeterReadingData>();
 builder.Services.AddScoped<AdvanceData>();
+builder.Services.AddScoped<PaymentData>();
+builder.Services.AddScoped<SettingsData>();
+
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

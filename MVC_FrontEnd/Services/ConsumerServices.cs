@@ -3,6 +3,7 @@ using MVC_FrontEnd.URL;
 using MVC_WaterBilling_API.Services;
 using System.Net.Http.Json;
 using Newtonsoft.Json;
+using static System.Net.WebRequestMethods;
 
 namespace MVC_FrontEnd.Services
 {
@@ -16,6 +17,11 @@ namespace MVC_FrontEnd.Services
         {
             _httpClient = httpClient;
             _uRLs = uRLs;
+        }
+
+        public async Task<List<ConsumerWithUser>> GetConsumersWithUsersAsync()
+        {
+            return await _httpClient.GetFromJsonAsync<List<ConsumerWithUser>>(_uRLs.Consumer);
         }
 
 

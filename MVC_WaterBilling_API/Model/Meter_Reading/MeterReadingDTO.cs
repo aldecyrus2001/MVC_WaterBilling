@@ -11,7 +11,7 @@ namespace MVC_WaterBilling_API.Model.Meter_Reading
         public string meter_Number { get; set; }
 
         [Required(ErrorMessage = "Reader ID is required! Meter")]
-        public string readerID { get; set; } //From User Role (FieldReader)
+        public string readerID { get; set; }
         public double previous_Reading { get; set; }
 
         [Required(ErrorMessage = "Current Reading is required!")]

@@ -7,7 +7,7 @@
 		<a href="/CreateReading" class="btn btn-success p-1">Create Reading</a>
 	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
-		<input style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
 </div>
 
@@ -20,10 +20,11 @@ else
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Meter ID</th>
+				<th>Reading ID</th>
 				<th>Consumer's Name</th>
 				<th>Address</th>
 				<th>Usage</th>
+				<th>Month</th>
 				<th>Status</th>
 				<th class="text-center">Action</th>
 			</tr>
@@ -32,32 +33,72 @@ else
 			@foreach (var reading in ReadingInformations)
 			{
 				<tr>
-					<td>@reading.meterReading.ReadingID</td>
-					<td>@(reading.users.Firstname + " " + reading.users.Firstname)</td>
-					<td>@reading.consumers.Address</td>
-					<td>@reading.meterReading.Usage</td>
-					<td>@reading.meterReading.Usage</td>
+					<td>@(reading.meterReading.ReadingID)</td>
+					<td>@($"{reading.users.Firstname} {reading.users.Lastname}")</td>
+					<td>@(reading.consumers.Address)</td>
+					<td>@(reading.meterReading.Usage)</td>
+					<td>@(reading.meterReading.MonthOf)</td>
+					<td>@(reading.meterReading.Status)</td>
 					<td class="text-end" style="vertical-align: middle;">
 						<div class="d-flex justify-content-center">
-							<a href="/ReadingView?Id=@reading.meterReading.ReadingID" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">View</a>
-							<a href="/UpdateConsumer?Id=@reading.meterReading.ReadingID" class="btn btn-primary btn-sm" type="button" style="margin-right: 10px;">Update</a>
-							<a href="/Payment?Id=@reading.meterReading.ReadingID" class="btn btn-danger btn-sm" type="button" style="margin-right: 10px;">Payment</a>
+							<a href="/ReadingView?Id=@(reading.meterReading.ReadingID)" class="btn btn-success btn-sm" style="margin-right: 10px;">View</a>
+							<button @onclick="() => DeleteReading(reading.meterReading.ReadingID)" class="btn btn-danger btn-sm" style="margin-right: 10px;">Delete</button>
 						</div>
 					</td>
 				</tr>
 			}
+
 
 		</tbody>
 	</table>
 }
 
 @code {
+
 	private List<ReadingConsumerUser>? ReadingInformations;
+
+	[Inject]
+	private ReadingServices readingServices { get; set; }
+
+	[Inject]
+	private BillingService billServices { get; set; }
+
+	[Inject]
+	private IJSRuntime jsRuntime { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ReadingInformations = await Http.GetFromJsonAsync<List<ReadingConsumerUser>>(urls.Reading);
+		ReadingInformations = await readingServices.GetReadingWithUserConsumerAsync();
+	}
+
+	private async Task DeleteReading(int Id)
+	{
+		// Show confirmation alert before deleting
+		bool confirmDelete = await jsRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this reading?");
+
+		if (confirmDelete)
+		{
+			await readingServices.DeleteReadingByID(Id);
+			await billServices.DeleteBill(Id);
+			ReadingInformations = await readingServices.GetReadingWithUserConsumerAsync();
+		}
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Reading + $"/Search?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<ReadingConsumerUser>>(Urls);
+
+		if (result != null)
+		{
+			ReadingInformations = result;
+		}
+		else
+		{
+
+		}
 	}
 
 }

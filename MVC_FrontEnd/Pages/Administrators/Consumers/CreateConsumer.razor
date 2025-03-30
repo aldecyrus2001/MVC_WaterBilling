@@ -7,6 +7,8 @@
 }
 else
 {
+	<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
 	<h5 class="mb-3" id="exampleModalLabel">Apply User | @Id</h5>
 
 
@@ -69,6 +71,8 @@ else
 	public string Gender { get; set; } = string.Empty;
 	public string PhoneNumber { get; set; } = string.Empty;
 	public string EmailAddress { get; set; } = string.Empty;
+
+	private Alert? alertComponent;
 
 	[Inject]
 	private URLStringServices URLStringServices { get; set; }
@@ -133,25 +137,37 @@ else
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine("Exception : " + ex.Message);
+			await alertComponent.ShowNotification($"Error Message: {ex.Message}", false, "danger");
+
 		}
 	}
 
 	protected async Task AddConsumer()
 	{
-		Console.WriteLine(consumerData.Meter_Number);
-		var (isAdded, message) = await consumerServices.AddConsumer(consumerData);
+		bool result = await alertComponent.ShowNotification("Do you want to apply this user as consumer?", true, "success");
 
-		if (isAdded)
+		await HandleNotificationResponse(result);
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		if (response)
 		{
-			await JSRuntime.InvokeVoidAsync("alert", $"Success: {message}");
-			navManager.NavigateTo("/Consumers");
-			
-		}
-		else
-		{
-			await JSRuntime.InvokeVoidAsync("alert", $"Failed: {message}");
-			navManager.NavigateTo("/Users");
+			var (isAdded, message) = await consumerServices.AddConsumer(consumerData);
+
+			if (isAdded)
+			{
+				await alertComponent.ShowNotification("Consumer added successfully", false, "success");
+
+				navManager.NavigateTo("/Consumers");
+
+			}
+			else
+			{
+				await alertComponent.ShowNotification("Failed to add data, Please Try Again.", false, "danger");
+
+				navManager.NavigateTo("/Consumers");
+			}
 		}
 	}
 	

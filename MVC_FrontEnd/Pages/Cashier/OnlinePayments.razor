@@ -1,0 +1,335 @@
+﻿@page "/OnlinePayments";
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h5>Payments Records</h5>
+	<form method="post" class="d-flex" style="width: 300px;">
+		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
+	</form>
+</div>
+
+@if (PaymentInformation == null || !PaymentInformation.Any())
+{
+	<p><em>No Data Display...</em></p>
+}
+else
+{
+	<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Reference Number</th>
+				<th>Consumer's Name</th>
+				<th>Usage</th>
+				<th>Amount Used</th>
+				<th>Amount Pay</th>
+				<th>Pay Date</th>
+				<th style="text-align: center;">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var payment in PaymentInformation)
+			{
+				<tr>
+					<td>@(payment.payments.PaymentReferenceNumber)</td>
+					<td>@($"{payment.user.Firstname} {payment.user.Lastname}")</td>
+					<td>@payment.meterReading.Usage</td>
+					<td>@(payment.bills.Consumed_Amount)</td>
+					<td>@(payment.payments.Amount_Paid)</td>
+					<td>@payment.payments.PaymentDate</td>
+					<td class="text-end" style="vertical-align: middle;">
+						<div class="d-flex justify-content-center">
+							<button @onclick="() => ConfirmAccept(payment.payments.PaymentID, payment.bills.BillID)" class="btn btn-success btn-sm" type="button" style="margin-right: 10px;">Accept</button>
+							<button @onclick="() => ConfirmDecline(payment.payments.PaymentID, null)" class="btn btn-danger btn-sm" type="button" style="margin-right: 10px;">Decline</button>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<PaymentsWithUserConsumer>? PaymentInformation;
+	public int paymentID;
+
+	[Inject]
+	private PaymentServices paymentServices { get; set; }
+
+	[Inject]
+	private BillingService billingService { get; set; }
+
+	[Inject]
+	private AdvanceServices advanceServices { get; set; }
+
+	private PaymentsWithUserConsumer PaymentData;
+	private Advances? advanceData;
+
+	private Alert? alertComponent;
+
+
+	public double advanceAmount;
+	public double TotalAmount;
+	public double changeAmount;
+	public double totalAmounts;
+	public string PaymentStatus;
+	public int? selectedBillID;
+
+
+
+	private string FullName { get; set; } = "Guest";
+
+	protected override async Task OnInitializedAsync()
+	{
+		advanceAmount = 0;
+		TotalAmount = 0;
+		changeAmount = 0;
+		totalAmounts = 0;
+
+		PaymentInformation = await paymentServices.GetOnlinePaymentsAsync();
+
+		var storedFullName = await sessionStorage.GetItemAsync<string>("fullName");
+
+		if (!string.IsNullOrEmpty(storedFullName))
+		{
+			FullName = storedFullName;
+		}
+	}
+
+	private async Task Search(ChangeEventArgs e)
+	{
+		string searchQuery = e.Value?.ToString() ?? "";
+		string Urls = urls.Payment + $"/SearchPendings?search={searchQuery}";
+		var result = await Http.GetFromJsonAsync<List<PaymentsWithUserConsumer>>(Urls);
+
+		if (result != null)
+		{
+			PaymentInformation = result;
+		}
+		else
+		{
+
+		}
+	}
+
+	private async Task ConfirmAccept(int PaymentID, int? billID)
+	{
+		paymentID = PaymentID;
+		PaymentStatus = "Paid";
+		selectedBillID = billID;
+		bool result = await alertComponent.ShowNotification("Are you sure you want to accept this payment?", true, "success");
+
+		await HandleNotificationResponse(result);
+		DoPrint(paymentID);
+	}
+
+	private async Task ConfirmDecline(int PaymentID, int? billID)
+	{
+		paymentID = PaymentID;
+		PaymentStatus = "Declined";
+		selectedBillID = billID;
+
+		bool result = await alertComponent.ShowNotification("Are you sure you want to decline this payment?", true, "success");
+		
+		await HandleNotificationResponse(result);
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		if (response)
+		{
+			(bool isUpdated, string message, int? billId) = await paymentServices.UpdatePaymentStatus(paymentID);
+
+			if (isUpdated)
+			{
+				var (isBillUpdated, UpdateMessage) = await billingService.UpdateBillingStatus(selectedBillID, PaymentStatus);
+				if (isUpdated)
+				{
+					await alertComponent.ShowNotification($"Success: {message}", false, "success");
+
+					navManager.NavigateTo(navManager.Uri, forceLoad: true);
+				}
+				
+			}
+		}
+	}
+
+
+	private bool UseDefaultPrinter = true;
+	private async void DoPrint(int PaymentID)
+	{
+		if (PaymentID > 0)
+		{
+			PaymentData = await paymentServices.GetPaymentByIdAsync(PaymentID);
+			if (PaymentData != null)
+			{
+				PaymentData ??= new PaymentsWithUserConsumer();
+				try
+				{
+					advanceData = await advanceServices.getAdvanceWithConsumerID(PaymentData.consumer.ConsumerID);
+					StateHasChanged();
+
+					TotalAmount = PaymentData.bills.Consumed_Amount - advanceAmount;
+					totalAmounts = TotalAmount;
+				}
+				catch (Exception ex)
+				{
+					if (ex is System.Net.Http.HttpRequestException httpException && httpException.StatusCode == System.Net.HttpStatusCode.NotFound)
+					{
+						advanceAmount = 0;
+						TotalAmount = PaymentData.bills.Consumed_Amount;
+						totalAmounts = TotalAmount;
+					}
+					else
+					{
+						await alertComponent.ShowNotification($"Error: {ex.Message}", false, "danger");
+
+					}
+				}
+
+				changeAmount = PaymentData.payments.Amount_Paid - PaymentData.bills.Consumed_Amount;
+			}
+		}
+		if (JSPrintManager.Status == JSPMWSStatus.Open)
+		{
+			var cpj = new ClientPrintJob();
+
+			cpj.ClientPrinter = new DefaultPrinter();
+
+			var esc = (char)0x1B; 
+			var newLine = (char)0x0A;
+			var alignLeft = esc + "a" + (char)0;
+			var alignCenter = esc + "a" + (char)1; 
+			var alignRight = esc + "a" + (char)2; 
+
+
+			var cmds = esc + "@"; 
+			cmds += esc + "!" + (char)0x38; 
+			cmds += alignCenter + "PAYMENT INVOICE"; 
+			cmds += newLine;
+			cmds += esc + "!" + (char)0x00;
+			cmds += newLine;
+			cmds += alignLeft + $"Date: {DateOnly.FromDateTime(DateTime.Now)}";
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignLeft + $"Account No. {PaymentData.consumer.ConsumerID}";
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += newLine;
+			cmds += alignLeft + $"NAME : {PaymentData.user.Firstname}, {PaymentData.user.Firstname}";
+			cmds += newLine;
+			cmds += alignLeft + $"Connection Type: {PaymentData.consumer.ConnectionType}";
+			cmds += newLine;
+			cmds += alignLeft + $"Address : {PaymentData.consumer.Address}";
+			cmds += newLine;
+			cmds += alignLeft + $"Meter Number : {PaymentData.consumer.Meter_Number}";
+			cmds += newLine;
+			cmds += alignLeft + $"Bill Number : {PaymentData.bills.BillID}";
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignLeft + "From: " + PaymentData.bills.From;
+			cmds += newLine;
+			cmds += alignLeft + "To: " + PaymentData.bills.To;
+			cmds += newLine;
+			cmds += alignLeft + "Due Date: " + PaymentData.bills.DueDate;
+			cmds += newLine;
+			cmds += alignLeft + "Month Of: " + PaymentData.meterReading.MonthOf;
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignLeft + "Prev. Rdg: " + PaymentData.meterReading.Previous_Reading;
+			cmds += newLine;
+			cmds += alignLeft + "Pres. Rdg: " + PaymentData.meterReading.Current_Reading;
+			cmds += newLine;
+			cmds += alignLeft + "Usage: " + PaymentData.meterReading.Usage + " m3";
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignLeft + "Mode of Payment: " + PaymentData.payments.PaymentMethod;
+			cmds += newLine;
+			cmds += alignLeft + "Current Bill: " + PaymentData.bills.Consumed_Amount;
+			cmds += newLine;
+			cmds += alignLeft + "Advance: " + advanceAmount;
+			cmds += newLine;
+			cmds += alignLeft + "Penalty: " + PaymentData.payments.PenaltyIncluded;
+			cmds += newLine;
+			cmds += esc + "!" + (char)0x38;
+			cmds += alignLeft + "Total: " + totalAmounts;
+			cmds += newLine;
+			cmds += alignLeft + "Paid: " + PaymentData.payments.Amount_Paid;
+			cmds += newLine;
+			cmds += alignLeft + "Change: " + changeAmount;
+			cmds += esc + "!" + (char)0x00;
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignLeft + "Cashier Information";
+			cmds += newLine;
+			cmds += alignLeft + FullName;
+			cmds += newLine;
+			cmds += alignCenter + "==============================";
+			cmds += newLine;
+			cmds += alignCenter + $"Thank you!";
+			cmds += newLine;
+			cmds += newLine;
+			cmds += newLine;
+			cmds += newLine;
+			cmds += newLine;
+
+
+			cpj.PrinterCommands = cmds;
+			JSPrintManager.SendClientPrintJob(cpj);
+
+			await JSRuntime.InvokeVoidAsync("location.reload");
+		}
+
+		
+
+	}
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		if (firstRender)
+		{
+			// Handle OnGetPrinters event...
+			JSPrintManager.OnGetPrinters += async () =>
+			{
+				if (JSPrintManager.Printers != null &&
+					JSPrintManager.Printers.Length > 0)
+				{
+					// Display installed printers...
+					StateHasChanged();
+				}
+				else
+				{
+					await alertComponent.ShowNotification("No printers found...", false, "danger");
+
+				}
+
+			};
+
+			// Handle OnStatusChanged event to detect any WSS status change
+			JSPrintManager.OnStatusChanged += () =>
+			{
+				StateHasChanged();
+
+				// Status = Open means that JSPM Client App is up and running!
+				if (JSPrintManager.Status == JSPMWSStatus.Open)
+				{
+					//Try getting local printers...
+					JSPrintManager.TryGetPrinters();
+				}
+			};
+
+			// Start WebSocket comm
+			JSPrintManager.Start();
+		}
+
+		base.OnAfterRender(firstRender);
+	}
+
+
+}

@@ -23,17 +23,20 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(meters);
         }
 
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMeterReading(int id)
         {
             var meterReading = await _meterReadingData.GetMeterReadingsAsync(id);
-            if(meterReading == null)
+            if (meterReading == null)
             {
                 return NotFound();
             }
 
             return Ok(meterReading);
         }
+
+        
 
         [HttpGet("{meternumber}/Search")]
         public async Task<IActionResult> GetMeterReadingByMeterNumber(string meternumber)
@@ -46,6 +49,8 @@ namespace MVC_WaterBilling_API.Controllers
 
             return Ok(meterReading);
         }
+
+        
 
 
         [HttpGet("{meterNumber}/Previous-Reading")]
@@ -70,6 +75,7 @@ namespace MVC_WaterBilling_API.Controllers
                 Previous_Reading = meterReadingDTO.previous_Reading,
                 Current_Reading = meterReadingDTO.current_Reading,
                 Usage = meterReadingDTO.usage,
+                MonthOf = meterReadingDTO.MonthOf,
                 Status = "Unpaid",
                 Reading_Date = DateTime.Now
             };
@@ -80,7 +86,7 @@ namespace MVC_WaterBilling_API.Controllers
             {
                 return BadRequest(new
                 {
-                    message = "Invalid Action, Meter Number Has Been Issued Reciept!."
+                    message = "Invalid Action, Meter Number Has Been Issued Reciept, Or Reference number already been deployed!."
                 });
             }
             else
@@ -93,6 +99,41 @@ namespace MVC_WaterBilling_API.Controllers
             }
 
             
+        }
+
+        [HttpDelete("{id}/Delete")]
+        public async Task<bool> DeleteMeterReading(int id)
+        {
+            var meterReading = await _meterReadingData.GetMeterReadingsAsync(id);
+
+            if (meterReading == null)
+            {
+                return false;
+            }
+
+            await _meterReadingData.DeleteMeterReadingAsync(id);
+
+            return true;
+        }
+
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search([FromQuery] string? search = null)
+        {
+            var users = await _meterReadingData.SearchAsync(search);
+            return Ok(users);
+        }
+
+        [HttpGet("{ReaderId}/Reading/Count")]
+        public async Task<IActionResult> GetUserCount(string ReaderId)
+        {
+            var userCount = await _meterReadingData.GetCountByReader(ReaderId);
+
+            if (userCount == 0)
+            {
+                return NotFound("No users found with this role.");
+            }
+
+            return Ok(userCount);
         }
 
     }

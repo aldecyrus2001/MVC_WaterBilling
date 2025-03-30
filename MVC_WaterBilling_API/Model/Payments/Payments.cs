@@ -3,7 +3,7 @@
     public class Payments
     {
         public int PaymentID { get; set; }
-        public string BillID { get; set; }
+        public int BillID { get; set; }
         public string CashierID { get; set; } //From User Role (Cashier)
         public double Amount_Paid { get; set; }
         public double Change { get; set; }
@@ -12,5 +12,6 @@
         public DateOnly PaymentDate { get; set; }
         public string PaymentMethod { get; set; } //Bank Transfer, Cash, GCash
         public string? Remarks { get; set; }
+        public string? PaymentReferenceNumber { get; set; }
     }
 }

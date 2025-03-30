@@ -11,50 +11,50 @@ else {
         <div class="row g-2 mb-2">
             <div class="col">
                 <label for="Previous" class="form-label">First Name</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Firstname" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.Firstname" disabled />
             </div>
 
             <div class="col">
                 <label for="Previous" class="form-label">Middle Name</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Middlename" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.Middlename" disabled />
             </div>
 
             <div class="col">
                 <label for="Previous" class="form-label">Last Name</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Lastname" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.Lastname" disabled />
             </div>
 
         </div>
         <div class="row g-2 mb-2">
             <div class="col">
                 <label for="Previous" class="form-label">Gender</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Gender" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.Gender" disabled />
             </div>
 
             <div class="col">
                 <label for="Previous" class="form-label">PhoneNumber</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.PhoneNumber" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.PhoneNumber" disabled />
             </div>
 
             <div class="col">
                 <label for="Previous" class="form-label">Email Address</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.users.Email" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="userData.Email" disabled />
             </div>
         </div>
         <div class="row g-2 mb-2">
             <div class="col">
                 <label for="Previous" class="form-label">Meter Number</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Meter_Number" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="readingData.Meter_Number" disabled />
             </div>
             <div class="col">
                 <label for="Previous" class="form-label">Date Connection</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Connection_Date" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="consumersData.Connection_Date" disabled />
             </div>
             <div class="col">
                 <label for="Previous" class="form-label">Address</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.consumers.Address" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="consumersData.Address" disabled />
             </div>
-            
+
         </div>
     </div>
 
@@ -65,75 +65,81 @@ else {
         <div class="row g-2 mb-2">
             <div class="col">
                 <label for="Previous" class="form-label">Previous Reading</label>
-                <input type="text" id="Previous" class="form-control" @bind="readingData.meterReading.Previous_Reading" disabled />
+                <input type="text" id="Previous" class="form-control" @bind="readingData.Previous_Reading" disabled />
             </div>
 
             <div class="col">
                 <label for="Current" class="form-label">Current Reading</label>
-                <input type="text" id="Current" class="form-control" @bind="readingData.meterReading.Current_Reading"  disabled/>
+                <input type="text" id="Current" class="form-control" @bind="readingData.Current_Reading"  disabled/>
             </div>
 
             <div class="col">
                 <label for="Usage" class="form-label">Usage</label>
-                <input type="text" id="Usage" class="form-control" @bind="readingData.meterReading.Usage" disabled />
+                <input type="text" id="Usage" class="form-control" @bind="readingData.Usage" disabled />
             </div>
 
             <div class="col">
                 <label for="Usage" class="form-label">Month Of</label>
-                <input type="text" id="Usage" class="form-control" @bind="readingData.meterReading.MonthOf" disabled />
+                <input type="text" id="Usage" class="form-control" @bind="readingData.MonthOf" disabled />
             </div>
 
-            <div class="col">
-                <label for="DateBilled" class="form-label">Bill Date</label>
-                <input type="date" id="DateBilled" class="form-control" @bind="billReading.Bills.BillDate" disabled/>
-            </div>
+            @if(billsData == null) {
+
+            }else 
+            {
+                <div class="col">
+                    <label for="DateBilled" class="form-label">Bill Date</label>
+                    <input type="date" id="DateBilled" class="form-control" @bind="billsData.BillDate" disabled />
+                </div>
+            }
+
+            
 
         </div>
 
-        <div class="row g-2 mb-2">
-            <div class="col">
-                <label for="Previous" class="form-label">Consumed Amount</label>
-                <input type="text" id="Previous" class="form-control" @bind="billReading.Bills.Consumed_Amount" disabled />
+        @if (billsData == null)
+        {
+
+        }
+        else
+        {
+            <div class="row g-2 mb-2">
+                <div class="col">
+                    <label for="Previous" class="form-label">Consumed Amount</label>
+                    <input type="text" id="Previous" class="form-control" @bind="billsData.Consumed_Amount" disabled />
+                </div>
+
+                <div class="col">
+                    <label for="Current" class="form-label">From Date</label>
+                    <input type="date" id="Current" class="form-control" @bind="billsData.From" disabled />
+                </div>
+
+                <div class="col">
+                    <label for="To" class="form-label">To Date</label>
+                    <input type="date" id="To" class="form-control" @bind="billsData.To" disabled />
+                </div>
+
+                <div class="col">
+                    <label for="DueDate" class="form-label">Due Date</label>
+                    <input type="date" id="DueDate" class="form-control" @bind="billsData.DueDate" disabled />
+                </div>
+
+
             </div>
+        }
 
-            <div class="col">
-                <label for="Current" class="form-label">From Date</label>
-                <input type="date" id="Current" class="form-control" @bind="billReading.Bills.From" disabled/>
-            </div>
-
-            <div class="col">
-                <label for="To" class="form-label">To Date</label>
-                <input type="date" id="To" class="form-control" @bind="billReading.Bills.To" disabled/>
-            </div>
-
-            <div class="col">
-                <label for="DueDate" class="form-label">Due Date</label>
-                <input type="date" id="DueDate" class="form-control" @bind="billReading.Bills.DueDate" disabled/>
-            </div>
-
-            <div class="col">
-                <label for="Advance" class="form-label">Advance</label>
-                <input type="text" id="Advance" class="form-control" @bind="advanceAmount" disabled />
-            </div>
-
-        </div>
-
-        <a href="/Reading" class="btn btn-succes">Close</a>
+        <a href="/Readings" class="btn btn-succes">Close</a>
 
     </div>
 }
 
 @code {
     public int? Id;
-    private ReadingConsumerUser? readingData;
+    private Reading? readingData;
+    private Consumers? consumersData;
+    private Users? userData;
+    private Bills? billsData;
 
-    private ReadingWithBilling? billReading = new()
-        {
-            Reading = new Reading(),
-            Bills = new Bills()
-        };
-
-    public double advanceAmount;
 
     [Inject]
     private URLStringServices URLStringServices { get; set; }
@@ -142,15 +148,67 @@ else {
     private ReadingServices readingServices { get; set; }
 
     [Inject]
+    private ConsumerServices consumerServices { get; set; }
+
+    [Inject]
+    private UsersServices usersServices { get; set; }
+
+    [Inject]
     private BillingService? billingService { get; set; }
 
     [Inject]
     private AdvanceServices advanceServices { get; set; }
 
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
         Id = URLStringServices.GetURLStringValueAsInt("id");
-        
+        await Task.CompletedTask;
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            if (Id.HasValue)
+            {
+                readingData = await readingServices.GetReadingByID(Id.Value);
+
+                if (readingData != null)
+                {
+                    consumersData = await consumerServices.GetConsumerByMeterNumber(readingData.Meter_Number);
+
+                    if (consumersData != null && int.TryParse(consumersData.UserID, out int userId))
+                    {
+                        userData = await usersServices.GetUserByIdAsync(userId);
+
+                        if(readingData != null) 
+                        {
+                            billsData = await billingService.GetBillingByReadingID(readingData.ReadingID);
+
+                        }
+                        else 
+                        {
+                            Console.WriteLine($"No reading data found for ID: {Id.Value}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid UserID format or Consumer data is null.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"No reading data found for ID: {Id.Value}");
+                }
+
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error Exception: {ex.Message}\nStackTrace: {ex.StackTrace}");
+        }
+    }
+
 }

@@ -53,38 +53,31 @@ namespace MVC_WaterBilling_API.Controllers
             });
         }
 
-        [HttpPut]
-        public async Task<IActionResult> EditAdvance([FromBody] List<AdvanceDTO> advanceDTOs)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditAdvance(int id)
         {
-            if (advanceDTOs == null || !advanceDTOs.Any())
+            if (id <= 0)
             {
-                return BadRequest(new { message = "No advances provided for update." });
+                return BadRequest(new { message = "Advance ID is required." });
             }
 
-            var advancesToUpdate = new List<Advances>();
+            var advance = await _advanceData.GetAdvanceAsync(id);
 
-            foreach (var advanceDTO in advanceDTOs)
+            if (advance == null)
             {
-                var advance = await _advanceData.GetAdvanceAsync(advanceDTO.AdvanceID);
-
-                if (advance == null)
-                {
-                    return NotFound(new { message = $"Advance with ID {advanceDTO.AdvanceID} not found." });
-                }
-
-                advance.Status = "Used";
-                advance.DateUsed = DateTime.Now;
-
-                advancesToUpdate.Add(advance);
+                return NotFound(new { 
+                    message = $"Advance with ID {id} not found." ,
+                    status = false
+                });
             }
 
-            // Bulk update all changes
-            await _advanceData.UpdateMultipleAdvanceStatusAsync(advancesToUpdate);
+            advance.Status = "Used";
+            advance.DateUsed = DateTime.Now;
 
-            return Ok(new
-            {
-                message = "Advances updated successfully!"
-            });
+            await _advanceData.UpdateAdvanceStatusAsync(advance);
+
+            return Ok(new { message = "Advance updated successfully!" });
         }
+
     }
 }

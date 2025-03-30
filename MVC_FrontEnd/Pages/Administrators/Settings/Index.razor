@@ -1,0 +1,133 @@
+﻿@page "/Settings";
+@inject IJSRuntime JS
+
+@if (settingsData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
+    <h5 class="mb-3" id="exampleModalLabel">Settings</h5>
+
+    <div class="row g-2 mb-2">
+        <div class="col">
+            <label for="SystemName" class="form-label">System Name</label>
+            <input type="text" id="SystemName" class="form-control" @bind="settingsData.SystemName" />
+        </div>
+
+        <div class="col">
+            <label for="cubicPrice" class="form-label">Price Per Cubic</label>
+            <input type="text" id="cubicPrice" class="form-control" @bind="settingsData.AmountPerCubic" />
+        </div>
+    </div>
+
+    <div class="row g-2 mb-2">
+        <div class="col">
+            <label for="SystemName" class="form-label">Gcash Name</label>
+            <input type="text" id="SystemName" class="form-control" @bind="settingsData.Gcash_Name" />
+        </div>
+
+        <div class="col">
+            <label for="gcashQr" class="form-label">Upload QR Code</label>
+
+            <div class="border p-3 text-center" style="cursor: pointer; border-radius: 10px;" @onclick="TriggerFileInput">
+                @if (string.IsNullOrEmpty(ImagePreview) && settingsData?.GcashQr != null && settingsData.GcashQr.Length > 0)
+                {
+                    <!-- Display Image from Database -->
+                    <img src="data:image/png;base64,@Convert.ToBase64String(settingsData.GcashQr)"
+                         class="img-fluid" alt="QR Code Preview" style="max-width: 200px; height: auto;" />
+                }
+                else if (!string.IsNullOrEmpty(ImagePreview))
+                {
+                    <!-- Display Uploaded Image -->
+                    <img src="@ImagePreview" class="img-fluid" alt="QR Code Preview" style="max-width: 200px; height: auto;" />
+                }
+                else
+                {
+                    <!-- Default Message -->
+                    <p>Click to upload QR Code</p>
+                }
+            </div>
+
+            <InputFile id="fileInput" OnChange="UploadImage" accept="image/*" style="display: none;" />
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success" @onclick="UpdateSettingsData">Update</button>
+    </div>
+}
+
+@code {
+    public Settings? settingsData;
+    private string? ImagePreview { get; set; }
+    private byte[]? GcashQr { get; set; }
+    private ElementReference fileInputRef;
+
+    private Alert? alertComponent;
+
+
+
+    [Inject]
+    private SettingsServices settingsServices { get; set; }
+
+    protected override async void OnInitialized()
+    {
+        await Task.CompletedTask;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        settingsData = await settingsServices.GetSettings();
+    }
+
+    protected async Task UpdateSettingsData()
+    {
+        bool result = await alertComponent.ShowNotification("Do you want to update the settings?", true, "success");
+
+        await HandleNotificationResponse(result);
+        
+    }
+
+    private async Task UploadImage(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file != null)
+        {
+            using var stream = file.OpenReadStream();
+            var buffer = new byte[file.Size];
+            await stream.ReadAsync(buffer);
+
+            GcashQr = buffer; // Store image as byte array
+            ImagePreview = $"data:image/png;base64,{Convert.ToBase64String(buffer)}"; // Convert to preview
+        }
+    }
+
+    private async Task TriggerFileInput()
+    {
+        await JS.InvokeVoidAsync("eval", "document.getElementById('fileInput').click()");
+    }
+
+    private async Task HandleNotificationResponse(bool response)
+    {
+        if (response)
+        {
+            bool isUpdated = await settingsServices.UpdateSettingsASync(settingsData);
+
+            if (isUpdated)
+            {
+                navManager.NavigateTo(navManager.Uri, forceLoad: true);
+            }
+            else
+            {
+                await alertComponent.ShowNotification("Failed to update data, Please Try Again.", false, "danger");
+
+            }
+        }
+    }
+
+
+
+}

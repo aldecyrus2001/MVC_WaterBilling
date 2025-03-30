@@ -1,6 +1,6 @@
 ﻿<div class="col">
     <label for="@Id" class="form-label">@Label</label>
-    <select id="@Id" class="form-select" @bind="@SelectedValue">
+    <select id="@Id" class="form-select" @bind="@SelectedValue" disabled="@isDisabled">
         <option value="n/a" disabled>-- Please Select @Label --</option>
         @if (Options != null)
         {
@@ -17,5 +17,6 @@
     [Parameter] public string Label { get; set; } = "Select";
     [Parameter] public List<SelectOptions> Options { get; set; } = new List<SelectOptions>();
     [Parameter] public string SelectedValue { set; get; }
-    
+    [Parameter] public bool isDisabled { get; set; } = true;
+
 }

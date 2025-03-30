@@ -6,6 +6,8 @@
 }
 else
 {
+	<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
 	<h5 class="mb-3" id="exampleModalLabel">Apply User | @Id</h5>
 
 
@@ -60,6 +62,9 @@ else
 	public int? Id { set; get; }
 	private ConsumerWithUser? consumerData;
 
+	private Alert? alertComponent;
+
+
 	[Inject]
 	private URLStringServices URLStringServices { get; set; }
 
@@ -92,22 +97,35 @@ else
 		}
 		catch (Exception ex)
 		{
-			Console.WriteLine($"Error Exception : {ex.Message}");
+			await alertComponent.ShowNotification($"Error Message: {ex.Message}", false, "danger");
+
 		}
 	}
 
 	protected async Task UpdateConsumerData()
 	{
-		bool isUpdated = await consumerServices.UpdateConsumerDataASync(Id.Value, consumerData);
+		bool result = await alertComponent.ShowNotification("Do you want to update this consumer?", true, "success");
 
-		if(isUpdated)
+		await HandleNotificationResponse(result);
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		if (response)
 		{
-			Console.WriteLine("Updated Successfully!");
-			navManager.NavigateTo("/Consumers");
-		}
-		else
-		{
-			Console.WriteLine("Update Failed");
+			bool isUpdated = await consumerServices.UpdateConsumerDataASync(Id.Value, consumerData);
+
+			if (isUpdated)
+			{
+				await alertComponent.ShowNotification("Updated Successfully", false, "success");
+
+				navManager.NavigateTo("/Consumers");
+			}
+			else
+			{
+				await alertComponent.ShowNotification("Failed to update data, Please Try Again.", false, "danger");
+				navManager.NavigateTo("/Consumers");
+			}
 		}
 	}
 }

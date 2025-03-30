@@ -28,6 +28,7 @@ namespace MVC_WaterBilling_API.Model.User
         public string Role { get; set; } //Administrator, Consumer, Cashier, FieldReader
 
         public string? Token { get; set; } //Used to access the website as Authorization
+        public string? Applied { get; set; }
     }
 
     public class UserUpdateDTO

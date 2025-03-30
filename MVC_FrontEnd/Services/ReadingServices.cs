@@ -17,10 +17,29 @@ namespace MVC_FrontEnd.Services
             _urls = urls;
         }
 
+        public async Task<List<ReadingConsumerUser>> GetReadingWithUserConsumerAsync()
+        {
+            return await _httpClient.GetFromJsonAsync<List<ReadingConsumerUser>>(_urls.Reading);
+        }
+
+        public async Task<Reading> GetReadingByID(int Id)
+        {
+            var url = $"{_urls.Reading}/{Id}";
+            return await _httpClient.GetFromJsonAsync<Reading>(url);
+        }
+
         public async Task<Reading> GetReadingByMeterNumber(string meterNumber)
         {
             var url = $"{_urls.Reading}/{meterNumber}/search";
             return await _httpClient.GetFromJsonAsync<Reading>(url);
+        }
+
+        public async Task<bool> DeleteReadingByID(int Id)
+        {
+            var url = $"{_urls.Reading}/{Id}/Delete";
+            var response = await _httpClient.DeleteAsync(url);
+
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<(bool isSuccess, string Message)> InitializedReading(Consumers consumerData)

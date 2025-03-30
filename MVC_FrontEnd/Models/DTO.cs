@@ -14,6 +14,7 @@
         public string Status { get; set; } //Deleted, Active
         public string Role { get; set; } //Administrator, Consumer, Cashier, FieldReader
         public string? Token { get; set; } //Used to access the website as Authorization
+        public string? Applied { get; set; }
     }
 
     public class Consumers
@@ -25,6 +26,8 @@
         public string Connection_Date { get; set; } //XXXX-XXXX-XXXX-XXXX
         public string Meter_Number { get; set; }
         public string Consumer_Status { get; set; } //Disconnected, Connected
+
+        public Users User { get; set; }
     }
 
     public class Reading
@@ -42,9 +45,10 @@
 
     public class Bills
     {
-        public int BillID { get; set; } = 0;
-        public string ReadingID { get; set; } = string.Empty;
-        public double Consumed_Amount { get; set; } = 0; //The total amount consumed by the consumers
+        public int? BillID { get; set; }
+        public string ReferenceNumber { get; set; }
+        public int ReadingID { get; set; }
+        public double Consumed_Amount { get; set; } //The total amount consumed by the consumers
         public DateOnly From { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public DateOnly To { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public DateOnly DueDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
@@ -55,13 +59,37 @@
 
     public class Advances
     {
-        public int AdvanceID { get; set; }
+        public string AdvanceID { get; set; }
         public string ConsumerID { get; set; }
         public double Amount { get; set; } // Advance Amount
         public DateTime DateInserted { get; set; }
         public DateTime? DateUsed { get; set; }
         public string Status { get; set; } //Used or Unused
         public double totalAmount { get; set; }
+    }
+
+    public class Payments
+    {
+        public int PaymentID { get; set; }
+        public int? BillID { get; set; }
+        public string CashierID { get; set; } //From User Role (Cashier)
+        public double Amount_Paid { get; set; }
+        public double Change { get; set; }
+        public double PenaltyIncluded { get; set; } = 0; //Get From Penalty from Settings table
+        public string? AdvanceIncluded { get; set; } //Insert Advance ID from advance table
+        public DateOnly PaymentDate { get; set; }
+        public string PaymentMethod { get; set; } //Bank Transfer, Cash, GCash
+        public string? Remarks { get; set; }
+        public string? PaymentReferenceNumber { get; set; }
+    }
+
+    public class Settings
+    {
+        public int SettingID { get; set; }
+        public string? SystemName { get; set; }
+        public double AmountPerCubic { get; set; }
+        public byte[]? GcashQr { get; set; }
+        public string? Gcash_Name { get; set; }
     }
 
     public class ConsumerWithUser
@@ -89,5 +117,14 @@
     {
         public Reading Reading { get; set; }
         public Bills Bills { get; set; }
+    }
+
+    public class PaymentsWithUserConsumer
+    {
+        public Payments payments { get; set; }
+        public Consumers consumer { get; set; }
+        public Users user { get; set; }
+        public Reading meterReading { get; set; }
+        public Bills bills { get; set; }
     }
 }

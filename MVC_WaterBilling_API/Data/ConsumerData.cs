@@ -14,39 +14,36 @@ namespace MVC_WaterBilling_API.Data
             _db = db;
         }
 
-        public async Task<List<ConsumerWithUserDTO>> GetConsumersAsync()
+        public async Task<List<ConsumerWithUser>> GetConsumersWithUsersAsync()
         {
-            return await _db.Consumers
-                .Where(c => c.Consumer_Status != "Disconnected")
-                .Join(
-                    _db.Users,
-                    consumer => consumer.UserID,
-                    user => user.UserID.ToString(),
-                    (consumer, user) => new ConsumerWithUserDTO
-                    {
-                        Consumer = consumer,
-                        User = user
-                    }
-                )
-                .OrderByDescending(c => c.Consumer.ConsumerID)
-                .ToListAsync();
+            var result = await (from c in _db.Consumers
+                                where c.Consumer_Status != "Disconnected"
+                                join u in _db.Users on c.UserID equals u.UserID.ToString()
+                                select new ConsumerWithUser
+                                {
+                                    Consumer = c,
+                                    User = u
+                                }).ToListAsync();
+            return result;
         }
 
-        public async Task<ConsumerWithUserDTO?> GetConsumerByIdAsync(int id)
+
+        public async Task<Consumers?> GetConsumerByIdAsync(int id)
         {
-            return await _db.Consumers
-                .Where(c => c.ConsumerID == id)
-                .Join(
-                    _db.Users,
-                    consumer => consumer.UserID,
-                    user => user.UserID.ToString(),
-                    (consumer, user) => new ConsumerWithUserDTO
-                    {
-                        Consumer = consumer,
-                        User = user
-                    }
-                )
-                .FirstOrDefaultAsync();
+            return await _db.Consumers.FindAsync(id);
+        }
+
+        public async Task<ConsumerWithUser?> GetConsumerWithUserAsync(int consumerId)
+        {
+            var result = await (from c in _db.Consumers
+                                join u in _db.Users on c.UserID equals u.UserID.ToString()
+                                where c.ConsumerID == consumerId
+                                select new ConsumerWithUser
+                                {
+                                    Consumer = c,
+                                    User = u
+                                }).FirstOrDefaultAsync();
+            return result;
         }
 
         public async Task<Consumers?> GetConsumerByMeterNumberAsync(string meterNumber)
@@ -102,5 +99,39 @@ namespace MVC_WaterBilling_API.Data
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<ConsumerWithUser>> SearchConsumerAsync(string searchQuery)
+        {
+            var query = from c in _db.Consumers
+                        join u in _db.Users on c.UserID equals u.UserID.ToString()
+                        where u.Status != "Deleted"
+                        select new ConsumerWithUser
+                        {
+                            Consumer = c,
+                            User = u
+                        };
+
+            if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                searchQuery = searchQuery.ToLower().Trim(); // Normalize input
+
+                query = query.Where(cu =>
+                    cu.User.UserID.ToString().Contains(searchQuery) ||
+                    cu.User.Firstname.ToLower().Contains(searchQuery) ||
+                    cu.User.Middlename.ToLower().Contains(searchQuery) ||
+                    cu.User.Lastname.ToLower().Contains(searchQuery) ||
+                    cu.User.Gender.ToLower().Contains(searchQuery) ||
+                    cu.User.PhoneNumber.Contains(searchQuery) ||
+                    cu.User.Email.ToLower().Contains(searchQuery) ||
+                    cu.User.Role.ToLower().Contains(searchQuery) ||
+                    cu.Consumer.ConsumerID.ToString().Contains(searchQuery) || // Search in Consumer
+                    cu.Consumer.Meter_Number.Contains(searchQuery) ||
+                    cu.Consumer.Address.ToLower().Contains(searchQuery)
+                );
+            }
+
+            return await query.OrderByDescending(cu => cu.User.UserID).ToListAsync();
+        }
+
     }
+
 }

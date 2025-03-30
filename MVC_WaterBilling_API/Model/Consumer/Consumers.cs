@@ -1,4 +1,6 @@
-﻿namespace MVC_WaterBilling_API.Model.Consumer
+﻿using MVC_WaterBilling_API.Model.User;
+
+namespace MVC_WaterBilling_API.Model.Consumer
 {
     public class Consumers
     {
@@ -9,6 +11,8 @@
         public DateTime Connection_Date { get; set; } //XXXX-XXXX-XXXX-XXXX
         public string Meter_Number { get; set; }
         public string Consumer_Status { get; set; } //Disconnected, Connected
+
+
     }
 
 }

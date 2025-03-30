@@ -1,0 +1,91 @@
+﻿@page "/ConsumersPayment";
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+	<h5>Payments Records</h5>
+
+</div>
+
+@if (PaymentInformation == null || !PaymentInformation.Any())
+{
+	<p><em>No Data...</em></p>
+}
+else
+{
+	<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Reference Number</th>
+				<th>Consumer's Name</th>
+				<th>Usage</th>
+				<th>Amount Used</th>
+				<th>Amount Pay</th>
+				<th>Paid Date</th>
+				<th>Payment Method</th>
+				<th>Payment Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var payment in PaymentInformation)
+			{
+				<tr>
+					<td>@(payment.bills.ReferenceNumber)</td>
+					<td>@($"{payment.user.Firstname} {payment.user.Lastname}")</td>
+					<td>@payment.meterReading.Usage</td>
+					<td>@(payment.bills.Consumed_Amount)</td>
+					<td>@(payment.payments.Amount_Paid)</td>
+					<td>@payment.payments.PaymentDate</td>
+					<td>@payment.payments.PaymentMethod</td>
+					<td>@payment.payments.Remarks</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+	private List<PaymentsWithUserConsumer>? PaymentInformation;
+	private string UserId { get; set; }
+
+	private Alert? alertComponent;
+	private bool alertTriggered = false;
+
+	[Inject]
+	private PaymentServices paymentServices { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		var storedFullName = await sessionStorage.GetItemAsync<string>("userId");
+
+		if (!string.IsNullOrEmpty(storedFullName))
+		{
+			UserId = storedFullName;
+		}
+
+		PaymentInformation = await paymentServices.GetConsumersPaymentWithUserConsumersAsync(UserId);
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (!alertTriggered && alertComponent != null)
+		{
+			alertTriggered = true;
+
+			await alertComponent.ShowNotification(
+				"If your payment was declined, please go to the office for the refund and further instructions. Thank you!",
+				false,
+				"success"
+			);
+
+			StateHasChanged();
+		}
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		
+	}
+
+	
+}

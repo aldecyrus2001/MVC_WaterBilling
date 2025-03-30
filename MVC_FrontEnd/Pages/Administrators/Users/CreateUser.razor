@@ -2,6 +2,8 @@
 
 <h5 class="mb-3" id="exampleModalLabel">Create User</h5>
 
+<Alert @ref="alertComponent" OnNotificationResponse="HandleNotificationResponse" />
+
 <div class="row g-2 mb-2">
 	<InputComponent InputType="text" InputID="FirstName" IsDisabled="false" label="First Name" @bind-Value="userData.Firstname" />
 	<InputComponent InputType="text" InputID="MiddleName" IsDisabled="false" label="Middle Name" @bind-Value="userData.Middlename" />
@@ -68,6 +70,8 @@
 	public List<SelectOptions> GenderOptions { get; set; }
 	public List<SelectOptions> PositionOptions { get; set; }
 
+	private Alert? alertComponent;
+
 	protected override async void OnInitialized()
 	{
 		GenderOptions = componentServices.GenderOptions;
@@ -76,40 +80,40 @@
 
 	protected async Task AddUser()
 	{
+		bool result = await alertComponent.ShowNotification("Do you want to Add this User?", true, "success");
 
-		if (userData.Password != confirmPassword)
+		await HandleNotificationResponse(result);
+	}
+
+	private async Task HandleNotificationResponse(bool response)
+	{
+		if (response)
 		{
-			Console.WriteLine("Password Mismatch!");
-			JSRuntime.InvokeVoidAsync("Alert", "Password Mismatch");
-		}
-		else if(userData.Password == null){
-			Console.WriteLine("Password Empty");
-			JSRuntime.InvokeVoidAsync("Alert", "Password Empty");
-
-		}
-		else
-		{
-			bool isAdded = await usersServices.AddUsers(userData);
-
-			if (isAdded)
+			if (userData.Password != confirmPassword)
 			{
-				// toastService.ShowSuccess("Data inserted successfully!");
-				JSRuntime.InvokeVoidAsync("Alert", "Data inserted successfully!");
+				await alertComponent.ShowNotification("Password Mismatch!", false, "danger");
+			}
+			else if (userData.Password == null)
+			{
+				await alertComponent.ShowNotification("Password Empty!", false, "danger");
 
-				navManager.NavigateTo("/Users");
 			}
 			else
 			{
-				JSRuntime.InvokeVoidAsync("Alert", "Failed to insert user!");
-				toastService.ShowError("Failed to insert user!");
+				bool isAdded = await usersServices.AddUsers(userData);
+
+				if (isAdded)
+				{
+					await alertComponent.ShowNotification("Data inserted successfully!", false, "success");
+
+					navManager.NavigateTo("/Users");
+				}
+				else
+				{
+					await alertComponent.ShowNotification("Failed to insert user!", false, "danger");
+				}
 			}
 		}
 	}
-
-	private void ShowToast()
-	{
-		toastService.ShowError("Sample");
-	}
-
 
 }
