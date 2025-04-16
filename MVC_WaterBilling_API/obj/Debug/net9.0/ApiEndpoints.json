@@ -552,7 +552,7 @@
   {
     "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
     "Method": "UpdatePayment",
-    "RelativePath": "api/Payment/{id}",
+    "RelativePath": "api/Payment/{id}/{CashierID}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -560,6 +560,27 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "CashierID",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MVC_WaterBilling_API.Controllers.PaymentController",
+    "Method": "GetCashierHistory",
+    "RelativePath": "api/Payment/CashierID/{CashierID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CashierID",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

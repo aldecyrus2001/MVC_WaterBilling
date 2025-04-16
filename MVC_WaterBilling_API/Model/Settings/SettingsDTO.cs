@@ -5,6 +5,8 @@
         public string? SystemName { get; set; }
         public double PenaltyAmount { get; set; }
         public double AmountPerCubic { get; set; }
+        public double? AmountPerCubicCommercial { get; set; }
+
     }
 
     public class SettingsQrDTO

@@ -277,7 +277,7 @@ else {
         }
     }
 
-    
+
 
     private void OnAmountPaidChange(ChangeEventArgs e)
     {
@@ -353,6 +353,14 @@ else {
                 {
                     await alertComponent.ShowNotification($"Success: {PaymentMessage}", false, "success");
 
+                    if (changeAmount != 0) {
+                        bool makeitAdvance = await alertComponent.ShowNotification($"Change: {changeAmount}<br>Do you want to make it advance?", true, "success");
+
+                        if (makeitAdvance) {
+                            advanceServices.AddAdvance(changeAmount, ConsumersData.ConsumerID);
+                        }
+                    }
+
                     navManager.NavigateTo("/Billings");
                     DoPrint();
                 }
@@ -360,7 +368,6 @@ else {
                 {
                     await alertComponent.ShowNotification($"Bill Updating Error: {UpdateMessage}", false, "danger");
 
-                    
                 }
 
 
@@ -388,7 +395,7 @@ else {
 
             var cmds = esc + "@"; // Initializes the printer (ESC @)
             cmds += esc + "!" + (char)0x38; //Emphasized + Double-height + Double-width mode selected (ESC ! (8 + 16 + 32)) 56 dec => 38 hex
-            cmds += alignCenter + "PAYMENT INVOICE"; //Header text
+            cmds += alignCenter + "TEMPORARY RECEIPT"; //Header text
             cmds += newLine;
             cmds += esc + "!" + (char)0x00; //Reset to normal mode (ESC ! 0)
             cmds += newLine;

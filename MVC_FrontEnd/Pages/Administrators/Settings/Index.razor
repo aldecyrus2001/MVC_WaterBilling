@@ -18,8 +18,12 @@ else
         </div>
 
         <div class="col">
-            <label for="cubicPrice" class="form-label">Price Per Cubic</label>
+            <label for="cubicPrice" class="form-label">Price Per Cubic (Residential)</label>
             <input type="text" id="cubicPrice" class="form-control" @bind="settingsData.AmountPerCubic" />
+        </div>
+        <div class="col">
+            <label for="cubicPrice" class="form-label">Price Per Cubic (Commercial)</label>
+            <input type="text" id="cubicPrice" class="form-control" @bind="settingsData.AmountPerCubicCommercial" />
         </div>
     </div>
 

@@ -120,6 +120,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Anonymous/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Cashier/BillingHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzaGllclxCaWxsaW5nSGlzdG9yeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Anonymous/source/repos/MVC_WaterBilling/MVC_FrontEnd/Pages/Cashier/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FzaGllclxJbmRleC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

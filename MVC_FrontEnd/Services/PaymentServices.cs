@@ -23,6 +23,11 @@ namespace MVC_FrontEnd.Services
             return await _httpClient.GetFromJsonAsync<List<PaymentsWithUserConsumer>>(_uRLs.Payment);
         }
 
+        public async Task<List<PaymentsWithUserConsumer>> PaymentHistory(string cashierID)
+        {
+            return await _httpClient.GetFromJsonAsync<List<PaymentsWithUserConsumer>>($"{_uRLs.Payment}/CashierID/{ cashierID }");
+        }
+
         public async Task<List<PaymentsWithUserConsumer>> GetPendingPayments()
         {
             return await _httpClient.GetFromJsonAsync<List<PaymentsWithUserConsumer>>($"{_uRLs.Payment}/Pending/Payments");
@@ -58,9 +63,9 @@ namespace MVC_FrontEnd.Services
             }
         }
 
-        public async Task<(bool isSuccess, string Message, int? BillID)> UpdatePaymentStatus(int id)
+        public async Task<(bool isSuccess, string Message, int? BillID)> UpdatePaymentStatus(int id, string CashierID)
         {
-            var url = $"{_uRLs.Payment}/{id}";
+            var url = $"{_uRLs.Payment}/{id}/{CashierID}";
             var response = await _httpClient.PutAsJsonAsync(url, new { });
 
             var responseMessage = await response.Content.ReadAsStringAsync();

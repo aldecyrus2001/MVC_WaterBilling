@@ -36,11 +36,17 @@
 </div>
 
 @code {
+	public int? Id { set; get; }
+
+	[Inject]
+	private URLStringServices URLStringServices { get; set; }
 
     private bool isAuthenticated = false;
 
-    protected override async Task OnInitializedAsync()
+	protected override async Task OnInitializedAsync()
     {
+		Id = URLStringServices.GetURLStringValueAsInt("id");
+
         await authService.CheckAuthenticationAsync();
     }
 

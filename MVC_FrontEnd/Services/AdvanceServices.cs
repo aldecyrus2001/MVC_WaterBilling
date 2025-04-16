@@ -2,6 +2,7 @@
 using MVC_FrontEnd.URL;
 using MVC_WaterBilling_API.Services;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http.Json;
 
 namespace MVC_FrontEnd.Services
@@ -17,6 +18,24 @@ namespace MVC_FrontEnd.Services
             _uRLs = uRLs;
         }
 
+        public async Task<(bool, string)> AddAdvance(double changeAmount, int ConsumerID)
+        {
+            var url = $"{_uRLs.Advance}";
+
+            var data = new
+            {
+                Amount = changeAmount,
+                ConsumerID = ConsumerID
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(url, data);
+
+            var responseMessage = await response.Content.ReadAsStringAsync();
+
+            ApiResponse apiResponse = JsonConvert.DeserializeObject<ApiResponse>(responseMessage);
+
+            return (response.IsSuccessStatusCode, apiResponse.Message);
+        }
         public async Task<Advances> getAdvanceWithConsumerID(int ConsumerID)
         {
             var url = $"{_uRLs.Advance}/{ConsumerID}";

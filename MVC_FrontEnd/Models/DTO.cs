@@ -88,6 +88,7 @@
         public int SettingID { get; set; }
         public string? SystemName { get; set; }
         public double AmountPerCubic { get; set; }
+        public double? AmountPerCubicCommercial { get; set; }
         public byte[]? GcashQr { get; set; }
         public string? Gcash_Name { get; set; }
     }

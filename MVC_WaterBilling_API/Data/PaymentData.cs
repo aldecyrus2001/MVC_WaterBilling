@@ -69,6 +69,33 @@ namespace MVC_WaterBilling_API.Data
             return result;
         }
 
+        public async Task<List<PaymentsWithUserConsumer>> GetCashierHistory(string CashierID)
+        {
+            var result = await (from p in _db.Payments
+                                where p.CashierID == CashierID
+                                join b in _db.Bills on p.BillID equals b.BillID into billGroup
+                                from bill in billGroup.DefaultIfEmpty()
+
+                                join r in _db.Meters on bill.ReadingID equals r.ReadingID into readingGroup
+                                from reading in readingGroup.DefaultIfEmpty()
+
+                                join c in _db.Consumers on reading.Meter_Number equals c.Meter_Number into consumerGroup
+                                from consumer in consumerGroup.DefaultIfEmpty()
+                                join u in _db.Users on consumer.UserID equals u.UserID.ToString() into userGroup
+                                from user in userGroup.DefaultIfEmpty()
+
+                                select new PaymentsWithUserConsumer
+                                {
+                                    Payments = p,                      // Using correct capitalization
+                                    Bills = bill,                       // Bill might be null
+                                    MeterReading = reading,             // MeterReading might be null
+                                    Consumer = consumer,                // Consumer might be null
+                                    User = user                          // User might be null
+                                }).ToListAsync();
+
+            return result;
+        }
+
         public async Task<PaymentsWithUserConsumer?> GetPaymentAsync(int id)
         {
             var result = await (from p in _db.Payments
@@ -354,13 +381,14 @@ namespace MVC_WaterBilling_API.Data
             return await query.OrderByDescending(puc => puc.Payments.PaymentDate).ToListAsync();
         }
 
-        public async Task UpdatePaymentStatus(int id)
+        public async Task UpdatePaymentStatus(int id,string CashierID)
         {
             var payment = await _db.Payments.FindAsync(id);
             if (payment != null)
             {
                 payment.Remarks = "Paid";
                 payment.PaymentMethod = "Online Bank";
+                payment.CashierID = CashierID;
                 await _db.SaveChangesAsync();
             }
         }

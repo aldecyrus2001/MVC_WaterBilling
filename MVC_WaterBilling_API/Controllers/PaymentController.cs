@@ -37,6 +37,13 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(payments);
         }
 
+        [HttpGet("CashierID/{CashierID}")]
+        public async Task<IActionResult> GetCashierHistory(string CashierID)
+        {
+            var payments = await _paymentData.GetCashierHistory(CashierID);
+            return Ok(payments);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayment(int id)
         {
@@ -115,8 +122,8 @@ namespace MVC_WaterBilling_API.Controllers
             return Ok(data);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePayment(int id)
+        [HttpPut("{id}/{CashierID}")]
+        public async Task<IActionResult> UpdatePayment(int id, string CashierID)
         {
             var payment = await _paymentData.GetPaymentByPaymentIDAsync(id);
             if (payment == null)
@@ -124,7 +131,7 @@ namespace MVC_WaterBilling_API.Controllers
                 return NotFound();
             }
 
-            await _paymentData.UpdatePaymentStatus(id);
+            await _paymentData.UpdatePaymentStatus(id, CashierID);
 
             return Ok(new
             {

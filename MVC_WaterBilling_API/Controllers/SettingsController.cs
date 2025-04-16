@@ -39,6 +39,7 @@ namespace MVC_WaterBilling_API.Controllers
 
             settings.SystemName = settingsDTO.SystemName;
             settings.AmountPerCubic = settingsDTO.AmountPerCubic;
+            settings.AmountPerCubicCommercial = settingsDTO.AmountPerCubicCommercial;
 
             await _settingsData.UpdateSettingAsync(settings);
 
