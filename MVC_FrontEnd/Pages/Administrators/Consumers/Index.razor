@@ -1,8 +1,16 @@
 ﻿@page "/Consumers"
+@using MVC_FrontEnd.Data
+@using iTextSharp.text
+@using iTextSharp.text.pdf
 
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-	<h5>Consumers Records</h5>
+	<div class="d-flex">
+		<h5>Consumers Records</h5>
+		<span> | </span>
+		<button @onclick="Export" class="btn btn-secondary p1">Export PDF</button>
+		
+	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
@@ -50,6 +58,12 @@ else
 
 @code {
 	private List<ConsumerWithUser>? ConsumerInformations;
+	private List<ConsumerWithUser>? AllConsumers;
+	private string searchQuery = "";
+
+
+	[Inject]
+	private IJSRuntime jsRuntime { get; set; }
 
 	[Inject]
 	private ConsumerServices consumerServices { get; set; }
@@ -57,7 +71,8 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ConsumerInformations = await consumerServices.GetConsumersWithUsersAsync();
+		AllConsumers = await consumerServices.GetConsumersWithUsersAsync();
+		ConsumerInformations = AllConsumers;
 		StateHasChanged();
 	}
 
@@ -87,17 +102,83 @@ else
 
 	private async Task Search(ChangeEventArgs e)
 	{
-		string searchQuery = e.Value?.ToString() ?? "";
-		string Urls = urls.Consumer + $"/Search?search={searchQuery}";
-		var result = await Http.GetFromJsonAsync<List<ConsumerWithUser>>(Urls);
+		searchQuery = e.Value?.ToString() ?? "";
+		ApplySearch();
+	}
 
-		if(result != null)
+	private void ApplySearch()
+	{
+		if (string.IsNullOrWhiteSpace(searchQuery))
 		{
-			ConsumerInformations = result;
+			ConsumerInformations = AllConsumers;
 		}
 		else
 		{
+			var lowerSearch = searchQuery.ToLower();
 
+			ConsumerInformations = AllConsumers?.Where(consumerData =>
+				($"{consumerData.Consumer.Meter_Number}").Contains(lowerSearch) ||
+				($"{consumerData.User.Firstname} {consumerData.User.Lastname}").ToLower().Contains(lowerSearch) ||
+				(consumerData.Consumer.Address?.ToLower().Contains(lowerSearch) ?? false) ||
+				(consumerData.Consumer.Connection_Date?.ToLower().Contains(lowerSearch) ?? false) ||
+				(consumerData.Consumer.ConnectionType?.ToLower().Contains(lowerSearch) ?? false)
+			).ToList();
+		}
+	}
+
+	private async void Export()
+	{
+		using (MemoryStream stream = new MemoryStream())
+		{
+			Document doc = new Document(PageSize.A4);
+			PdfWriter writer = PdfWriter.GetInstance(doc, stream);
+			writer.PageEvent = new PdfHeaderFooter(); // Add this line if you have a header/footer class
+
+			doc.Open();
+
+			// Optional: Title
+			Paragraph title = new Paragraph("Consumers Records", new Font(Font.HELVETICA, 18, Font.BOLD));
+			title.Alignment = Element.ALIGN_CENTER;
+			title.SpacingAfter = 20f;
+			doc.Add(title);
+
+			// Define fonts
+			Font tableHeaderFont = new Font(Font.HELVETICA, 10, Font.BOLD, BaseColor.White);
+			Font tableBodyFont = new Font(Font.HELVETICA, 9, Font.NORMAL, BaseColor.Black);
+
+			// Table
+			PdfPTable table = new PdfPTable(5); // 5 columns (not 6 based on your data)
+			table.WidthPercentage = 100;
+
+			table.SetWidths(new float[] { 1.5f, 3f, 2f, 4f, 2f });
+
+			string[] headers = { "Meter No.", "Name", "Address", "Connection Date", "Connection Type" };
+
+			// Header row
+			foreach (var header in headers)
+			{
+				PdfPCell headerCell = new PdfPCell(new Phrase(header, tableHeaderFont))
+					{
+						BackgroundColor = BaseColor.Gray
+					};
+				table.AddCell(headerCell);
+			}
+
+			// Data rows
+			foreach (var consumerData in ConsumerInformations)
+			{
+				table.AddCell(new Phrase(consumerData.Consumer.Meter_Number, tableBodyFont));
+				table.AddCell(new Phrase($"{consumerData.User.Firstname} {consumerData.User.Lastname}", tableBodyFont));
+				table.AddCell(new Phrase($"{consumerData.Consumer.Address}", tableBodyFont));
+				table.AddCell(new Phrase($"{consumerData.Consumer.Connection_Date}", tableBodyFont));
+				table.AddCell(new Phrase($"{consumerData.Consumer.ConnectionType}", tableBodyFont));
+			}
+
+			doc.Add(table);
+			doc.Close();
+
+			byte[] byteArray = stream.ToArray();
+			await jsRuntime.SaveAs("ConsumersReport.pdf", byteArray);
 		}
 	}
 

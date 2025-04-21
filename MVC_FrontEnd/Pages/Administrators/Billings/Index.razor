@@ -1,8 +1,14 @@
 ﻿@page "/Billings"
+@using MVC_FrontEnd.Data
+@using iTextSharp.text
+@using iTextSharp.text.pdf
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 	<div class="d-flex flex-row gap-2 align-items-baseline">
 		<h5>Bills Record</h5>
+		<a href="/CreateUser" class="btn btn-primary px-2 py-1">Apply</a>
+		<span> | </span>
+		<button @onclick="Export" class="btn btn-secondary p1">Export PDF</button>
 	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
@@ -54,20 +60,25 @@ else {
 		</tbody>
 
 	</table>
-
+	
 }
 
 
 @code {
 	private List<Bills>? BillInformation;
-	
+	private List<Bills>? AllBills;
+	private string searchQuery = "";
+
+	[Inject]
+	private IJSRuntime jsRuntime { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
 		try
 		{
-			BillInformation = await Http.GetFromJsonAsync<List<Bills>>(urls.Billing) ?? new List<Bills>();
-			
+			AllBills = await Http.GetFromJsonAsync<List<Bills>>(urls.Billing) ?? new List<Bills>();
+			BillInformation = AllBills;
+
 		}
 		catch (Exception ex)
 		{
@@ -77,17 +88,85 @@ else {
 
 	private async Task Search(ChangeEventArgs e)
 	{
-		string searchQuery = e.Value?.ToString() ?? "";
-		string Urls = urls.Billing + $"/Search?search={searchQuery}";
-		var result = await Http.GetFromJsonAsync<List<Bills>>(Urls);
+		searchQuery = e.Value?.ToString() ?? "";
+		ApplySearch();
+	}
 
-		if (result != null)
+	private void ApplySearch()
+	{
+		if (string.IsNullOrWhiteSpace(searchQuery))
 		{
-			BillInformation = result;
+			BillInformation = AllBills;
 		}
 		else
 		{
+			var lowerSearch = searchQuery.ToLower();
 
+			BillInformation = AllBills?.Where(billing =>
+				($"{billing.BillID}").Contains(lowerSearch) ||
+				($"{billing.ReadingID}").Contains(lowerSearch) ||
+				($"{billing.Consumed_Amount}").ToLower().Contains(lowerSearch) ||
+				($"{billing.From}").ToLower().Contains(lowerSearch) ||
+				($"{billing.To}").ToLower().Contains(lowerSearch) ||
+				($"{billing.BillStatus}").ToLower().Contains(lowerSearch)
+			).ToList();
+		}
+	}
+
+	private async void Export()
+	{
+		using (MemoryStream stream = new MemoryStream())
+		{
+			Document doc = new Document(PageSize.A4);
+			PdfWriter writer = PdfWriter.GetInstance(doc, stream);
+			writer.PageEvent = new PdfHeaderFooter(); // Add this line if you have a header/footer class
+
+			doc.Open();
+
+			// Optional: Title
+			Paragraph title = new Paragraph("Users Records", new Font(Font.HELVETICA, 18, Font.BOLD));
+			title.Alignment = Element.ALIGN_CENTER;
+			title.SpacingAfter = 20f;
+			doc.Add(title);
+
+			// Define fonts
+			Font tableHeaderFont = new Font(Font.HELVETICA, 9, Font.BOLD, BaseColor.White);
+			Font tableBodyFont = new Font(Font.HELVETICA, 9, Font.NORMAL, BaseColor.Black);
+
+			// Table
+			PdfPTable table = new PdfPTable(6); // 5 columns (not 6 based on your data)
+			table.WidthPercentage = 100;
+
+			table.SetWidths(new float[] { 1.5f, 1.5f, 2f, 2f, 2f, 4f });
+
+			string[] headers = { "Bill ID", "Reading ID", "Amount", "From (M/D/Y)", "To (M/D/Y)", "Status" };
+
+			// Header row
+			foreach (var header in headers)
+			{
+				PdfPCell headerCell = new PdfPCell(new Phrase(header, tableHeaderFont))
+					{
+						BackgroundColor = BaseColor.Gray
+					};
+				table.AddCell(headerCell);
+			}
+
+			// Data rows
+			foreach (var billing in BillInformation)
+			{
+				table.AddCell(new Phrase($"{billing.BillID}", tableBodyFont));
+				table.AddCell(new Phrase($"{billing.ReadingID}", tableBodyFont));
+				table.AddCell(new Phrase($"₱ {billing.Consumed_Amount}", tableBodyFont));
+				table.AddCell(new Phrase($"{billing.From}", tableBodyFont));
+				table.AddCell(new Phrase($"{billing.To}", tableBodyFont));
+				table.AddCell(new Phrase($"{billing.BillStatus}", tableBodyFont));
+			}
+
+			doc.Add(table);
+			doc.Close();
+
+			byte[] byteArray = stream.ToArray();
+			await jsRuntime.SaveAs("BillingReport.pdf", byteArray);
 		}
 	}
 }

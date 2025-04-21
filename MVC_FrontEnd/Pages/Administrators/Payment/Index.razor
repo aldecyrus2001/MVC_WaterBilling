@@ -1,7 +1,14 @@
 ﻿@page "/Payment";
+@using MVC_FrontEnd.Data
+@using iTextSharp.text
+@using iTextSharp.text.pdf
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-	<h5>Payments Records</h5>
+	<div class="d-flex">
+		<h5>Payments Records</h5>
+		<span> | </span>
+		<button @onclick="Export" class="btn btn-secondary p1">Export PDF</button>
+	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
 	</form>
@@ -44,32 +51,107 @@ else
 
 @code {
 	private List<PaymentsWithUserConsumer>? PaymentInformation;
+	private List<PaymentsWithUserConsumer>? AllPayments;
+	private string searchQuery = "";
 
-	
+
+	[Inject]
+	private IJSRuntime jsRuntime { get; set; }
 
 	[Inject]
 	private PaymentServices paymentServices { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
-		PaymentInformation = await paymentServices.GetPaymentsWithUserConsumersAsync();
+		AllPayments = await paymentServices.GetPaymentsWithUserConsumersAsync();
+		PaymentInformation = AllPayments;
 
 		Console.WriteLine($"Fetched {PaymentInformation?.Count} records");
 	}
 
 	private async Task Search(ChangeEventArgs e)
 	{
-		string searchQuery = e.Value?.ToString() ?? "";
-		string Urls = urls.Payment + $"/Search?search={searchQuery}";
-		var result = await Http.GetFromJsonAsync<List<PaymentsWithUserConsumer>>(Urls);
+		searchQuery = e.Value?.ToString() ?? "";
+		ApplySearch();
+	}
 
-		if (result != null)
+	private void ApplySearch()
+	{
+		if(string.IsNullOrWhiteSpace(searchQuery))
 		{
-			PaymentInformation = result;
+			PaymentInformation = AllPayments;
 		}
-		else
+		else 
 		{
+			var lowerSearch = searchQuery.ToLower();
 
+			PaymentInformation = AllPayments?.Where(payment =>
+				(payment.bills.ReferenceNumber.Contains(lowerSearch)) ||
+				($"{payment.user.Firstname} {payment.user.Lastname}").ToLower().Contains(lowerSearch) ||
+				($"{payment.meterReading.Usage}").ToLower().Contains(lowerSearch) ||
+				($"{payment.bills.Consumed_Amount}").ToLower().Contains(lowerSearch) ||
+				($"{payment.payments.Amount_Paid}").ToLower().Contains(lowerSearch) ||
+				($"{payment.payments.PaymentDate}").ToLower().Contains(lowerSearch) ||
+				($"{payment.payments.PaymentMethod}").ToLower().Contains(lowerSearch)
+			).ToList();
+		}
+	}
+
+	private async void Export()
+	{
+		using (MemoryStream stream = new MemoryStream())
+		{
+			Document doc = new Document(PageSize.A4);
+			PdfWriter writer = PdfWriter.GetInstance(doc, stream);
+			writer.PageEvent = new PdfHeaderFooter(); // Add this line if you have a header/footer class
+
+			doc.Open();
+
+			// Optional: Title
+			Paragraph title = new Paragraph("Payments Records", new Font(Font.HELVETICA, 18, Font.BOLD));
+			title.Alignment = Element.ALIGN_CENTER;
+			title.SpacingAfter = 20f;
+			doc.Add(title);
+
+			// Define fonts
+			Font tableHeaderFont = new Font(Font.HELVETICA, 9, Font.BOLD, BaseColor.White);
+			Font tableBodyFont = new Font(Font.HELVETICA, 9, Font.NORMAL, BaseColor.Black);
+
+			// Table
+			PdfPTable table = new PdfPTable(7); // 5 columns (not 6 based on your data)
+			table.WidthPercentage = 100;
+
+			table.SetWidths(new float[] { 1.5f, 3f, 1.5f, 1.5f, 1.5f, 1.5f, 2f });
+
+			string[] headers = { "Reference No.", "Name", "Usage", "Consumed Amount", "Amount Paid", "Payment Date", "Payment Method" };
+
+			// Header row
+			foreach (var header in headers)
+			{
+				PdfPCell headerCell = new PdfPCell(new Phrase(header, tableHeaderFont))
+					{
+						BackgroundColor = BaseColor.Gray
+					};
+				table.AddCell(headerCell);
+			}
+
+			// Data rows
+			foreach (var payment in PaymentInformation)
+			{
+				table.AddCell(new Phrase(payment.bills.ReferenceNumber, tableBodyFont));
+				table.AddCell(new Phrase($"{payment.user.Firstname} {payment.user.Lastname}", tableBodyFont));
+				table.AddCell(new Phrase($"{payment.meterReading.Usage}", tableBodyFont));
+				table.AddCell(new Phrase($"{payment.bills.Consumed_Amount}", tableBodyFont));
+				table.AddCell(new Phrase($"{payment.payments.Amount_Paid}", tableBodyFont));
+				table.AddCell(new Phrase($"{payment.payments.PaymentDate}", tableBodyFont));
+				table.AddCell(new Phrase($"{payment.payments.PaymentMethod}", tableBodyFont));
+			}
+
+			doc.Add(table);
+			doc.Close();
+
+			byte[] byteArray = stream.ToArray();
+			await jsRuntime.SaveAs("PaymentsReport.pdf", byteArray);
 		}
 	}
 

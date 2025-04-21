@@ -168,7 +168,7 @@ else {
                 From = DateOnly.FromDateTime(DateTime.Today),    
                 To = DateOnly.FromDateTime(DateTime.Today),   
                 DueDate = DateOnly.FromDateTime(DateTime.Today) 
-                
+
             };
 
         advanceAmount = 0;
@@ -177,7 +177,13 @@ else {
 
         if (SettingsData != null)
         {
-            pricePerCubic = SettingsData.AmountPerCubic;
+            if (ConsumerData.ConnectionType == "Residential") {
+                pricePerCubic = SettingsData.AmountPerCubic;
+            }
+            else {
+                pricePerCubic = SettingsData.AmountPerCubicCommercial;
+            }
+            
         }
         else
         {

@@ -1,10 +1,15 @@
 ﻿@page "/Users"
+@using MVC_FrontEnd.Data
+@using iTextSharp.text
+@using iTextSharp.text.pdf
 
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 	<div class="d-flex">
 		<h5>Users Records |</h5>
 		<a href="/CreateUser" class="btn btn-primary px-2 py-1">Apply</a>
+		<span> | </span>
+		<button @onclick="Export" class="btn btn-secondary p1">Export PDF</button>
 	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
@@ -59,14 +64,21 @@ else
 
 @code {
 	private List<Users>? Users;
+	private List<Users>? AllUsers;
+	private string searchQuery = "";
 
 	[Inject]
 	private UsersServices usersServices { get; set; }
 
+
+	[Inject]
+	private IJSRuntime jsRuntime { get; set; }
+
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		Users = await Http.GetFromJsonAsync<List<Users>>(urls.Users);
+		AllUsers = await Http.GetFromJsonAsync<List<Users>>(urls.Users);
+		Users = AllUsers;
 	}
 
 	private async Task ConfirmDelete(int id)
@@ -94,19 +106,85 @@ else
 
 	private async Task Search(ChangeEventArgs e)
 	{
-		string searchQuery = e.Value?.ToString() ?? "";
-		string Urls = urls.Users + $"/Search?search={searchQuery}";
-		var result = await Http.GetFromJsonAsync<List<Users>>(Urls);
-
-		if (result != null)
-		{
-			Users = result;
-		}
-		else
-		{
-			
-		}
+		searchQuery = e.Value?.ToString() ?? "";
+		ApplySearch();
 
 	}
+
+	private void ApplySearch()
+	{
+		if(string.IsNullOrWhiteSpace(searchQuery))
+		{
+			Users = AllUsers;
+		}
+		else 
+		{
+			var lowerSearch = searchQuery.ToLower();
+
+			Users = AllUsers?.Where(users =>
+				($"{users.Firstname} {users.Lastname}").ToLower().Contains(lowerSearch) ||
+				(users.Email?.ToLower().Contains(lowerSearch) ?? false) ||
+				(users.Role?.ToLower().Contains(lowerSearch) ?? false) ||
+				(users.Gender?.ToLower().Contains(lowerSearch) ?? false)
+			).ToList();
+		}
+	}
+
+	private async void Export()
+	{
+		using (MemoryStream stream = new MemoryStream())
+		{
+			Document doc = new Document(PageSize.A4);
+			PdfWriter writer = PdfWriter.GetInstance(doc, stream);
+			writer.PageEvent = new PdfHeaderFooter(); // Add this line if you have a header/footer class
+
+			doc.Open();
+
+			// Optional: Title
+			Paragraph title = new Paragraph("Users Records", new Font(Font.HELVETICA, 18, Font.BOLD));
+			title.Alignment = Element.ALIGN_CENTER;
+			title.SpacingAfter = 20f;
+			doc.Add(title);
+
+			// Define fonts
+			Font tableHeaderFont = new Font(Font.HELVETICA, 13, Font.BOLD, BaseColor.White);
+			Font tableBodyFont = new Font(Font.HELVETICA, 9, Font.NORMAL, BaseColor.Black);
+
+			// Table
+			PdfPTable table = new PdfPTable(5); // 5 columns (not 6 based on your data)
+			table.WidthPercentage = 100;
+
+			table.SetWidths(new float[] { 1.5f, 3f, 2f, 4f, 2f });
+
+			string[] headers = { "User ID", "Name", "Gender", "Email", "Role" };
+
+			// Header row
+			foreach (var header in headers)
+			{
+				PdfPCell headerCell = new PdfPCell(new Phrase(header, tableHeaderFont))
+					{
+						BackgroundColor = BaseColor.Gray
+					};
+				table.AddCell(headerCell);
+			}
+
+			// Data rows
+			foreach (var users in Users)
+			{
+				table.AddCell(new Phrase(users.UserID.ToString(), tableBodyFont));
+				table.AddCell(new Phrase($"{users?.Firstname} {users?.Lastname}", tableBodyFont));
+				table.AddCell(new Phrase($"{users?.Gender}", tableBodyFont));
+				table.AddCell(new Phrase($"{users?.Email}", tableBodyFont));
+				table.AddCell(new Phrase($"{users?.Role}", tableBodyFont));
+			}
+
+			doc.Add(table);
+			doc.Close();
+
+			byte[] byteArray = stream.ToArray();
+			await jsRuntime.SaveAs("UsersReport.pdf", byteArray);
+		}
+	}
+
 
 }

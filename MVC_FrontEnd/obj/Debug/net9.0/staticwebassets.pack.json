@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
+      "Id": "C:\\Users\\Anonymous\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\wwwroot\\download.js",
+      "PackagePath": "staticwebassets\\download.js"
+    },
+    {
       "Id": "C:\\Users\\Anonymous\\source\\repos\\MVC_WaterBilling\\MVC_FrontEnd\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },

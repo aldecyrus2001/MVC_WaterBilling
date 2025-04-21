@@ -24,6 +24,7 @@ C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\appsetting
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\download.js
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
 C:\Users\Anonymous\source\repos\MVC_WaterBilling\MVC_FrontEnd\wwwroot\lib\bootstrap\dist\js\bootstrap.js
@@ -64,6 +65,7 @@ wwwroot\css\Dashboard.css
 wwwroot\css\Login.css
 wwwroot\css\Navbar.css
 wwwroot\css\Notfound.css
+wwwroot\download.js
 wwwroot\favicon.png
 wwwroot\icon-192.png
 wwwroot\icon-512.png

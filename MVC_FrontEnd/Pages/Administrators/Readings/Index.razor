@@ -1,10 +1,17 @@
 ﻿@page "/Readings"
+@using MVC_FrontEnd.Data
+@using iTextSharp.text;
+@using iTextSharp.text.pdf;
+@using System.IO;
 
 <div class="d-flex justify-content-between align-items-center mb-3">
 	<div class="d-flex flex-row gap-2 align-items-baseline">
 		<h5>Readings Records</h5>
 		<span> | </span>
 		<a href="/CreateReading" class="btn btn-success p-1">Create Reading</a>
+		<span> | </span>
+		<button @onclick="Export" class="btn btn-secondary p1">Export PDF</button>
+
 	</div>
 	<form method="post" class="d-flex" style="width: 300px;">
 		<input @oninput="Search" style="max-width: 100%;" type="text" class="form-control me-2" placeholder="Search..." />
@@ -56,6 +63,8 @@ else
 @code {
 
 	private List<ReadingConsumerUser>? ReadingInformations;
+	private List<ReadingConsumerUser>? AllReadings; // Store unfiltered readings
+	private string searchQuery = "";
 
 	[Inject]
 	private ReadingServices readingServices { get; set; }
@@ -69,7 +78,9 @@ else
 	protected override async Task OnInitializedAsync()
 	{
 		await authService.CheckAuthenticationAsync();
-		ReadingInformations = await readingServices.GetReadingWithUserConsumerAsync();
+		AllReadings = await readingServices.GetReadingWithUserConsumerAsync();
+		ApplySearch();
+		ReadingInformations = AllReadings;
 	}
 
 	private async Task DeleteReading(int Id)
@@ -85,20 +96,78 @@ else
 		}
 	}
 
-	private async Task Search(ChangeEventArgs e)
+	private void Search(ChangeEventArgs e)
 	{
-		string searchQuery = e.Value?.ToString() ?? "";
-		string Urls = urls.Reading + $"/Search?search={searchQuery}";
-		var result = await Http.GetFromJsonAsync<List<ReadingConsumerUser>>(Urls);
+		searchQuery = e.Value?.ToString() ?? "";
+		ApplySearch();
+	}
 
-		if (result != null)
+	private void ApplySearch()
+	{
+		if (string.IsNullOrWhiteSpace(searchQuery))
 		{
-			ReadingInformations = result;
+			ReadingInformations = AllReadings;
 		}
 		else
 		{
+			var lowerSearch = searchQuery.ToLower();
 
+			ReadingInformations = AllReadings?.Where(reading =>
+				($"{reading.users?.Firstname} {reading.users?.Lastname}").ToLower().Contains(lowerSearch) ||
+				(reading.consumers?.Address?.ToLower()?.Contains(lowerSearch) ?? false) ||
+				(reading.meterReading?.MonthOf?.ToLower()?.Contains(lowerSearch) ?? false) ||
+				(reading.meterReading?.Status?.ToLower()?.Contains(lowerSearch) ?? false) ||
+				(reading.meterReading?.Usage.ToString().Contains(lowerSearch) ?? false) ||
+				(reading.meterReading?.ReadingID.ToString().Contains(lowerSearch) ?? false)
+			).ToList();
 		}
 	}
+
+	private async void Export()
+	{
+		using (MemoryStream stream = new MemoryStream())
+		{
+			Document doc = new Document(PageSize.A4);
+			PdfWriter writer = PdfWriter.GetInstance(doc, stream);
+			writer.PageEvent = new PdfHeaderFooter(); // Add this line
+
+			doc.Open();
+
+			// Optional: Title (first page only)
+			Paragraph title = new Paragraph("Reading Records", new Font(Font.HELVETICA, 18, Font.BOLD));
+			title.Alignment = Element.ALIGN_CENTER;
+			title.SpacingAfter = 20f;
+			doc.Add(title);
+
+			// Table
+			PdfPTable table = new PdfPTable(6);
+			table.WidthPercentage = 100;
+			string[] headers = { "Reading ID", "Name", "Address", "Usage", "Month", "Status" };
+			foreach (var header in headers)
+			{
+				table.AddCell(new PdfPCell(new Phrase(header)) { BackgroundColor = BaseColor.Gray });
+			}
+			foreach (var reading in ReadingInformations)
+			{
+				table.AddCell(reading.meterReading?.ReadingID.ToString());
+				table.AddCell($"{reading.users?.Firstname} {reading.users?.Lastname}");
+				table.AddCell(reading.consumers?.Address ?? "");
+				table.AddCell(reading.meterReading?.Usage.ToString());
+				table.AddCell(reading.meterReading?.MonthOf ?? "");
+				table.AddCell(reading.meterReading?.Status ?? "");
+			}
+
+			doc.Add(table);
+			doc.Close();
+
+			byte[] byteArray = stream.ToArray();
+			await jsRuntime.SaveAs("ReadingReport.pdf", byteArray);
+		}
+
+
+	}
+
+
+
 
 }
